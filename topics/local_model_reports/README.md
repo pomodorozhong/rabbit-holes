@@ -18,6 +18,7 @@ Shared hardware note: [Your real memory budget](./memory-budget.md).
 | [report-2026-08-30-video-ai-news.md](./report-2026-08-30-video-ai-news.md) | video [4wjHNgMLeyY](https://www.youtube.com/watch?v=4wjHNgMLeyY) (as of 2026-08-30) | Runnability on 16 GB M2 for every model named in that AI-news video; MLX ports for GLM-5.3-Flash / Qwen3.8-Flash-Next / FastH3 / Fibo vs VoiceMem |
 | [report-2026-09-06-video-ai-news.md](./report-2026-09-06-video-ai-news.md) | video [ngyFRCNq0Yc](https://www.youtube.com/watch?v=ngyFRCNq0Yc) (as of 2026-09-06) | Runnability on 16 GB M2 for every model named in that AI-news video; TimesFM-3 vs H3 world-model stack / frontier APIs |
 | [report-2026-09-13-video-ai-news.md](./report-2026-09-13-video-ai-news.md) | video [nZYJdwM-_nI](https://www.youtube.com/watch?v=nZYJdwM-_nI) (as of 2026-09-13) | Runnability on 16 GB M2 for every chapter in that AI-news video; MiniCPM5-2B + Edge0-8B vs CUDA-heavy world, 3D, robot, and audio stacks |
+| [report-2026-09-20-video-ai-news.md](./report-2026-09-20-video-ai-news.md) | video [hygMRgnDD7w](https://www.youtube.com/watch?v=hygMRgnDD7w) (as of 2026-09-20) | Every chapter: Laya and Needle 3 fit narrow local tasks; Bonsai 2 is an experimental M2 candidate; products, research, and larger models |
 
 ## Scripts
 
