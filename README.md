@@ -1,9 +1,18 @@
-# My Personal Researches
+# Rabbit Holes
 
-This repository is used to track the progress of my personal researches.
+A personal collection of questions I’ve followed into notes, guides, notebooks, comparisons, and small experiments.
 
-## How it works
+## Topics
 
-I use [Github Issues](https://github.com/pomodorozhong/personal-research/issues) to capture topics which I'm interested. And then I use [Github Projects](https://github.com/pomodorozhong/personal-research/projects) to arrange topics I'm about to work on.
+| Topic | What’s inside |
+| --- | --- |
+| [AI watermarks](topics/ai_watermarks/README.md) | A guide to watermarking and provenance, with text and image notebooks. |
+| [Doppler effect](topics/doppler_semitone/README.md) | A notebook on Doppler shift, pitch perception, and a charging fighter. |
+| [Freeform canvas](topics/freeform_canvas/README.md) | A comparison of browser canvas packages and runnable demos. |
+| [Git and GitHub](topics/git_and_github/README.md) | A table of contents for Git and GitHub learning notes. |
+| [Indie hacking](topics/indie-hacking/README.md) | Notes on building and sustaining products independently. |
+| [Local model reports](topics/local_model_reports/README.md) | Hardware-aware model reports, memory notes, and research scripts. |
 
-During the research, If there is any result that is worth noting, I'll commit it to the repository.
+## Workflow
+
+I use [GitHub Issues](https://github.com/pomodorozhong/rabbit-holes/issues) to collect topics I’m curious about, then [GitHub Projects](https://github.com/pomodorozhong/rabbit-holes/projects) to choose what to work on. When I find something worth revisiting, I keep it in the corresponding topic folder here.
