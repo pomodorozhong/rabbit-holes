@@ -130,3 +130,31 @@ Gemini Live, both Qwen endpoints, Runway, Jev, Astra for Law, and Odyssey 3 rout
 
 
 **For local streaming transcription:** Keep **R2T2** on the list, but wait for or build an MPS path before treating it as a Mac-ready install.
+
+## Sources
+
+- Roundup: [YouTube video](https://www.youtube.com/watch?v=hygMRgnDD7w)
+- Meridian: [Hugging Face model card](https://huggingface.co/Viggle/Meridian), [MiniMax-H3 base model](https://huggingface.co/MiniMaxAI/MiniMax-H3)
+- R2T2: [GitHub repository](https://github.com/netease-youdao/Confucius4-R2T2), [Hugging Face weights](https://huggingface.co/netease-youdao/Confucius4-R2T2)
+- JING / DAO: [JING GitHub repository](https://github.com/XGEN-Labs/XGEN-JING), [JING model card](https://huggingface.co/XGENlabs/XGEN-JING), [XGEN research page](https://xgenlabs.ai/research/generative-world-simulation)
+- Dream-RSI: [project page](https://dream-rsi.com/)
+- Gemini 3.8 Live: [Google announcement](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/)
+- Qwen 3.8 Omni Flash: [Qwen release post](https://qwen.ai/blog?id=qwen3.8-omni-flash), [Alibaba Cloud Model Studio documentation](https://help.aliyun.com/en/model-studio/qwen3-8-omni-flash)
+- Qwen 3.8 Live Translate: [Qwen release post](https://qwen.ai/blog?id=qwen3.8-livetranslate)
+- Runway: [Runway](https://runwayml.com/)
+- Needle 3: [Cactus release page](https://www.cactuscompute.com/needle), [Python documentation](https://www.cactuscompute.com/blog/needle-python-docs)
+- Z.ai inference infrastructure: [Z.ai engineering write-up](https://z.ai/blog/glm-built-its-inference-infrastructure)
+- Xiaomi MiMo real-time RL: [MiMo RL page](https://mimo.xiaomi.com/rl/)
+- GPT-Policy: [project report and resources](https://cheng-haha.github.io/GPT-Policy/)
+- Enigma case study: [case page](https://mvueh-enigma-solved.carterl.chatgpt.site/)
+- Jev: [TypeSafe announcement](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
+- Laya: [Hugging Face model card](https://huggingface.co/convaiinnovations/laya), [project page](https://laya.convaiinnovations.com/)
+- Bespoke Nimble 9B: [adapter model card](https://huggingface.co/bespokelabs/Bespoke-Nimble-9B), [Qwen3.5-9B base model](https://huggingface.co/Qwen/Qwen3.5-9B)
+- Astra for Law: [OpenAI announcement](https://openai.com/index/astra-for-law/)
+- OpenAI security story: [Hacktron report](https://www.hacktron.ai/blog/hacking-openai)
+- MiniMax Code CLI: [GitHub repository](https://github.com/MiniMax-AI/minimax-code)
+- Bonsai 2 27B: [release announcement](https://prismml.com/news/bonsai-2-27b), [MLX weights](https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-mlx-2bit), [project runbook](https://github.com/PrismML-Eng/Bonsai-demo)
+- Occamy 1.0: [Hugging Face model card](https://huggingface.co/Accio-Lab/occamy-1.0), [GGUF weights](https://huggingface.co/Accio-Lab/occamy-1.0-GGUF)
+- ZGCM-1: [Hugging Face model card](https://huggingface.co/zgcagi/ZGCM-1-7B), [GitHub repository](https://github.com/zgcagi/ZGCM-1)
+- Odyssey 3: [Odyssey announcement](https://odyssey.systems/introducing-odyssey-3)
+- Prior hardware bar: [report-2026-09-13-video-ai-news](./report-2026-09-13-video-ai-news.md), [memory budget](./memory-budget.md)
