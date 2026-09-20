@@ -472,3 +472,7 @@ SOFTWARE.
 ```
 
 </details>
+
+## Further reading
+
+- [Perplexity search](https://www.perplexity.ai/search/3fa47b8d-101e-44cf-a33c-ab2313ce72a1)
