@@ -16,7 +16,7 @@ A common D&D charge (30–60 ft/round ≈ 1.5–3.0 m/s) is already enough for a
 ## Run the notebook
 
 ```bash
-cd researches/doppler_semitone
+cd topics/doppler_semitone
 uv sync
 uv run jupyter notebook doppler_semitone.ipynb
 ```

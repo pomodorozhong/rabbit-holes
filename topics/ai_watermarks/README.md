@@ -4,7 +4,7 @@ AI watermarking is the practice of adding a machine-detectable signal to generat
 
 This research is a guided introduction to those ideas. It develops the vocabulary first, follows a watermark through embedding and detection, compares representative systems, and ends with practical interpretation. The companion notebooks make the hidden intermediate steps visible.
 
-This work grew from [issue #115](https://github.com/pomodorozhong/personal-research/issues/115).
+This work grew from [issue #115](https://github.com/pomodorozhong/rabbit-holes/issues/115).
 
 ## How to use this guide
 
@@ -209,7 +209,7 @@ The examples are deliberately small and inspectable. They teach the pattern and 
 Install the environment:
 
 ```bash
-cd researches/ai_watermarks
+cd topics/ai_watermarks
 uv sync
 ```
 

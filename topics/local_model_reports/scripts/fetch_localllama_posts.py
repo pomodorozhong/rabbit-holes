@@ -26,7 +26,7 @@ from datetime import datetime, timezone
 from typing import Any, Iterable
 
 API_BASE = "https://arctic-shift.photon-reddit.com/api/posts"
-DEFAULT_UA = "localllama-research/1.0 (+https://github.com/pomodorozhong/personal-research)"
+DEFAULT_UA = "localllama-research/1.0 (+https://github.com/pomodorozhong/rabbit-holes)"
 
 
 def parse_date(value: str) -> int:
