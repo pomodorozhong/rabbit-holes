@@ -77,7 +77,7 @@ export function HomePage() {
         </ol>
         <p>
           Full write-up, sources, and “what I would pick” live in{" "}
-          <code>researches/freeform_canvas/README.md</code>.
+          <code>topics/freeform_canvas/README.md</code>.
         </p>
       </section>
     </div>

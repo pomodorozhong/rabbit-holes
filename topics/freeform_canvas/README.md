@@ -14,7 +14,7 @@ There are two different products hiding under that phrase:
 Runnable playground (same spawn-stress HUD on every demo):
 
 ```bash
-cd researches/freeform_canvas/demo
+cd topics/freeform_canvas/demo
 npm ci
 npm run dev
 ```

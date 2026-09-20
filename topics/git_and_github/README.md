@@ -1,6 +1,6 @@
 # Git & Github
 
-This very page is serve to be a table of contents. And [this Project Board](https://github.com/pomodorozhong/personal-research/projects/2?fullscreen=true) is used to manage the progress of all the related works.
+This very page is serve to be a table of contents. And [this Project Board](https://github.com/pomodorozhong/rabbit-holes/projects/2?fullscreen=true) is used to manage the progress of all the related works.
 
 ## Roadmaps
 
