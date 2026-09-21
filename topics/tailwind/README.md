@@ -1,14 +1,8 @@
 # Reading Tailwind in real source code
 
-[This Perplexity search result](https://www.perplexity.ai/search/3fa47b8d-101e-44cf-a33c-ab2313ce72a1) suggested reading the Taxonomy, shadcn/ui, Dub.co, and Cal.com codebases to learn Tailwind. I used Codex to turn that suggestion into a more approachable guide to reading the source code.
+This guide is for readers who know Tailwind’s utility classes but want to understand how they fit together in a codebase. It traces class merging, component styles, named button variants, and theme values, then compares how the same patterns work in Tailwind v3 and v4.
 
-The guide below annotates steps 1–5 of the reading path, using examples from Taxonomy and shadcn/ui.
-
-Read in this order: **class merging → a small component → button variants → theme values → Tailwind v4**. Each step reuses an idea from the previous one.
-
-The snippets below are copied from repository snapshots fetched on **20 September 2026**. Source links point to those exact commits. Comments containing `...` mark omitted lines; a few excerpts are fragments of larger objects or functions. Examples written for this guide are labelled **Illustration**.
-
-**Version context:** Steps 1–4 use Taxonomy, whose [package file](https://github.com/shadcn-ui/taxonomy/blob/298a8857c7128a0d121e7f699dfd729f23b3966d/package.json) declares Tailwind `^3.3.1`. Step 5 uses shadcn/ui’s v4 app, whose [package file](https://github.com/shadcn-ui/ui/blob/a87a63b2ca25143d26c8bd0903e4e9bc77b3f824/apps/v4/package.json) declares Tailwind `^4.3.0`. These are dependency ranges. The different configuration styles are intentional.
+The examples come from Taxonomy and shadcn/ui. Steps 1–4 use Tailwind v3; step 5 uses v4. Links point to the exact code versions used. A `...` in a code sample means some lines are left out. Samples labeled **Illustration** are simplified examples.
 
 ## 1. Read the small `cn()` helper
 
@@ -410,67 +404,3 @@ All source links above are pinned so they continue to match the excerpts:
 
 - **Taxonomy:** [`298a885`](https://github.com/shadcn-ui/taxonomy/commit/298a8857c7128a0d121e7f699dfd729f23b3966d); steps 1–4.
 - **shadcn/ui:** [`a87a63b`](https://github.com/shadcn-ui/ui/commit/a87a63b2ca25143d26c8bd0903e4e9bc77b3f824); step 5.
-
-The copied code is distributed under the upstream MIT licenses. Their notices are included below.
-
-<details>
-<summary>Taxonomy — MIT license</summary>
-
-[Original license](https://github.com/shadcn-ui/taxonomy/blob/298a8857c7128a0d121e7f699dfd729f23b3966d/LICENSE.md)
-
-```text
-MIT License
-
-Copyright (c) 2022 shadcn
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-</details>
-
-<details>
-<summary>shadcn/ui — MIT license</summary>
-
-[Original license](https://github.com/shadcn-ui/ui/blob/a87a63b2ca25143d26c8bd0903e4e9bc77b3f824/LICENSE.md)
-
-```text
-MIT License
-
-Copyright (c) 2023 shadcn
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-</details>
