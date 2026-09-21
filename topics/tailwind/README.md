@@ -1,6 +1,8 @@
 # Reading Tailwind in real source code
 
-An annotated guide to steps 1–5 of your source-reading path.
+[This Perplexity search result](https://www.perplexity.ai/search/3fa47b8d-101e-44cf-a33c-ab2313ce72a1) suggested reading the Taxonomy, shadcn/ui, Dub.co, and Cal.com codebases to learn Tailwind. I used Codex to turn that suggestion into a more approachable guide to reading the source code.
+
+The guide below annotates steps 1–5 of the reading path, using examples from Taxonomy and shadcn/ui.
 
 Read in this order: **class merging → a small component → button variants → theme values → Tailwind v4**. Each step reuses an idea from the previous one.
 
@@ -472,7 +474,3 @@ SOFTWARE.
 ```
 
 </details>
-
-## Further reading
-
-- [Perplexity search](https://www.perplexity.ai/search/3fa47b8d-101e-44cf-a33c-ab2313ce72a1)
