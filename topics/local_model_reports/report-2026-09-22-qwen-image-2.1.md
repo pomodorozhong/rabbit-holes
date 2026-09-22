@@ -1,9 +1,9 @@
 # Local Runnability: Qwen-Image-2.1 on a 16 GB M2 Mac
 
-**Compiled:** 2026-09-22
-**Model:** [Qwen-Image-2.1](https://github.com/QwenLM/Qwen-Image-2.1), released 2026-09-20
-**Reference video:** [“Finally! New best local AI image editor is here”](https://www.youtube.com/watch?v=BaE6UBfNdQk) by AI Search, published 2026-09-22
-**Hardware target:** Apple **M2 MacBook Pro, 16 GB unified memory**
+**Compiled:** 2026-09-22\
+**Model:** [Qwen-Image-2.1](https://github.com/QwenLM/Qwen-Image-2.1), released 2026-09-20\
+**Reference video:** [“Finally! New best local AI image editor is here”](https://www.youtube.com/watch?v=BaE6UBfNdQk) by AI Search, published 2026-09-22\
+**Hardware target:** Apple **M2 MacBook Pro, 16 GB unified memory**\
 **Stack assumption:** ComfyUI / PyTorch-MPS — **no CUDA**
 
 This report asks whether Qwen-Image-2.1 is a useful local image generator and editor on this Mac, rather than whether one checkpoint file can fit in a nominal memory figure. File sizes below come from the Hugging Face repositories as of the compilation date. Runtime conclusions are inferred from the complete pipeline, the project’s [memory budget](./memory-budget.md), and current MPS issue reports; this model was **not benchmarked on the target Mac**.
