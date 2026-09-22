@@ -19,6 +19,7 @@ Shared hardware note: [Your real memory budget](./memory-budget.md).
 | [report-2026-09-06-video-ai-news.md](./report-2026-09-06-video-ai-news.md) | video [ngyFRCNq0Yc](https://www.youtube.com/watch?v=ngyFRCNq0Yc) (as of 2026-09-06) | Runnability on 16 GB M2 for every model named in that AI-news video; TimesFM-3 vs H3 world-model stack / frontier APIs |
 | [report-2026-09-13-video-ai-news.md](./report-2026-09-13-video-ai-news.md) | video [nZYJdwM-_nI](https://www.youtube.com/watch?v=nZYJdwM-_nI) (as of 2026-09-13) | Runnability on 16 GB M2 for every chapter in that AI-news video; MiniCPM5-2B + Edge0-8B vs CUDA-heavy world, 3D, robot, and audio stacks |
 | [report-2026-09-20-video-ai-news.md](./report-2026-09-20-video-ai-news.md) | video [hygMRgnDD7w](https://www.youtube.com/watch?v=hygMRgnDD7w) (as of 2026-09-20) | Runnability on 16 GB M2 for every chapter in that AI-news video; Needle 3 + Laya, Bonsai 2 and R2T2 near-miss analysis |
+| [report-2026-09-22-qwen-image-2.1.md](./report-2026-09-22-qwen-image-2.1.md) | as of 2026-09-22 | **Qwen-Image-2.1** on the 16 GB M2: full-pipeline footprint, GGUF/ComfyUI path, MPS edit bug, LoRA and license caveats |
 
 ## Scripts
 
