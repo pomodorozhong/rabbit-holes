@@ -1,0 +1,6 @@
+metric,value,unit,year,source
+dnd_fans_engaged_total,85000000,count,2024,wotc_2024_presentation
+dnd_beyond_registered_users,19000000,count,2024,wotc_2024_presentation
+dnd_beyond_characters_2024_ruleset,3600000,count,2024,wotc_2024_presentation
+dnd_beyond_vtt_maps_used,1300000,count,2024,wotc_2024_presentation
+great_ttrpg_survey_responses,1902,count,2024,scholomance_survey_2024
