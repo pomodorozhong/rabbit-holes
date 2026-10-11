@@ -8,12 +8,13 @@
 
 ## Worth trying on your Mac
 
-Start with **EmbeddingGemma 2** if you want local search over your own notes, code, or photos. **Botanic1-M** is worth a look only if you work with plant DNA. Most of this week's video covers hosted services, scientific results, and visual or world models that need large NVIDIA systems. Amazon's ALoDLM-8B looks small enough, but its community GGUF files do not run the diffusion decoding that makes it interesting.
+Start with **EmbeddingGemma 2** if you want local search over your own notes, code, or photos. **Botanic1-M** is worth a look for plant DNA research, starting with short windows and small batches. **ALoDLM-1.7B** offers an experimental CPU path for exploring diffusion decoding, but memory and speed need checking before it becomes a practical recommendation. Most of this week's video covers hosted services, scientific results, and visual or world models that need large NVIDIA systems.
 
 | Model / configuration | Best for | Why it matters this week | Mac fit |
 | --- | --- | --- | --- |
 | [EmbeddingGemma 2, text-only](#embeddinggemma-2) | ❓ Embeddings for local search and retrieval | 270M-parameter text path; Q8 GGUF is 310 MB; Apache-2.0; code retrieval improved sharply | ✅ Comfortable |
-| [Botanic1-M, fp32 PyTorch on MPS](#botanic1-m) | ❓ Plant DNA variant scoring | 688M-parameter genomic model; publisher lists Apple-silicon (MPS) support | ✅ Comfortable |
+| [Botanic1-M, fp32 PyTorch on MPS](#botanic1-m) | ❓ Plant DNA variant scoring | MPS support documented; short windows and small batches needed until peak memory is checked | ⚠️ Constrained |
+| [ALoDLM-1.7B, fp32 CPU](#alodlm-17b) | 💬 Diffusion text generation experiments | Official decoder preserves adaptive decoding; roughly 8.1 GB of fp32 weights before runtime overhead | ⚠️ Experimental |
 
 **Mac fit:** ✅ Comfortable = credible path with headroom; ⚠️ Constrained = specific limits required; ⚠️ Experimental = important verification gaps; ❌ Outside budget = unsuitable in the checked configuration. These are deployment judgments, not M2 measurements. The shared budget is approximately **8–11 GB for the entire inference process**, including weights, caches, and activations.
 
@@ -27,7 +28,7 @@ An embedding model turns a passage, image, or audio clip into a list of numbers 
 
 **Why consider it:** Google's successor to EmbeddingGemma places text, images, audio, video, and code in one vector space. The text path uses about 270M of the model's 740M parameters; vision and audio encoders are optional additions. Google reports an MTEB Code score of **78.68**, up from 68.76 for the first version, with multilingual text results about level (61.36 vs 61.15). Output vectors can be truncated from 768 to 512 or 256 dimensions with little loss, which shrinks a search index. [Google announcement](https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2) · [Model card](https://huggingface.co/google/embeddinggemma-2)
 
-**Start with:** The text-only model, either through Ollama's `embeddinggemma-2:270m` tag (378 MB) or the `ggml-org` **Q8_0 GGUF (309.9 MB)** in llama.cpp. Embed a few hundred notes or source files and test search with the card's task prefixes, such as `task: search result | query: …` for queries and `title: … | text: …` for documents. Add the image projector only once text search is useful.\
+**Start with:** The text-only model, either through Ollama's `embeddinggemma-2:270m` tag (378 MB) or the `ggml-org` **Q8_0 GGUF (309.9 MB)** in llama.cpp. Embed a few hundred notes or source files and test search with the card's task prefixes, such as `task: search result | query: …` for queries and `title: … | text: …` for documents. Keep queries and documents at the same output dimension; if truncating to 512 or 256 dimensions, L2-normalize the shortened vectors (rescale them to unit length) before indexing or scoring. Add the image projector only once text search is useful.\
 **Main limitation:** Retrieval quality depends on applying the right prefix to queries and documents, and the card warns that **float16 can silently produce NaN or degraded embeddings**; use bfloat16 or float32 in Python, or a GGUF quantization. Audio and video embedding through llama.cpp or Ollama was not confirmed; the checked Ollama tags list text and image input only.
 
 [Video chapter](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=1597s) · [GGUF artifacts](https://huggingface.co/ggml-org/embeddinggemma-2-GGUF) · [Ollama](https://ollama.com/library/embeddinggemma-2) · [Deployment details](#embeddinggemma-2-deployment)
@@ -36,18 +37,31 @@ An embedding model turns a passage, image, or audio clip into a list of numbers 
 
 ### Botanic1-M
 
-**Mac fit:** ✅ Comfortable
+**Mac fit:** ⚠️ Constrained
 
 **Why consider it:** Living Models' Botanic1 family reads plant DNA one base at a time. To score a mutation, it compares how likely the model finds the mutated base versus the original base in its surrounding sequence; a strongly negative score suggests the change disrupts a conserved position. In a melon case study, Google's Gemma 4 E4B narrowed a region to 2,494 single-letter variants, and Botanic1 ranked the validated causal mutation first in 18 of 20 runs. That result comes from the publishers' agent pipeline, not from Botanic1-M alone. [Gemmaverse write-up](https://deepmind.google/models/gemma/gemmaverse/living-models/)
 
-**Start with:** `living-models/Botanic1-M` (688M parameters, **about 2.8 GB of fp32 weights**) in PyTorch on MPS, with the card's `score_variant_zero_shot` helper. Score one known variant from the card's example, then a small batch of equal-length windows; the card defaults to batch 8 on CPU/MPS.\
-**Main limitation:** Research use only: the license forbids production, clinical, and diagnostic use, and downloading requires accepting gated terms that share your Hugging Face username and email. Released models score windows of up to **8,191 bases**, shorter than the roughly 128 kb context described in the case study. A near-zero score does not mean a variant is harmless. [Model card](https://huggingface.co/living-models/Botanic1-M)
+**Start with:** `living-models/Botanic1-M` (688M parameters, **about 2.8 GB of fp32 weights**) in PyTorch on MPS, with the card's `score_variant_zero_shot` helper. Score the card's roughly 500-base example first. For batched inference, start at batch 1 with 512-base windows (513 tokens including `<cls>`); the publisher's CPU/MPS batch-8 default applies to this short-window setting. Increase batch size only after checking peak memory. For longer windows, keep batch 1 and check memory again.\
+**Main limitation:** Research use only: the license forbids production, clinical, and diagnostic use, and downloading requires accepting gated terms that share your Hugging Face username and email. Use **8,191 bases** as a conservative context limit based on the released models' training windows; longer inputs through direct model calls are untested, and full-window Mac memory remains unverified. This differs from the roughly 128 kb context described in the case study. A near-zero score does not mean a variant is harmless. [Model card](https://huggingface.co/living-models/Botanic1-M)
 
 [Video chapter](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=626s) · [Model family](https://huggingface.co/collections/living-models/botanic1-6a97f4e3c33f3d109a75057d) · [Deployment details](#botanic1-m-deployment)
 
+## Diffusion text generation experiments
+
+### ALoDLM-1.7B
+
+**Mac fit:** ⚠️ Experimental
+
+**Why consider it:** Amazon's smaller ALoDLM release can use the official portable PyTorch decoder on CPU, preserving its repeated refinement and adaptive token commitment. This makes it a candidate for studying diffusion decoding on the Mac. [Model card](https://huggingface.co/amazon/ALoDLM-1.7B)
+
+**Start with:** The official 1.7B checkpoint and portable decoder in fp32 CPU mode, one short prompt at a time with a small output budget. Check loading and generation peak memory before increasing context or output length.\
+**Main limitation:** The checkpoint implies about **8.1 GB of fp32 weights**, leaving limited room within the 8–11 GB process budget for loading, caches, and workspace. No M2 memory or throughput measurement is available here; the 8B B200 speedup does not establish CPU performance. The weights are non-commercial.
+
+[Video chapter](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=383s) · [Inference guide](https://github.com/amazon-science/ALoDLM/blob/main/docs/inference.md) · [Deployment details](#alodlm-17b-deployment)
+
 ## Other developments worth knowing
 
-- **ALoDLM-8B looks local but is not yet:** Amazon's diffusion language model, built from Qwen3-8B, drafts several tokens at once and spends extra passes only on uncertain tokens. The publisher reports a higher 11-benchmark average than Qwen3-8B and about 2.7× its throughput on a B200. The documented runtimes are CUDA or fp32 CPU, and the license is non-commercial. Community GGUF files load as an ordinary Qwen3 model and do not implement the adaptive decoding. [Model card](https://huggingface.co/amazon/ALoDLM-8B) · [Details](#alodlm-8b-near-miss)
+- **ALoDLM-8B's GGUF files omit its decoder:** The publisher reports a higher 11-benchmark average than Qwen3-8B and about 2.7× its throughput on a B200. The official 8B weights exceed this Mac's budget, while community GGUF files used through ordinary llama.cpp generation do not implement adaptive decoding. Assess the smaller 1.7B CPU path separately. [Model card](https://huggingface.co/amazon/ALoDLM-8B) · [Details](#alodlm-8b-near-miss)
 - **AI-produced mathematics:** OpenAI published 719 manuscripts in 372 families from an unreleased internal model, with about 42% of top-line results formalized in Lean. OpenAI states that unformalized results may contain errors. [Repository](https://github.com/openai/math)
 - **AI-assisted science claims:** AlphaProtein Novo releases code and separately licensed weights for designing enzymes around a catalytic site; it depends on AlphaFold 3 and JAX. A Vals.ai post describes Claude Opus 5.5 agents predicting two room-temperature magnetic semiconductors through simulation; neither band gap nor spin sorting has been measured. [AlphaProtein Novo](https://github.com/google-deepmind/alphaprotein-novo) · [Vals.ai](https://www.vals.ai/blogs/room-temperature-magnetic-semiconductors)
 - **Hosted models:** OpenAI's Intelligent UI builds interactive ChatGPT answers; Nano Banana 2.1 edits images in Google products; Claude Haiku 5.5 is a low-cost API model. Mistral Large 4 is in API preview, with weights promised for late October. At about 1.05 trillion total parameters, even four-bit weights would need roughly 525 GB. [OpenAI](https://openai.com/index/gpt-6-for-everyone/) · [Google](https://deepmind.google/models/model-cards/nano-banana-2-1/) · [Anthropic](https://www.anthropic.com/claude-haiku-5-5) · [Mistral](https://mistral.ai/news/mistral-large-4/)
@@ -70,9 +84,9 @@ All 22 chapters below match the official description in source order. “❌ Hos
 | [02:24](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=144s) | [MSFlow](https://yu1ut.com/MSFlow-HP/) | Open weights / text-to-motion research | ⚠️ Unverified; 0.55 GB checkpoints, but the Mac runtime path and evaluation dependencies are undocumented. |
 | [03:30](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=210s) | [Kandinsky 6.0](https://github.com/kandinskylab/kandinsky-6) | Open weights / video with audio | ❌ Outside budget; Lite repository totals 26.7 GB; NVIDIA setup. |
 | [04:54](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=294s) | [GPT-6 Intelligent UI](https://openai.com/index/gpt-6-for-everyone/) | Hosted chat feature | ❌ Hosted; ChatGPT feature using GPT-6 Sol and Luna. |
-| [06:23](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=383s) | [ALoDLM](https://huggingface.co/amazon/ALoDLM-8B) | Open weights / diffusion LLM | ⚠️ Experimental; small GGUFs exist but lack the diffusion decoder; official path is CUDA or fp32 CPU. |
+| [06:23](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=383s) | [ALoDLM](https://huggingface.co/amazon/ALoDLM-8B) / [1.7B](https://huggingface.co/amazon/ALoDLM-1.7B) | Open weights / diffusion LLM | ⚠️ Experimental for 1.7B fp32 CPU; memory and speed untested. Official 8B exceeds budget; ordinary llama.cpp GGUF generation omits adaptive decoding. |
 | [08:04](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=484s) | [AlphaProtein Novo](https://github.com/google-deepmind/alphaprotein-novo) | Open code and weights / enzyme design | ⚠️ Unverified; JAX pipeline with AlphaFold 3 and multi-GPU support; no memory guidance. |
-| [10:26](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=626s) | [Botanic 1](https://deepmind.google/models/gemma/gemmaverse/living-models/) | Open weights (gated) / plant genomics | ✅ Comfortable for Botanic1-M; MPS support documented; research-only license. |
+| [10:26](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=626s) | [Botanic 1](https://deepmind.google/models/gemma/gemmaverse/living-models/) | Open weights (gated) / plant genomics | ⚠️ Constrained for Botanic1-M; start with short windows and small batches on MPS; research-only license. |
 | [12:20](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=740s) | [OpenAI math results](https://github.com/openai/math) | Mathematics research | — N/A; manuscripts and Lean proofs from an unreleased model. |
 | [17:17](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=1037s) | [Higgsfield](https://higgsfield.ai/) | Sponsored hosted creative platform | ❌ Hosted; description identifies Higgsfield as sponsor. |
 | [18:50](https://www.youtube.com/watch?v=X0_GDOkLKzQ&t=1130s) | [OpenAI math results, continued](https://github.com/openai/math) | Mathematics research | — N/A; continuation of the 12:20 chapter. |
@@ -101,7 +115,7 @@ All 22 chapters below match the official description in source order. “❌ Hos
 | Vector index | Depends on corpus | 768 floats per item at full size; truncating to 256 dimensions cuts storage by two-thirds. |
 
 **Working memory:** Google reports about **191 MB active RAM for quantized text-only weights and 567 MB for the full multimodal model** on a Pixel 11 Pro. The process peak on an M2 is unknown but should sit well inside the budget; batch size and the 8,192-token context set activation memory.\
-**Starting limits:** Text only, documents chunked to a few hundred tokens, 768 or 256 output dimensions, modest batches.\
+**Starting limits:** Text only, documents chunked to a few hundred tokens, 768 or 256 output dimensions, modest batches. Queries and documents must share a dimension. After truncation, L2-normalize both; a dot-product index that assumes unit vectors can otherwise silently change rankings. SentenceTransformers exposes `truncate_dim` and `normalize_embeddings=True` to perform both steps. [Truncation guidance](https://huggingface.co/google/embeddinggemma-2#3-matryoshka-dimension-truncation)\
 **Runtime support:** Google lists Ollama, llama.cpp, MLX, sentence-transformers, Transformers, transformers.js, and LM Studio. The Ollama listing shows a 256K context, which conflicts with the card's 8,192 tokens; follow the card. Avoid float16 in Python.\
 **License:** Weights tagged Apache-2.0 on Hugging Face and described as Apache 2.0 by Google; the card's license link points to a file titled for Gemma 4, so read it before redistribution.\
 **Unresolved:** M2 throughput for large corpora, retrieval quality at Q8 versus BF16, and audio/video support in local runtimes.
@@ -120,13 +134,33 @@ All 22 chapters below match the official description in source order. “❌ Hos
 | Reference genome / variant files | User-supplied | Sequence extraction and variant calling happen outside the model. |
 | Optional CUDA kernels | Not used on Mac | `mamba-ssm` speedups apply only to CUDA. |
 
-**Working memory:** Weights plus a scan transient that grows with batch size × sequence length; the card gives no M2 peak.\
-**Starting limits:** Batch 8, equal-length windows (padding is not masked), at most 8,191 bases.\
+**Working memory:** Weights plus a scan transient that grows with batch size × sequence length; the card gives no M2 peak. The publisher reports **3.5 GiB of transient memory per scan** for Botanic1-S at batch 32 × 513 tokens on CPU. This is evidence that scan memory matters, not a measured peak for M. The batch-8 CPU/MPS default is for 513-token windows and does not establish fit at the full context. [Memory guidance](https://huggingface.co/living-models/Botanic1-M#devices-memory-and-batch-sizes)\
+**Starting limits:** Batch 1, equal-length 512-base windows (513 tokens with `<cls>`); increase batch size only after checking peak memory. For longer windows up to the conservative 8,191-base limit used here, return to batch 1 and verify memory at the intended length. Padding is not masked.\
 **Runtime support:** Pure PyTorch on CPU, MPS, and CUDA in fp32.\
 **License:** “livingmodels-research” terms: non-commercial research only, no production, clinical, or diagnostic use; gated download.\
-**Unresolved:** MPS speed, how the 128 kb context in the case study relates to the released 8,191-base limit, and accuracy on species outside the training set.
+**Unresolved:** MPS speed and peak memory at each batch/window setting, how the 128 kb case-study context relates to the released model's 8,191-base training windows, and accuracy on species outside the training set. The card permits untested longer inputs through direct model calls; they are not part of this recommendation.
 
 The card reports a zero-shot AUROC of 0.713 on its benchmark. The melon Recall@1 of 0.90 and the 15.9% top-0.1% rate across more than 500 validated mutations come from the Gemmaverse write-up's combined Gemma-plus-Botanic workflow. [Card](https://huggingface.co/living-models/Botanic1-M) · [Large variant](https://huggingface.co/living-models/Botanic1-L) · [Case study](https://deepmind.google/models/gemma/gemmaverse/living-models/)
+
+### ALoDLM-1.7B deployment
+
+**Configuration:** `amazon/ALoDLM-1.7B` revision `588c7dc1946e3e09fd496da0b0808bd26f46a758`, official portable PyTorch decoder on CPU in fp32; card specifies PyTorch 2.8.0 and Transformers 4.56.1.\
+**Fit evidence:** Checkpoint metadata and documented CPU support; no M2 run.
+
+| Component | Artifact size | Loading / residency notes |
+| --- | --- | --- |
+| Official BF16 checkpoint | 4,063,515,640 bytes = 4.064 GB | Metadata lists 2,031,739,904 BF16 parameters despite the 1.7B model name. |
+| Same parameters in fp32 | About 8.127 GB, calculated | Estimated weight residency for the documented CPU precision; not a process peak. |
+| Exit gate and recurrence configuration | Additional files | `exit_gate.pt` and `alodlm_config.json` are required by the adaptive decoder. |
+| KV cache and runtime workspace | Unknown | Must fit alongside weights; loading may temporarily retain additional copies. |
+
+**Working memory:** Unknown on the M2. The calculated fp32 weights alone approach the lower end of the 8–11 GB budget, so CPU support does not establish comfortable fit.\
+**Starting limits:** One short prompt, a 16-token decoding window, and a small output budget; check loading and generation peak memory before expanding the workload.\
+**Runtime support:** Official portable decoder documents CPU with fp32 and CUDA with BF16. A Metal/MPS path was not verified.\
+**License:** Model weights are CC BY-NC 4.0; retain upstream Qwen license and attribution notices.\
+**Unresolved:** Loading peak, generation peak, and CPU speed on this Mac. Published B200 throughput concerns 8B and does not establish 1.7B CPU speed.
+
+[Model card](https://huggingface.co/amazon/ALoDLM-1.7B) · [Pinned files](https://huggingface.co/amazon/ALoDLM-1.7B/tree/588c7dc1946e3e09fd496da0b0808bd26f46a758) · [Inference guide](https://github.com/amazon-science/ALoDLM/blob/main/docs/inference.md)
 
 ### ALoDLM-8B near-miss
 
@@ -172,7 +206,7 @@ ALoDLM's method lies in its decoder: it loops shared layers over a block of draf
 - **MSFlow:** [Project](https://yu1ut.com/MSFlow-HP/) · [Code](https://github.com/yu1ut/MSFlow) · [Weights](https://huggingface.co/ly-corporation/MSFlow).
 - **Kandinsky 6.0:** [Code](https://github.com/kandinskylab/kandinsky-6) · [Lite distilled files](https://huggingface.co/kandinskylab/Kandinsky-6.0-Lite-distill-5s-Diffusers).
 - **GPT-6 Intelligent UI:** [OpenAI announcement](https://openai.com/index/gpt-6-for-everyone/).
-- **ALoDLM:** [Model card](https://huggingface.co/amazon/ALoDLM-8B) · [Code](https://github.com/amazon-science/ALoDLM) · [Community GGUF](https://huggingface.co/mradermacher/ALoDLM-8B-GGUF).
+- **ALoDLM:** [8B model card](https://huggingface.co/amazon/ALoDLM-8B) · [1.7B model card](https://huggingface.co/amazon/ALoDLM-1.7B) · [Code](https://github.com/amazon-science/ALoDLM) · [Inference guide](https://github.com/amazon-science/ALoDLM/blob/main/docs/inference.md) · [Community GGUF](https://huggingface.co/mradermacher/ALoDLM-8B-GGUF).
 - **AlphaProtein Novo:** [Repository](https://github.com/google-deepmind/alphaprotein-novo).
 - **Botanic 1:** [Gemmaverse case study](https://deepmind.google/models/gemma/gemmaverse/living-models/) · [Collection](https://huggingface.co/collections/living-models/botanic1-6a97f4e3c33f3d109a75057d) · [Botanic1-M](https://huggingface.co/living-models/Botanic1-M) · [Botanic1-L](https://huggingface.co/living-models/Botanic1-L).
 - **OpenAI math:** [Repository](https://github.com/openai/math).
