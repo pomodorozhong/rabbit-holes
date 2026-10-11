@@ -25,6 +25,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-09-22-qwen-image-2.1.md](./report-2026-09-22-qwen-image-2.1.md) | as of 2026-09-22 | **Qwen-Image-2.1** on the 16 GB M2: full-pipeline footprint, GGUF/ComfyUI path, MPS edit bug, LoRA and license caveats |
 | [report-2026-09-28-video-ai-news.md](./report-2026-09-28-video-ai-news.md) | video [nX0fgBL3sIM](https://www.youtube.com/watch?v=nX0fgBL3sIM) (as of 2026-09-28) | Runnability on 16 GB M2 for every chapter in that AI-news video; Supra2-IMG as the practical local candidate, with Limite 1B / CLM near-misses and large hosted, robotics, and research stacks separated out |
 | [report-2026-10-04-video-ai-news.md](./report-2026-10-04-video-ai-news.md) | video [lHmZoRHMZyM](https://www.youtube.com/watch?v=lHmZoRHMZyM) (as of 2026-10-04) | All 28 chapters; Whistle and Phonon-2 for local speech recognition, AstaBrief Q4 for cited synthesis, and full-pipeline checks for InSpatio, PixelUMM, DMAD and PDMD |
+| [report-2026-10-12-video-ai-news.md](./report-2026-10-12-video-ai-news.md) | video [X0_GDOkLKzQ](https://youtu.be/X0_GDOkLKzQ) (as of 2026-10-12) | All 22 chapters; EmbeddingGemma 2 for local search, Botanic1-M with window/batch limits for plant DNA scoring, and experimental ALoDLM-1.7B CPU decoding; 8B GGUF gap and Kandinsky 6.0 / Iris-3B full-pipeline checks |
 
 ## Scripts
 
