@@ -20,6 +20,10 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - What do Codex, Claude Code, Gemini CLI, Cursor, and Copilot share?
   - How do discovery, activation, permissions, and sharing differ?
   - How do local skills differ from skills attached through an API?
+- [How Codex and Claude Code use skills differently](codex-vs-claude-code.md)
+  - How does one shared workflow behave in each product?
+  - Which invocation settings, arguments, permissions, and subagent features need adaptation?
+  - How do their catalog budgets affect discovery, and how should you check a migrated skill?
 - [Storing and sharing skills](storage-and-distribution.md)
   - How do you store one skill or manage several skills in a Git repository?
   - Which existing templates and example repositories can you adapt?
@@ -31,4 +35,4 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - Where should you put the document rules, template, and helper scripts?
   - How do you check the document's contents and page layout?
 
-The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Product details in these guides were checked on 2026-09-29. Check the linked documentation for later changes.
+The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Each guide records its checked date; most were checked on 2026-09-29, and the Codex–Claude Code comparison on 2026-10-12. Check the linked documentation for later changes.
