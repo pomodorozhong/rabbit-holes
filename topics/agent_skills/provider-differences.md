@@ -4,6 +4,8 @@ Checked against primary sources on 2026-09-29.
 
 The same skill folder can work in several products, but where you put it, how you start it, and what it can access may differ. Compare the product running the agent as well as the model provider. Even two products from the same provider can load and share skills differently.
 
+For a focused comparison with one shared workflow, see [How Codex and Claude Code use skills differently](codex-vs-claude-code.md).
+
 ## What is shared?
 
 The [Agent Skills specification](https://agentskills.io/specification) defines a folder with `SKILL.md`, required `name` and `description` fields, Markdown instructions, and optional supporting files. It describes loading metadata first, instructions when selected, and other files as needed. It does not define one installation path, command, permission system, or sharing service for every product.
