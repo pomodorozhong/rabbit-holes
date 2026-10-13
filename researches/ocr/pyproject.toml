@@ -1,0 +1,19 @@
+[project]
+name = "ocr-model-comparison"
+version = "0.1.0"
+description = "Compare a compact OCR pipeline with a Transformer-based text recognizer"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "jiwer>=4.0.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.0",
+    "onnxruntime>=1.29.0",
+    "pandas>=2.3.0",
+    "pillow>=11.0.0",
+    "protobuf>=6.31.0",
+    "rapidocr>=3.9.2,<4",
+    "sentencepiece>=0.2.0",
+    "torch>=2.7.0",
+    "transformers>=4.55.0,<5",
+]
