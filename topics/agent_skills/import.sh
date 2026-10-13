@@ -63,6 +63,8 @@ for d in "$STAGE"/agents/*/; do
     place "$d" "$REPO/skills"; rm -rf "$other"
   else
     place "$d" "$REPO/codex-only"; place "$other" "$REPO/claude-only"
+    # A skipped existing entry must not be imported again as a shared Claude-only skill.
+    rm -rf "$other"
     echo "DIFFERENT in each agent, review: $name"
   fi
 done
