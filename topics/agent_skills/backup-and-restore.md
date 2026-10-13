@@ -148,7 +148,6 @@ Each `mv` line shows an existing entry that will be moved to `~/skills-link-back
 ```bash
 mkdir -p "$HOME/skills-link-backup"
 RUN_OUTPUT="$(mktemp "$HOME/skills-link-backup/run-output.XXXXXX")"
-set -o pipefail
 ./link.sh 2>&1 | tee "$RUN_OUTPUT"
 echo "Run output saved to $RUN_OUTPUT"
 ls -l ~/.agents/skills ~/.claude/skills
@@ -157,7 +156,7 @@ ls -A ~/.codex/skills
 
 Every personal skill you kept in the repo should have an arrow into `$REPO` in its intended agent folders. Third-party installations and Claude Code's `synced` folder may remain beside those links. In `~/.codex/skills`, migrated names should be gone; `.system` and any unrelated installations remain. Use your configured folders instead of these defaults if you set `CLAUDE_CONFIG_DIR` or `CODEX_HOME`.
 
-`tee` keeps a plain transcript for manual recovery; the script does not read it. `pipefail` makes the pipeline report a linker failure even if saving the output succeeds. If the run fails, stop and inspect the output before continuing: there is no automatic rollback, and earlier changes remain.
+The saved output is your record for manual recovery. The run succeeded if its last line is `Linked skills from …`. If it isn't, stop and read the output: there is no automatic rollback, and changes made before the failure remain.
 
 Then check in each agent:
 
@@ -174,9 +173,14 @@ Entries with `path = "…/.codex/skills/…"` no longer match after the move. Ch
 
 When both agents list each intended skill once and the old folders are no longer needed, you can delete that run's backup folder. Keep its transcript until you no longer need the old link targets.
 
-To recover a replaced entry by hand, use the transcript to identify its original path and inspect the current entry with `ls -ld` and `readlink`. Remove only the replacement symlink for that entry, after confirming it points into this repo; preserve any later edits first. Move the individual folder or link inside `~/skills-link-backup/<timestamp>-<pid>/codex/` back to `~/.agents/skills/`, an entry inside `claude/` back to `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills/`, or an entry inside `codex-legacy/` back to `${CODEX_HOME:-$HOME/.codex}/skills/`. Move the entries themselves, rather than their `codex/`, `claude/`, or `codex-legacy/` parent folders, and check that each destination is free before moving.
+To recover a replaced entry by hand:
 
-For a re-pointed link, recreate it at the printed destination using the exact target in its `replacing link … (was -> …)` line. Preserve a relative target as written: it is relative to the link's parent folder. Git can recover the repo's skill files, but it does not record the previous targets of links elsewhere in your home folder. For a deleted or moved repo skill, restore its previous folder layout from Git and re-run `link.sh` to recreate its links. Recovery is selective; leave unaffected installations alone.
+1. Find it in the saved output: an `mv` line for a folder, or a `replacing link … (was -> …)` line for a link.
+2. Delete only the new link, after checking with `readlink` that it points into this repo.
+3. Move the folder back from `~/skills-link-backup/<timestamp>-<pid>/`: entries in `codex/` go to `~/.agents/skills/`, `claude/` to `~/.claude/skills/`, and `codex-legacy/` to `~/.codex/skills/`.
+4. For a link, recreate it with the exact old target, for example `ln -s '<old target>' ~/.claude/skills/<name>`.
+
+Recover only the entries you need; leave the rest alone.
 
 ## 6. Commit and push
 
