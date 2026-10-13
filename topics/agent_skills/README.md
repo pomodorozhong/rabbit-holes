@@ -26,9 +26,13 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - How do you install selected skills, choose links or copies, and track versions?
   - How do you export a skill and install it for Codex?
   - When should you use plugins, team sharing, or a public directory?
+- [Back up and install Codex and Claude Code skills from one Git repo](backup-and-restore.md)
+  - How do you import existing skills and resolve differences between the agents?
+  - How do per-skill links make Git the place where edits and backups live?
+  - How do you set up another machine, recover replaced entries, or use copies instead?
 - [Document generation example](document-generation-example.md)
   - When should a task use a template, a generator, or a separate formatting skill?
   - Where should you put the document rules, template, and helper scripts?
   - How do you check the document's contents and page layout?
 
-The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Product details in these guides were checked on 2026-09-29. Check the linked documentation for later changes.
+The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Check the linked documentation and the review date noted in each guide for current behavior.

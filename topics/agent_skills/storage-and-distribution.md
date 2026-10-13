@@ -4,7 +4,7 @@ Repository examples, folder locations, and installer behavior checked on 2026-09
 
 Keep the files you maintain in Git. Put the skills you want an agent to use in that product's skill folder, either by copying, linking, or installing them. A repository can hold a large library without installing the whole library for every project.
 
-This guide covers repository layouts, managing a collection, real examples, and installation. For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
+This guide covers repository layouts, managing a collection, real examples, and installation. For a personal repository that links skills into Codex and Claude Code, including migration and recovery, follow [Back up and install skills from one Git repo](backup-and-restore.md). For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
 
 ## Choose a repository layout
 
