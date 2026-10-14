@@ -26,10 +26,14 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - How do you install selected skills, choose links or copies, and track versions?
   - How do you export a skill and install it for Codex?
   - When should you use plugins, team sharing, or a public directory?
-- [Back up and install Codex and Claude Code skills from one Git repo](backup-and-restore.md)
-  - How do you import existing skills and resolve differences between the agents?
-  - How do per-skill links make Git the place where edits and backups live?
-  - How do you set up another machine, recover replaced entries, or use copies instead?
+- [Back up and restore personal skills with Git](backup-and-restore.md)
+  - How do links let Codex and Claude Code use the same source files?
+  - When should you share one version, keep agent-specific variants, or install copies?
+  - How do branch changes affect installed skills, and what does a restore need?
+- [Maintaining a personal skills repository](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md) (in `pomodorozhong/skills`)
+  - How do you import existing skills, preview links, and set up a machine?
+  - How do you edit, add, remove, and synchronize skills?
+  - How do you undo a link run and test the maintained scripts?
 - [Document generation example](document-generation-example.md)
   - When should a task use a template, a generator, or a separate formatting skill?
   - Where should you put the document rules, template, and helper scripts?
