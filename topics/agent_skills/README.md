@@ -24,12 +24,10 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - How do you store one skill or manage several skills in a Git repository?
   - Which existing templates and example repositories can you adapt?
   - How do you install selected skills, choose links or copies, and track versions?
+  - How do you use one checkout for personal skills, manage branch changes, and restore a backup?
+  - When should both agents share a version, and when do they need separate installations?
   - How do you export a skill and install it for Codex?
   - When should you use plugins, team sharing, or a public directory?
-- [Back up and restore personal skills with Git](backup-and-restore.md)
-  - How do links let Codex and Claude Code use the same source files?
-  - When should you share one version, keep agent-specific variants, or install copies?
-  - How do branch changes affect installed skills, and what does a restore need?
 - [Maintaining a personal skills repository](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md) (in `pomodorozhong/skills`)
   - How do you import existing skills, preview links, and set up a machine?
   - How do you edit, add, remove, and synchronize skills?

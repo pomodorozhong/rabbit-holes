@@ -4,9 +4,9 @@ Repository examples, folder locations, and installer behavior checked on 2026-09
 
 Keep the files you maintain in Git. Put the skills you want an agent to use in that product's skill folder, either by copying, linking, or installing them. A repository can hold a large library without installing the whole library for every project.
 
-This guide covers repository layouts, managing a collection, real examples, and installation. For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
+This guide covers repository layouts, installation, maintaining a personal checkout, backups, and sharing. For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
 
-For the design of a personal repository linked into Codex and Claude Code, see [Back up and restore personal skills with Git](backup-and-restore.md). The runnable setup, import, and recovery workflow is maintained in [pomodorozhong/skills: Maintaining these skills](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md).
+The runnable setup, import, and recovery workflow for the personal-repository example is maintained in [pomodorozhong/skills: Maintaining these skills](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md).
 
 ## Choose a repository layout
 
@@ -105,7 +105,40 @@ For a reviewed revision, check out that tag or commit locally, then install sele
 npx skills add /absolute/path/to/agent-skills --skill release-brief --agent codex
 ```
 
-Choose between **links** and **copies**. A symlink points an agent's installation to the installer's shared local copy. A copy has independent files; `--copy` selects that approach. Updating the source Git repository does not by itself refresh every installed copy. Agree on an update process and retest affected skills. [Installation methods](https://github.com/vercel-labs/skills#installation-methods)
+Choose between **links** and **copies**. The CLI's symlink installation points to its shared local copy; `--copy` gives each agent independent files. These installations are separate from the source Git checkout: updating the repository does not by itself refresh the installed files. Agree on an update process and retest affected skills. [Installation methods](https://github.com/vercel-labs/skills#installation-methods)
+
+For a collection you actively maintain yourself, you can instead link each skill directly to your source checkout. The next section explains how that changes editing and backups.
+
+## Maintain a personal checkout as the installation
+
+A direct symlink makes an agent read the files in your Git checkout. For example, a shared `commit` skill can live at `~/repo/skills/skills/commit`, with links from both agents' personal folders:
+
+```text
+~/repo/skills/skills/commit/SKILL.md                 Source file in Git
+
+~/.agents/skills/commit -> ~/repo/skills/skills/commit   Codex
+~/.claude/skills/commit -> ~/repo/skills/skills/commit   Claude Code
+```
+
+Codex's personal discovery folder is `~/.agents/skills`; Claude Code's default is `~/.claude/skills`. Both document support for individual skill folders that are symlinks to directories elsewhere on disk. [Codex skill locations](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills), [Claude Code skill locations](https://code.claude.com/docs/en/skills)
+
+An edit through either link changes the source file, so Git sees it in the checkout. Link each skill individually, leaving the parent discovery folders available for other installations and product-managed entries. The checkout must remain accessible at the linked location; moving it requires repairing the links.
+
+### Keep the linked checkout on a reviewed version
+
+Agents read the linked files, including uncommitted edits. Switching branches in that checkout changes the installed skills. For a collection reviewed through pull requests, keep the linked checkout on the branch containing accepted changes and develop in a separate worktree. Pull into the linked checkout after a merge. If an agent edits through a link, review that diff and save it on a development branch before returning the linked checkout to its reviewed version. [Maintaining these skills: Keep main checked out](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md#keep-main-checked-out)
+
+Before importing existing installations, compare versions with the same name. Different instructions or executable permissions can change behavior. Merge the changes you want if both agents should share one version. When instructions depend on a product's tools or invocation syntax, keep distinct versions and install each only for its intended agent.
+
+The [pomodorozhong/skills import script](https://github.com/pomodorozhong/skills/blob/main/scripts/import.sh) chooses one shared version per skill: it leaves existing repository entries alone and skips names whose installed copies differ, including executable permissions. Its link script installs every skill under `skills/` into both agents. Agent-specific variants require a different installation plan.
+
+### Back up the files and restore the installation
+
+Commit the source files you want to preserve and push them to your remote. A symlink or installer lock file cannot replace the skill's actual files. Maintain your own source files in Git, record the sources and reviewed revisions of third-party skills separately, and reinstall bundled, synced, and plugin skills through the product that manages them.
+
+A restore needs both the source files and the installation plan: clone the repository, recreate links or copies, reinstall recorded dependencies, and try a sample request in each intended agent. A skill appearing in a selector checks discovery; a sample request checks whether its instructions and helpers work in that environment.
+
+For a runnable example, follow [Maintaining these skills](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md). It covers machine setup, imports, daily edits, synchronization, and script tests. Its [link script](https://github.com/pomodorozhong/skills/blob/main/scripts/link.sh) previews changes and records recovery information for replaced entries; [Undo a link run](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md#undo-a-link-run) explains the `--undo` option and handling of entries changed since the run. Read the scripts and inspect the dry run before replacing installations.
 
 ## Exporting and installing a skill for Codex
 
@@ -183,4 +216,4 @@ Cursor has a team marketplace for sharing skills. Other products have their own 
 - [Published skill-installer instructions](https://github.com/openai/skills/blob/main/skills/.system/skill-installer/SKILL.md)
 - [Codex plugin packaging](https://developers.openai.com/plugins/build/plugins)
 
-The repository layouts and maintenance advice are recommendations. Export and project-copy commands were checked with temporary files; no skill was installed into Codex. Product and installer behavior may change.
+The repository layouts and maintenance advice are recommendations. Export and project-copy commands were checked with temporary files; no skill was installed into Codex. Personal-skill discovery and invocation were not tested in running agents. Product and installer behavior may change.
