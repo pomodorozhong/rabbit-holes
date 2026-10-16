@@ -34,9 +34,9 @@ model: inherit
 ---
 
 Read SPEC.md and work only on the module assigned by the parent.
-For review, do not edit files. Return defects with concrete examples.
+For review, do not edit files. Return defects with symbols and concrete examples.
 For implementation, edit only your assigned module and verify its contracts.
-Do not create further subagents. Return findings or changes and checks.
+Do not create further subagents. Return findings or changes and checks to the parent.
 ```
 
 The YAML header configures the agent; the Markdown body supplies its instructions. For a worker that only reviews files, reduce `tools` to `Read, Glob, Grep`. That removes editing and shell tools, whereas the sentence “do not edit” alone is an instruction. [Claude Code custom subagents](https://code.claude.com/docs/en/sub-agents), [permission rules](https://code.claude.com/docs/en/permissions)
@@ -48,13 +48,13 @@ name = "module_worker"
 description = "Review or repair one explicitly assigned module against SPEC.md."
 developer_instructions = """
 Read SPEC.md and work only on the module assigned by the parent.
-For review, do not edit files. Return defects with concrete examples.
+For review, do not edit files. Return defects with symbols and concrete examples.
 For implementation, edit only your assigned module and verify its contracts.
-Do not create further subagents. Return findings or changes and checks.
+Do not create further subagents. Return findings or changes and checks to the parent.
 """
 ```
 
-The documented schema requires those three fields. The measured native spawn path records `agentRole: null`, so the experiment does not establish that this custom role was selected. A worker inherits the parent's permission boundary. Start the parent with `codex --sandbox read-only` to enforce read-only shell execution. [Codex custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents), [sandbox and approval controls](https://learn.chatgpt.com/docs/agent-approvals-security)
+The documented schema requires those three fields, and Codex identifies a custom agent by its `name`. A worker inherits the parent's permission boundary. Start the parent with `codex --sandbox read-only` to enforce read-only shell execution. [Codex custom agents](https://learn.chatgpt.com/docs/agent-configuration/subagents#custom-agents), [sandbox and approval controls](https://learn.chatgpt.com/docs/agent-approvals-security)
 
 Set explicit limits for this example. Claude Code's `.claude/settings.json` can contain:
 
@@ -87,7 +87,7 @@ the other reviews windows.mjs, against SPEC.md. Do not edit files or let workers
 delegate further. Wait for both, reproduce their findings, and combine the result.
 ```
 
-For Codex, ask for two named workers instead of requiring the Claude profile name. Its working minimum here is the `[agents]` configuration plus the explicit task assignment. Claude Code can also select matching descriptions automatically; current local Codex documentation describes delegation after a direct request or applicable project or skill instructions. [Claude Code delegation](https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly), [Codex delegation](https://learn.chatgpt.com/docs/agent-configuration/subagents#triggering-subagent-workflows)
+For Codex, the measured runs asked for two `module_worker` subagents with the TOML file above present. Both workers ran, but their records show `agentRole: null`: naming the custom role in the prompt did not select it in Codex CLI 0.162.1. The working minimum here is therefore the `[agents]` configuration plus an explicit task assignment; treat the custom role as unverified until a worker record names it. Claude Code can also select matching descriptions automatically; current local Codex documentation describes delegation after a direct request or applicable project or skill instructions. [Claude Code delegation](https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly), [Codex delegation](https://learn.chatgpt.com/docs/agent-configuration/subagents#triggering-subagent-workflows)
 
 ## Compare the configuration and handoff
 
