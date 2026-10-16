@@ -1,0 +1,11 @@
+Found five contract violations, confirmed with Node:
+
+| File / exported symbol | Concrete reproducer | Expected behavior | Actual behavior |
+|---|---|---|---|
+| [money.mjs:2](money.mjs:2) — `discountedTotal` | `discountedTotal(1000, 10)` | `900` cents after a 10% discount | `-9000`; treats the percentage as a fraction without dividing by 100 |
+| [money.mjs:7](money.mjs:7) — `splitCents` | `splitCents(10, 3)` | `[4, 3, 3]` | `[3, 3, 3]`; discards the remainder, so the sum is only 9 |
+| [windows.mjs:2](windows.mjs:2) — `overlaps` | `overlaps({start:0,end:1}, {start:1,end:2})` | `false`; half-open intervals touching at an endpoint do not intersect | `true` |
+| [windows.mjs:11](windows.mjs:11) — `mergeWindows` | `const a = [{start:0,end:2},{start:1,end:3}]; mergeWindows(a);` | `a` remains unchanged | Changes `a[0].end` from `2` to `3` |
+| [windows.mjs:13](windows.mjs:13) — `mergeWindows` | `const a = [{start:4,end:5}]; mergeWindows(a)[0] === a[0]` | `false`; returned objects must not alias input objects | `true` |
+
+No files were changed.

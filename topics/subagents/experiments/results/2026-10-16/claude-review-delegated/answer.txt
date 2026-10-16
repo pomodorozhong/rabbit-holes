@@ -1,0 +1,33 @@
+I read both files and confirmed all four defects against the code. Nothing was run in node, and neither worker ran anything either. The reproducers are traced by hand from the source. I edited no files.
+
+## money.mjs
+
+**1. `discountedTotal`: `percent` is treated as a fraction (line 2)**
+- Reproducer: `discountedTotal(1000, 10)`
+- Expected: `900`
+- Actual: `Math.round(1000 * (1 - 10))`, which is `-9000`.
+- `discountedTotal(1000, 100)` also gives `-99000` instead of `0`.
+- The code uses `1 - percent` where the spec's 0–100 range needs `1 - percent / 100`.
+
+**2. `splitCents`: the remainder is dropped (lines 6–7)**
+- Reproducer: `splitCents(10, 3)`
+- Expected: `[4, 3, 3]`, which sums to 10.
+- Actual: `[3, 3, 3]`, which sums to 9.
+- `splitCents(1, 2)` returns `[0, 0]` instead of `[1, 0]`.
+- Every slot gets `Math.floor(total / people)`, and the `total % people` leftover cents are never handed out.
+
+## windows.mjs
+
+**3. `overlaps`: touching intervals count as overlapping (line 2)**
+- Reproducer: `overlaps({start:0,end:5}, {start:5,end:10})`
+- Expected: `false`, since intervals are half-open and touching endpoints don't overlap.
+- Actual: `true`.
+- Both comparisons use `<=` where they need strict `<`.
+
+**4. `mergeWindows`: mutates input objects and returns aliases of them (lines 11 and 13)**
+- Reproducer: `const a={start:0,end:5}, b={start:3,end:9}; const r = mergeWindows([a,b]);`
+- Expected: `a.end` stays `5`, and `r[0] !== a`.
+- Actual: `a.end` becomes `9`, and `r[0] === a`.
+- The input object `a` is pushed into `merged`, then `previous.end` is written on it.
+- Even a single unmerged input is aliased: `mergeWindows([a])[0] === a`.
+- The sort and the empty-input case are fine, because `[...windows]` copies the array and an empty input returns `[]`.

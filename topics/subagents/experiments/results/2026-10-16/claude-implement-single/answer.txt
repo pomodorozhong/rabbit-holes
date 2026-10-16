@@ -1,0 +1,17 @@
+I repaired both modules, but I haven't run any of the code. The shell was denied, so I couldn't execute `node`. I checked the edits only by reading them against SPEC.md.
+
+**`money.mjs`**
+- `discountedTotal` treated `percent` as a fraction, so a 50% discount gave `cents * (1 - 50)`. It now computes `Math.round(cents * (100 - percent) / 100)`.
+- `splitCents` dropped the remainder. Every share was `floor(total / people)`, so the shares didn't sum to `total`. It now adds one cent to each of the first `total % people` shares.
+
+**`windows.mjs`**
+- `overlaps` used `<=`, so intervals that only touch counted as overlapping. It now uses strict `<` on both comparisons, which matches the half-open rule.
+- `mergeWindows` pushed the input objects into the result and then changed their `end` values. That mutated the input and made the output alias it. It now pushes a copy, `{ ...window }`, and the input array is already copied before sorting.
+
+By reading, these cases come out as the spec requires:
+- `discountedTotal(100, 100)` is 0.
+- `splitCents(10, 3)` is `[4, 3, 3]`.
+- `overlaps` on `[0,1)` and `[1,2)` is false.
+- Empty input to `mergeWindows` returns `[]`.
+
+I didn't touch SPEC.md or any configuration files. The exports are unchanged.

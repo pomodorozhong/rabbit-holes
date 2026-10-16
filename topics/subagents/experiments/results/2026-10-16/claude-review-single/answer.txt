@@ -1,0 +1,32 @@
+I found five defects, one or two per exported function. All are from reading the code against SPEC.md. I didn't run anything, and I edited no files.
+
+**1. `money.mjs`, `discountedTotal`: the percent is used as a fraction**
+- Reproducer: `discountedTotal(1000, 10)`
+- Expected: `900`, because the spec gives the discount as a percentage from 0 through 100.
+- Actual: `Math.round(1000 * (1 - 10))` returns `-9000`. For any percent above 100, the result is the wrong sign or magnitude. Only 0 and 100 give correct results, and 100 gives `-0` for positive cents.
+- Cause: the code should use `1 - percent / 100`, or `cents * (100 - percent) / 100`.
+
+**2. `money.mjs`, `splitCents`: the remainder is dropped**
+- Reproducer: `splitCents(10, 3)`
+- Expected: `[4, 3, 3]`, which sums to 10, with the extra cent going to the earliest person.
+- Actual: `[3, 3, 3]`, which sums to 9. The spec requires the sum to equal `total`.
+- Cause: `total % people` is never distributed.
+
+**3. `windows.mjs`, `overlaps`: touching endpoints count as overlapping**
+- Reproducer: `overlaps({start: 0, end: 5}, {start: 5, end: 10})`
+- Expected: `false`, because intervals are half open and touching endpoints don't overlap.
+- Actual: `true`, because the comparisons use `<=` where they should use `<`.
+- Cause: the check should be `a.start < b.end && b.start < a.end`.
+
+**4. `windows.mjs`, `mergeWindows`: it mutates the input objects**
+- Reproducer: `const a = {start: 0, end: 5}, b = {start: 3, end: 9}; mergeWindows([a, b]);`
+- Expected: `a` is still `{start: 0, end: 5}`.
+- Actual: the first sorted window is pushed into `merged` by reference. The later `previous.end = Math.max(...)` then changes `a.end` to `9`. This violates the no-mutation rule.
+
+**5. `windows.mjs`, `mergeWindows`: returned objects alias input objects**
+- Reproducer: `const a = {start: 0, end: 1}; mergeWindows([a])[0] === a`
+- Expected: `false`, because returned objects must not alias inputs.
+- Actual: `true`, because `merged.push(window)` pushes the input object itself.
+- Fix for 4 and 5: push a copy, `merged.push({...window})`.
+
+Empty input and sorting behave correctly. The sort copies the array first and doesn't touch the original. Merging touching intervals with `<=` is allowed by the spec.
