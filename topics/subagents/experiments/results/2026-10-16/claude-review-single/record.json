@@ -115,13 +115,5 @@
   "workerCompletions": [],
   "workerModels": [],
   "spawnErrors": false,
-  "delegationValid": true,
-  "editorialAssessment": {
-    "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-    "correctContractViolations": 5,
-    "extraIncorrectClaims": [
-      "The answer says 100 percent gives a correct result or negative zero. With cents=1000, the actual result is -99000, not zero. Its main 10 percent reproducer is correct."
-    ],
-    "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
-  }
+  "delegationValid": true
 }

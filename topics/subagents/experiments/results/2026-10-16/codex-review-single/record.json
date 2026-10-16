@@ -129,11 +129,5 @@
     "covered": 4,
     "total": 4,
     "limitation": "Symbol coverage only; review the saved answer for correct claims, reproductions, and false positives."
-  },
-  "editorialAssessment": {
-    "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-    "correctContractViolations": 5,
-    "extraIncorrectClaims": [],
-    "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
   }
 }

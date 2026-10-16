@@ -1,15 +1,21 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gradeImplementation, gradeReview } from './grade.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const directory = resolve(process.argv[2] ?? join(here, 'results', '2026-10-16'));
-const summary = JSON.parse(await readFile(join(directory, 'summary.json'), 'utf8'));
-assert.equal(summary.runs.length, 8);
-assert.equal(new Set(summary.runs.map(r => r.id)).size, 8);
+const readJson = async name => JSON.parse(await readFile(join(directory, name), 'utf8'));
+const optionalJson = name => access(join(directory, name)).then(() => readJson(name), () => null);
+const summary = await readJson('summary.json');
+// The published results add an exclusion log and post-run editorial scores; a fresh run has neither.
+const excluded = await optionalJson('excluded-setup.json');
+const editorial = await optionalJson('editorial-assessment.json');
+if (excluded) assert.equal(summary.runs.length, 8);
+assert(summary.runs.length > 0, 'No runs in summary');
+assert.equal(new Set(summary.runs.map(r => r.id)).size, summary.runs.length);
 const expected = Object.fromEntries(await Promise.all(['SPEC.md', 'money.mjs', 'windows.mjs'].map(async name => [
   name, createHash('sha256').update(await readFile(join(here, 'fixture', name))).digest('hex'),
 ])));
@@ -33,7 +39,7 @@ for (const row of summary.runs) {
     assert.deepEqual(record.initialHashes, record.finalHashes);
     assert.deepEqual(record.assessment, gradeReview(answer));
     assert.equal(record.assessment.covered, 4);
-    assert.equal(record.editorialAssessment.correctContractViolations, 5);
+    if (editorial) assert.equal(editorial.runs[row.id]?.correctContractViolations, 5, `${row.id}: missing editorial score`);
   } else {
     assert.deepEqual(await gradeImplementation(join(folder, 'workspace')), record.assessment);
     assert.equal(record.assessment.passed, 15);
@@ -69,8 +75,8 @@ for (const row of summary.runs) {
   }
   console.log(`${row.id}: inputs, output, grading, delegation, and usage verified`);
 }
-const excluded = JSON.parse(await readFile(join(directory, 'excluded-setup.json'), 'utf8'));
-assert.equal(excluded.length, 6);
+if (excluded) assert.equal(excluded.length, 6);
+if (editorial) assert.deepEqual(Object.keys(editorial.runs).sort(), summary.runs.map(r => r.id).filter(id => id.includes('-review-')).sort());
 const source = await import('./fixture/money.mjs');
 assert.equal(source.discountedTotal(1000, 100), -99000);
-console.log('8 measured runs and 6 disclosed setup runs verified; review arithmetic counterexample reproduced.');
+console.log(`${summary.runs.length} measured runs verified${excluded ? `, ${excluded.length} disclosed setup runs checked` : ''}${editorial ? ', editorial scores present' : ''}; review arithmetic counterexample reproduced.`);

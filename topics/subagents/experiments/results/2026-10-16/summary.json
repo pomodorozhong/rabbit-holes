@@ -145,12 +145,6 @@
         "covered": 4,
         "total": 4,
         "limitation": "Symbol coverage only; review the saved answer for correct claims, reproductions, and false positives."
-      },
-      "editorialAssessment": {
-        "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-        "correctContractViolations": 5,
-        "extraIncorrectClaims": [],
-        "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
       }
     },
     {
@@ -575,12 +569,6 @@
         "covered": 4,
         "total": 4,
         "limitation": "Symbol coverage only; review the saved answer for correct claims, reproductions, and false positives."
-      },
-      "editorialAssessment": {
-        "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-        "correctContractViolations": 5,
-        "extraIncorrectClaims": [],
-        "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
       }
     },
     {
@@ -1352,15 +1340,7 @@
       "workerCompletions": [],
       "workerModels": [],
       "spawnErrors": false,
-      "delegationValid": true,
-      "editorialAssessment": {
-        "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-        "correctContractViolations": 5,
-        "extraIncorrectClaims": [
-          "The answer says 100 percent gives a correct result or negative zero. With cents=1000, the actual result is -99000, not zero. Its main 10 percent reproducer is correct."
-        ],
-        "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
-      }
+      "delegationValid": true
     },
     {
       "id": "claude-review-delegated",
@@ -1517,13 +1497,7 @@
         "claude-sonnet-5-5"
       ],
       "spawnErrors": false,
-      "delegationValid": true,
-      "editorialAssessment": {
-        "assessor": "Codex inspection against the fixture; not a blinded or independent human evaluation",
-        "correctContractViolations": 5,
-        "extraIncorrectClaims": [],
-        "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports."
-      }
+      "delegationValid": true
     },
     {
       "id": "claude-implement-single",

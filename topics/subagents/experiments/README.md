@@ -15,7 +15,7 @@ The [fixture specification](fixture/SPEC.md) describes four exports in two short
 | `overlaps` | Includes touching endpoints | Use half-open interval intersection |
 | `mergeWindows` | Retains and later changes input objects | Avoid input mutation and output aliases |
 
-**Review task:** find real contract violations without editing files; give the export, reproducer, expected behavior, and actual behavior. The automatic score counts the four affected export names. It does not decide whether the explanation is correct. Codex separately inspected the saved answers against the fixture, including all five obligations and incorrect extra claims. That assessment is agent-authored, not blinded human evaluation.
+**Review task:** find real contract violations without editing files; give the export, reproducer, expected behavior, and actual behavior. The automatic score counts the four affected export names. It does not decide whether the explanation is correct. After the runs, an agent session running Codex, one of the two tools being compared, inspected the saved answers against the fixture, including all five obligations and incorrect extra claims. Because that assessor shares a product with half of the answers it judged, it is not a neutral grader, and its scores are not a blinded or human evaluation. They are kept in a separate [editorial assessment](results/2026-10-16/editorial-assessment.json) so that the runner's records contain only what the runner measured.
 
 **Repair task:** edit only the two modules, preserve their exports, and satisfy the specification. The independent [grader](grade.mjs) runs 15 behavioral checks. The agent's temporary workspace contains neither the grader nor the answer key. The buggy baseline passes 7/15; a repair must pass 15/15. These checks exercise the stated edge cases without proving correctness for all possible inputs.
 
@@ -99,7 +99,7 @@ node topics/subagents/experiments/run.mjs --dry-run
 node topics/subagents/experiments/verify.mjs
 ```
 
-The self-check confirms the intentionally failing fixture baseline. The verifier checks all eight saved cases, source hashes, immutable review workspaces, repair results, answer preservation, worker evidence, and token totals. It also reproduces the arithmetic counterexample. The review's semantic assessment remains an explicit inspection, rather than something this script can prove.
+The self-check confirms the intentionally failing fixture baseline. The verifier checks all eight saved cases, source hashes, immutable review workspaces, repair results, answer preservation, worker evidence, and token totals. It also reproduces the arithmetic counterexample and confirms that each saved review has an editorial score; the scores themselves remain an inspection, rather than something this script can prove. Given a fresh `local-results/<timestamp>` directory, the verifier skips the checks that apply only to the published set: exactly eight runs, the six exclusions, and the editorial scores.
 
 To run the full eight-case comparison again using the measured model selections:
 
@@ -125,7 +125,7 @@ The results favor keeping these particular tasks in one agent; they do not estab
 
 - [Fixture specification](fixture/SPEC.md), [runner](run.mjs), [grader](grade.mjs), [evidence collector](codex-evidence.mjs), and [saved-result verifier](verify.mjs)
 - [Measured records and output workspaces](results/2026-10-16/summary.json)
-- [Excluded setup runs](results/2026-10-16/excluded-setup.json)
+- [Excluded setup runs](results/2026-10-16/excluded-setup.json) and [post-run editorial assessment](results/2026-10-16/editorial-assessment.json)
 - [Claude Code: CLI reference](https://code.claude.com/docs/en/cli-reference)
 - [Claude Code: Cost accounting](https://code.claude.com/docs/en/costs)
 - [Claude Agent SDK: Cost tracking](https://code.claude.com/docs/en/agent-sdk/cost-tracking)
