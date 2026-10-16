@@ -141,6 +141,33 @@ Start with the fewest workers that cover independent work. Specify file ownershi
 
 Treat model choice and agent count as separate variables. A larger team using a smaller model changes more than concurrency. First compare the same model and settings with and without delegation, then test a cheaper worker or another decomposition. Judge successful completion, verification effort, elapsed time, and total usage together. The [local comparison](experiments/README.md) fixes models within each product's pair; it does not compare equal token budgets or identify an optimal model or agent count.
 
+### Can a cheaper helper model save usage?
+
+A common tip for Claude subscriptions is to keep Opus as the main agent and hand most of the work to Sonnet or Haiku subagents, so that the weekly limit lasts longer. The tip changes two things at once: it splits the work, and it moves the bulk of the tokens to a model with lower per-token prices. The local experiment changes only the first. Its delegated runs used more tokens because the same model did more coordinating; the tip is betting that cheaper tokens outweigh that overhead.
+
+How the cheaper tokens count against a subscription is only partly documented. On Pro and Max, the five-hour and weekly limits are shared across all models and across Claude and Claude Code. Claude Code can also report separate Opus and Sonnet limits that apply only to that model family. Anthropic lists model choice as a factor in usage, but does not publish how much less of the shared limit a Sonnet or Haiku token uses than an Opus token. [Claude Code with Pro or Max](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan), [usage limit best practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices), [usage limit errors](https://code.claude.com/docs/en/errors#youve-hit-your-session-limit)
+
+As of 2026-10-16, no controlled comparison was found between an Opus-only session and Opus with cheaper subagents, measured against subscription limits. The closest evidence comes from different setups:
+
+| Evidence | What it reports | What limits it |
+| --- | --- | --- |
+| [Andrea Grandi, October 2026](https://www.andreagrandi.it/posts/claude-code-subagents-to-save-usage/) | On a Pro plan, an Opus 5.5 main session delegated implementation to a Sonnet 5.5 subagent, with Haiku and Opus helpers for smaller roles. Thirteen delegated PRs cost an estimated $2.14 each, against $3.59 for 24 earlier Opus-only PRs that were smaller on average. Repricing the subagents' tokens at Opus rates raised the delegated total by only about 5%. Main-session requests fell from 75 to 54 per session, and context per request from 119k to 107k tokens. | One developer's own projects, with different PRs before and after. Dollar figures are API-equivalent estimates; plan usage was logged in whole percentages. |
+| [Anthropic, "The advisor strategy", April 2026](https://claude.com/blog/the-advisor-strategy) | Reverses the roles: Sonnet does the work and calls Opus for brief advice. On SWE-bench Multilingual, this scored 2.7 points higher than Sonnet alone at 11.9% lower cost per task. | An API tool inside one request, not Claude Code subagents. The baseline is Sonnet alone, not Opus, and the post does not discuss subscription limits. |
+| [Ovidius AI, October 2026](https://ovidius.ai/blog/claude-code-subagents-haiku-vs-sonnet-vs-opus-benchmarked) | Across 458 graded runs of 23 subagent task types, Haiku 5.5 at low effort handled most production agent definitions; no task needed Opus once the definition included a checklist. Narrow tool lists were reported to use three to five times fewer tokens. | Graded by Claude models, on one client's tasks. The token comparison is not a matched test, and the main session's model is not stated. |
+| [anthropics/claude-code#52502, April 2026](https://github.com/anthropics/claude-code/issues/52502) | A Max user running an Opus main agent with about 15 Haiku-pinned helpers reported limits draining fast and suspected the helpers were not running on Haiku. | An unverified report, closed without a reply from Anthropic. |
+
+The Grandi measurements are the most direct, and they point at a different mechanism from the one the tip names. Most of the saving came from keeping the main session small: the subagents ran the edit-and-test loop, so the Opus conversation saw a plan and a short report instead of every file read and test log. The lower Sonnet price contributed little on top of that. This matches the guide's planning model: a split pays when it removes work from the expensive context, not merely when it moves tokens elsewhere.
+
+Three documented behaviors can erase the saving:
+
+- **The helper may not run on the cheaper model.** Claude Code resolves a subagent's model from the model Claude passes when it starts the subagent, then the definition's `model` field, then `CLAUDE_CODE_SUBAGENT_MODEL`, then the main conversation's model. A definition with `model: inherit`, like the example above, runs on Opus when the parent does. To pin every subagent, set `CLAUDE_CODE_SUBAGENT_MODEL` together with `CLAUDE_CODE_SUBAGENT_MODEL_FORCE=1` (v2.1.257 or later), then check the model on each row of `/tasks` (v2.1.242 or later). [Claude Code: choose a subagent model](https://code.claude.com/docs/en/sub-agents#choose-a-model)
+- **A helper's cache expires sooner.** Within a subscription's included usage, the main conversation's prompt cache lasts an hour, but subagents get five minutes unless `subagentPromptCacheTtl` says otherwise. A subagent also cannot read the parent's cache on its first request, because its prompt differs. A helper that sits idle for more than five minutes reprocesses its whole context on the next request. [Claude Code: subagents and the cache](https://code.claude.com/docs/en/prompt-caching#subagents-and-the-cache)
+- **Cheaper work may need expensive checking.** If the parent rereads every file to check a helper's result, or redoes a step the helper got wrong, the Opus context grows again. This is an inference from the planning model rather than a measured result.
+
+Codex has a comparable setting, `agents.default_subagent_model`, which an explicit spawn model overrides. [Codex configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
+
+To check the effect on a specific account, compare a week of similar work before and after the change. On Pro and Max, `/usage` attributes recent plan usage to subagents as a share of the total, over the last 24 hours or 7 days. It is computed from local history, so it omits usage from other devices and claude.ai. [Claude Code: plan usage breakdown](https://code.claude.com/docs/en/costs#plan-usage-breakdown)
+
 ## What effectiveness evidence establishes
 
 | Evidence | What it reports | What it does not establish |
@@ -160,6 +187,10 @@ These sources support testing decomposition and coordination explicitly. They do
 - [Claude Code: Permissions](https://code.claude.com/docs/en/permissions)
 - [Claude Code: Environment variables](https://code.claude.com/docs/en/env-vars)
 - [Claude Code: Costs and usage accounting](https://code.claude.com/docs/en/costs)
+- [Claude Code: Prompt caching](https://code.claude.com/docs/en/prompt-caching)
+- [Claude Code: Errors](https://code.claude.com/docs/en/errors)
+- [Claude Help Center: Use Claude Code with your Pro or Max plan](https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan)
+- [Claude Help Center: Usage limit best practices](https://support.claude.com/en/articles/9797557-usage-limit-best-practices)
 - [OpenAI: Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)
 - [OpenAI: Configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference)
 - [OpenAI: Agent approvals and security](https://learn.chatgpt.com/docs/agent-approvals-security)
@@ -167,5 +198,9 @@ These sources support testing decomposition and coordination explicitly. They do
 - [Anthropic: How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)
 - [Kim et al.: Towards a Science of Scaling Agent Systems](https://arxiv.org/abs/2512.08296)
 - [Cemri et al.: Why Do Multi-Agent LLM Systems Fail?](https://arxiv.org/abs/2503.13657)
+- [Anthropic: The advisor strategy](https://claude.com/blog/the-advisor-strategy)
+- [Andrea Grandi: How I use Claude Code subagents to make my Claude Pro limits last longer](https://www.andreagrandi.it/posts/claude-code-subagents-to-save-usage/)
+- [Ovidius AI: Claude Code Subagents: Haiku vs Sonnet vs Opus Benchmarked](https://ovidius.ai/blog/claude-code-subagents-haiku-vs-sonnet-vs-opus-benchmarked)
+- [anthropics/claude-code#52502](https://github.com/anthropics/claude-code/issues/52502)
 
 The documentation supplies changing product behavior; the papers and engineering report supply evidence with different tasks and controls. The local experiment supplies measurements for its stated environment. Practical recommendations above are an interpretation of those sources and results.

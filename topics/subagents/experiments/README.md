@@ -121,6 +121,8 @@ The two tasks use the same tiny source fixture, so they are not independent samp
 
 The results favor keeping these particular tasks in one agent; they do not establish that delegation fails on larger research or implementation work. A useful next study would preselect larger independent tasks and a sequential dependency task, repeat paired runs in alternating order, and compare both unconstrained and equal-budget conditions. Keep the same outcome checks and disclose failed runs.
 
+Moving worker tasks to a cheaper model is a separate question from splitting the work, because it changes the price of the tokens as well as their number. The guide's section on [whether a cheaper helper model saves usage](../configuration-and-effectiveness.md#can-a-cheaper-helper-model-save-usage) collects the published evidence on that question.
+
 ## Sources
 
 - [Fixture specification](fixture/SPEC.md), [runner](run.mjs), [grader](grade.mjs), [evidence collector](codex-evidence.mjs), and [saved-result verifier](verify.mjs)

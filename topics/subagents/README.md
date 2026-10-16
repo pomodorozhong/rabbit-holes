@@ -6,6 +6,7 @@ A subagent takes a bounded piece of work from a parent agent, works in a separat
   - How do Claude Code and Codex define, invoke, and coordinate subagents?
   - Which instructions, context, models, tools, and permissions reach a worker?
   - When do independent tasks justify the extra time and usage?
+  - Can moving subagent work to a cheaper model make subscription limits last longer?
   - What do vendor reports and broader evaluations establish?
 - [A small single-agent versus subagent comparison](experiments/README.md)
   - How can the same review and repair tasks be run with and without delegation?
