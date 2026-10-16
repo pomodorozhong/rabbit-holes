@@ -10,7 +10,12 @@ import { publicEvents } from './public-events.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
-const option = (name, fallback) => args.includes(name) ? args[args.indexOf(name) + 1] : fallback;
+const option = (name, fallback) => {
+  if (!args.includes(name)) return fallback;
+  const value = args[args.indexOf(name) + 1];
+  if (value === undefined || value.startsWith('--')) throw new Error(`${name} needs a value.`);
+  return value;
+};
 const product = option('--product', 'all');
 const task = option('--task', 'all');
 const mode = option('--mode', 'all');
