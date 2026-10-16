@@ -1,0 +1,19 @@
+Both modules now satisfy SPEC.md. Two `module-worker` subagents ran concurrently, one per file. I read both files afterward and they match the spec. I did not rerun the workers' node checks myself.
+
+**`money.mjs`**
+- `discountedTotal` treated `percent` as a fraction. It now returns `Math.round(cents * (100 - percent) / 100)`.
+- `splitCents` dropped the remainder. It now gives one extra cent to each of the earliest people until the remainder is used up, so the shares sum to `total`.
+
+**`windows.mjs`**
+- `overlaps` counted touching endpoints as overlapping. Both comparisons are now strict (`<`), which matches the half-open rule.
+- `mergeWindows` mutated the input objects and returned aliases of them. It now pushes copies (`{ ...window }`) into the result. The array was already copied before sorting.
+
+**Checks**
+
+The workers' node checks gave these results:
+- `discountedTotal(1000, 10)` returned 900, `(5, 50)` returned 3, and `(99, 100)` returned 0.
+- `splitCents(10, 3)` returned `[4, 3, 3]`, and `(0, 2)` returned `[0, 0]`.
+- `overlaps` returned false for `[1,2)` and `[2,3)`.
+- `mergeWindows` turned `[{5,8},{1,3},{2,4}]` into `[{1,4},{5,8}]` and left the input unchanged. An empty input returned `[]`.
+
+The workers did not test that returned objects are separate from the input objects. I confirmed that by reading the code. Exports are unchanged, and SPEC.md and the configuration files were not touched.

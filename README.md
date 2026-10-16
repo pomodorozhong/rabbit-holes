@@ -14,6 +14,7 @@ A personal collection of questions I’ve followed into notes, guides, notebooks
 | [Git and GitHub](topics/git_and_github/README.md) | A table of contents for Git and GitHub learning notes. |
 | [Indie hacking](topics/indie-hacking/README.md) | Notes on building and sustaining products independently. |
 | [Local model reports](topics/local_model_reports/README.md) | Hardware-aware model reports, memory notes, and research scripts. |
+| [Subagents](topics/subagents/README.md) | Claude Code and Codex configuration, delegation tradeoffs, and a reproducible comparison. |
 
 ## Workflow
 

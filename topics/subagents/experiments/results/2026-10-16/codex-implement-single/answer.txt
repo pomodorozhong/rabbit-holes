@@ -1,0 +1,7 @@
+Updated only `money.mjs` and `windows.mjs`, preserving exports:
+
+- Corrected percentage discounts and remainder distribution.
+- Fixed half-open overlap checks.
+- Made merged intervals independent of input objects.
+
+Local checks passed: discount boundaries and half cents, 6,030 splits, 1,225 overlap cases, and merge ordering, touching intervals, nesting, gaps, empty input, and immutability.

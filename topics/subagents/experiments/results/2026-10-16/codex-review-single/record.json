@@ -1,0 +1,133 @@
+{
+  "id": "codex-review-single",
+  "startedAt": "2026-10-16T03:46:39.651Z",
+  "seconds": 21.608341916999997,
+  "exitCode": 0,
+  "timedOut": false,
+  "command": "codex",
+  "args": [
+    "exec",
+    "--json",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--strict-config",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    "gpt-6.1-sol",
+    "-c",
+    "approval_policy=\"never\"",
+    "-c",
+    "model_reasoning_effort=\"low\"",
+    "-c",
+    "agents.enabled=false",
+    "-c",
+    "agents.max_concurrent_threads_per_session=2",
+    "-c",
+    "features.memories=false",
+    "-c",
+    "projects.\"<FIXTURE>\".trust_level=\"trusted\"",
+    "-C",
+    "<FIXTURE>",
+    "-"
+  ],
+  "initialHashes": {
+    "SPEC.md": "183bfffae7f2fcda86ecbd17c5696030c3caf65e12195a321c3b8a9ff7ea6527",
+    "money.mjs": "1c03139b956cb0ee61108a52eca2bfd8423108a01405508e135676e89a8ef5c4",
+    "windows.mjs": "da33d9b10b97fc1e1c60da612436e1dd59b47d4dbab64017d84fdacb943075c6"
+  },
+  "finalHashes": {
+    "SPEC.md": "183bfffae7f2fcda86ecbd17c5696030c3caf65e12195a321c3b8a9ff7ea6527",
+    "money.mjs": "1c03139b956cb0ee61108a52eca2bfd8423108a01405508e135676e89a8ef5c4",
+    "windows.mjs": "da33d9b10b97fc1e1c60da612436e1dd59b47d4dbab64017d84fdacb943075c6"
+  },
+  "final": "Found five contract violations, confirmed with Node:\n\n| File / exported symbol | Concrete reproducer | Expected behavior | Actual behavior |\n|---|---|---|---|\n| [money.mjs:2](money.mjs:2) — `discountedTotal` | `discountedTotal(1000, 10)` | `900` cents after a 10% discount | `-9000`; treats the percentage as a fraction without dividing by 100 |\n| [money.mjs:7](money.mjs:7) — `splitCents` | `splitCents(10, 3)` | `[4, 3, 3]` | `[3, 3, 3]`; discards the remainder, so the sum is only 9 |\n| [windows.mjs:2](windows.mjs:2) — `overlaps` | `overlaps({start:0,end:1}, {start:1,end:2})` | `false`; half-open intervals touching at an endpoint do not intersect | `true` |\n| [windows.mjs:11](windows.mjs:11) — `mergeWindows` | `const a = [{start:0,end:2},{start:1,end:3}]; mergeWindows(a);` | `a` remains unchanged | Changes `a[0].end` from `2` to `3` |\n| [windows.mjs:13](windows.mjs:13) — `mergeWindows` | `const a = [{start:4,end:5}]; mergeWindows(a)[0] === a[0]` | `false`; returned objects must not alias input objects | `true` |\n\nNo files were changed.",
+  "usage": {
+    "input_tokens": 47321,
+    "cached_input_tokens": 34176,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 739,
+    "reasoning_output_tokens": 0
+  },
+  "usageScope": "Coordinator CLI turn.completed usage; ledger sums unique response records owned separately by the root and its workers",
+  "model": "gpt-6.1-sol",
+  "coordination": [],
+  "resultStatus": "completed",
+  "ledger": {
+    "rootId": "01a142d1-ad6f-79d1-bece-bbcddbe0ba72",
+    "spawns": [],
+    "workerResults": [],
+    "workers": [],
+    "requests": [
+      {
+        "timestamp": "2026-10-16T03:46:45.805Z",
+        "threadId": "01a142d1-ad6f-79d1-bece-bbcddbe0ba72",
+        "responseId": "resp_0f0b06d82573ec50016ad19e23a4c48191b20dd683462a7874",
+        "usage": {
+          "input_tokens": 15067,
+          "cached_input_tokens": 11392,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 105,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 15172
+        }
+      },
+      {
+        "timestamp": "2026-10-16T03:46:53.035Z",
+        "threadId": "01a142d1-ad6f-79d1-bece-bbcddbe0ba72",
+        "responseId": "resp_0f0b06d82573ec50016ad19e288d288191b42c2fa4aa3db501",
+        "usage": {
+          "input_tokens": 15772,
+          "cached_input_tokens": 7168,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 275,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 16047
+        }
+      },
+      {
+        "timestamp": "2026-10-16T03:47:00.584Z",
+        "threadId": "01a142d1-ad6f-79d1-bece-bbcddbe0ba72",
+        "responseId": "resp_0f0b06d82573ec50016ad19e2e8b908191ab51865007800fa0",
+        "usage": {
+          "input_tokens": 16482,
+          "cached_input_tokens": 15616,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 359,
+          "reasoning_output_tokens": 0,
+          "total_tokens": 16841
+        }
+      }
+    ],
+    "rootUsage": {
+      "input_tokens": 47321,
+      "cached_input_tokens": 34176,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 739,
+      "reasoning_output_tokens": 0,
+      "total_tokens": 48060
+    },
+    "aggregateUsage": {
+      "input_tokens": 47321,
+      "cached_input_tokens": 34176,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 739,
+      "reasoning_output_tokens": 0,
+      "total_tokens": 48060
+    }
+  },
+  "spawnErrors": false,
+  "delegationValid": true,
+  "assessment": {
+    "mentioned": [
+      "discountedTotal",
+      "splitCents",
+      "overlaps",
+      "mergeWindows"
+    ],
+    "covered": 4,
+    "total": 4,
+    "limitation": "Symbol coverage only; review the saved answer for correct claims, reproductions, and false positives."
+  }
+}

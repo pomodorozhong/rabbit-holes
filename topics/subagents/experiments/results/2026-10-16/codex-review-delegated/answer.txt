@@ -1,0 +1,11 @@
+Verified both workers’ findings locally. Five contract violations:
+
+| File | Exported symbol | Concrete reproducer | Expected | Actual |
+|---|---|---|---|---|
+| `money.mjs` | `discountedTotal` | `discountedTotal(1000, 10)` | `900` | `-9000`; percentage is not divided by 100. |
+| `money.mjs` | `splitCents` | `splitCents(10, 3)` | `[4, 3, 3]` | `[3, 3, 3]`; remainder is discarded. |
+| `windows.mjs` | `overlaps` | `overlaps({start:0,end:1}, {start:1,end:2})` | `false` | `true`; touching endpoints count as overlap. |
+| `windows.mjs` | `mergeWindows` | `const a = [{start:1,end:3},{start:2,end:4}]; mergeWindows(a); a[0].end` | `3` | `4`; merging mutates an input object. |
+| `windows.mjs` | `mergeWindows` | `const a = [{start:1,end:2}]; mergeWindows(a)[0] === a[0]` | `false` | `true`; returned objects alias input objects. |
+
+The final two violations share the same cause: retaining input objects in the result. No files were edited.

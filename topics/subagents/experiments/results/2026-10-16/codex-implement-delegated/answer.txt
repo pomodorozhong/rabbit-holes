@@ -1,0 +1,6 @@
+Repaired only `money.mjs` and `windows.mjs`, preserving exports:
+
+- Fixed percentage discounts and remainder distribution.
+- Fixed half-open overlap checks and copied merged objects to prevent input mutation or aliasing.
+
+Exactly two concurrent module workers completed the repairs. Independent Node assertions passed for rounding, 6,030 splits, interval intersections, sorted merging, empty inputs, frozen inputs, and object independence.

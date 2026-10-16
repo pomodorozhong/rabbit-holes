@@ -1,0 +1,119 @@
+{
+  "id": "claude-review-single",
+  "startedAt": "2026-10-16T03:40:13.193Z",
+  "seconds": 11.292886874999997,
+  "exitCode": 0,
+  "timedOut": false,
+  "command": "claude",
+  "args": [
+    "--print",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--forward-subagent-text",
+    "--model",
+    "sonnet",
+    "--effort",
+    "low",
+    "--no-session-persistence",
+    "--setting-sources",
+    "project",
+    "--disable-slash-commands",
+    "--no-chrome",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{}}",
+    "--settings",
+    "{\"disableAllHooks\":true,\"autoMemoryEnabled\":false}",
+    "--permission-mode",
+    "dontAsk",
+    "--permission-prompts",
+    "none",
+    "--tools",
+    "Read,Glob,Grep,Edit,Write,Bash",
+    "--allowedTools",
+    "Read,Glob,Grep,Edit,Write,Bash(node *),Agent(module-worker)"
+  ],
+  "initialHashes": {
+    "SPEC.md": "183bfffae7f2fcda86ecbd17c5696030c3caf65e12195a321c3b8a9ff7ea6527",
+    "money.mjs": "1c03139b956cb0ee61108a52eca2bfd8423108a01405508e135676e89a8ef5c4",
+    "windows.mjs": "da33d9b10b97fc1e1c60da612436e1dd59b47d4dbab64017d84fdacb943075c6"
+  },
+  "finalHashes": {
+    "SPEC.md": "183bfffae7f2fcda86ecbd17c5696030c3caf65e12195a321c3b8a9ff7ea6527",
+    "money.mjs": "1c03139b956cb0ee61108a52eca2bfd8423108a01405508e135676e89a8ef5c4",
+    "windows.mjs": "da33d9b10b97fc1e1c60da612436e1dd59b47d4dbab64017d84fdacb943075c6"
+  },
+  "final": "I found five defects, one or two per exported function. All are from reading the code against SPEC.md. I didn't run anything, and I edited no files.\n\n**1. `money.mjs`, `discountedTotal`: the percent is used as a fraction**\n- Reproducer: `discountedTotal(1000, 10)`\n- Expected: `900`, because the spec gives the discount as a percentage from 0 through 100.\n- Actual: `Math.round(1000 * (1 - 10))` returns `-9000`. For any percent above 100, the result is the wrong sign or magnitude. Only 0 and 100 give correct results, and 100 gives `-0` for positive cents.\n- Cause: the code should use `1 - percent / 100`, or `cents * (100 - percent) / 100`.\n\n**2. `money.mjs`, `splitCents`: the remainder is dropped**\n- Reproducer: `splitCents(10, 3)`\n- Expected: `[4, 3, 3]`, which sums to 10, with the extra cent going to the earliest person.\n- Actual: `[3, 3, 3]`, which sums to 9. The spec requires the sum to equal `total`.\n- Cause: `total % people` is never distributed.\n\n**3. `windows.mjs`, `overlaps`: touching endpoints count as overlapping**\n- Reproducer: `overlaps({start: 0, end: 5}, {start: 5, end: 10})`\n- Expected: `false`, because intervals are half open and touching endpoints don't overlap.\n- Actual: `true`, because the comparisons use `<=` where they should use `<`.\n- Cause: the check should be `a.start < b.end && b.start < a.end`.\n\n**4. `windows.mjs`, `mergeWindows`: it mutates the input objects**\n- Reproducer: `const a = {start: 0, end: 5}, b = {start: 3, end: 9}; mergeWindows([a, b]);`\n- Expected: `a` is still `{start: 0, end: 5}`.\n- Actual: the first sorted window is pushed into `merged` by reference. The later `previous.end = Math.max(...)` then changes `a.end` to `9`. This violates the no-mutation rule.\n\n**5. `windows.mjs`, `mergeWindows`: returned objects alias input objects**\n- Reproducer: `const a = {start: 0, end: 1}; mergeWindows([a])[0] === a`\n- Expected: `false`, because returned objects must not alias inputs.\n- Actual: `true`, because `merged.push(window)` pushes the input object itself.\n- Fix for 4 and 5: push a copy, `merged.push({...window})`.\n\nEmpty input and sorting behave correctly. The sort copies the array first and doesn't touch the original. Merging touching intervals with `<=` is allowed by the spec.",
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 2947,
+    "cache_read_input_tokens": 11330,
+    "output_tokens": 1245,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 2947,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 937,
+        "cache_read_input_tokens": 6553,
+        "cache_creation_input_tokens": 1171,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1171
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1245,
+      "cacheReadInputTokens": 11330,
+      "cacheCreationInputTokens": 2947,
+      "webSearchRequests": 0,
+      "costUSD": 0.026512,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "reportedCostUsd": 0.026512,
+  "usageScope": "CLI result usage/modelUsage; reported USD is an API-equivalent estimate, not a subscription invoice",
+  "model": "claude-sonnet-5-5",
+  "coordination": [],
+  "permissionDenials": [],
+  "resultStatus": "success",
+  "assessment": {
+    "mentioned": [
+      "discountedTotal",
+      "splitCents",
+      "overlaps",
+      "mergeWindows"
+    ],
+    "covered": 4,
+    "total": 4,
+    "limitation": "Symbol coverage only; review the saved answer for correct claims, reproductions, and false positives."
+  },
+  "workerCompletions": [],
+  "workerModels": [],
+  "spawnErrors": false,
+  "delegationValid": true
+}

@@ -1,0 +1,26 @@
+{
+  "studyDate": "2026-10-16",
+  "addedAfterRuns": true,
+  "assessor": "An agent session running Codex, one of the two compared tools, inspected the saved answers against the fixture after the runs. This is not a blinded or independent human evaluation.",
+  "groupingNote": "Input mutation and output aliasing share one source defect in mergeWindows; five obligations affect four exports.",
+  "runs": {
+    "codex-review-single": {
+      "correctContractViolations": 5,
+      "extraIncorrectClaims": []
+    },
+    "codex-review-delegated": {
+      "correctContractViolations": 5,
+      "extraIncorrectClaims": []
+    },
+    "claude-review-single": {
+      "correctContractViolations": 5,
+      "extraIncorrectClaims": [
+        "The answer says 100 percent gives a correct result or negative zero. With cents=1000, the actual result is -99000, not zero. Its main 10 percent reproducer is correct."
+      ]
+    },
+    "claude-review-delegated": {
+      "correctContractViolations": 5,
+      "extraIncorrectClaims": []
+    }
+  }
+}
