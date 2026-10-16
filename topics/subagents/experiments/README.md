@@ -19,7 +19,7 @@ The [fixture specification](fixture/SPEC.md) describes four exports in two short
 
 **Repair task:** edit only the two modules, preserve their exports, and satisfy the specification. The independent [grader](grade.mjs) runs 15 behavioral checks. The agent's temporary workspace contains neither the grader nor the answer key. The buggy baseline passes 7/15; a repair must pass 15/15. These checks exercise the stated edge cases without proving correctness for all possible inputs.
 
-Each product gets a single-agent condition and a delegated condition for each task. Single-agent runs have delegation disabled. Delegated runs request exactly two concurrent workers, one per module, with no further delegation; the parent verifies and combines their work. Models and effort stay fixed within each product. The shared task text changes only in its delegation paragraph; enabling the agent tool and concurrency settings is also part of that treatment.
+Each product gets a single-agent condition and a delegated condition for each task. Single-agent runs have delegation disabled. Delegated runs request exactly two concurrent workers, one per module, with no further delegation, and ask the parent to verify and combine their work. The parent does not always repeat the workers' checks: Claude's delegated repair parent read the edited files but says it did not rerun the workers' Node checks. Models and effort stay fixed within each product. The shared task text changes only in its delegation paragraph; enabling the agent tool and concurrency settings is also part of that treatment.
 
 ## Environment and protocol
 
@@ -53,15 +53,15 @@ The [complete summary](results/2026-10-16/summary.json) links the measurements t
 | Codex / repair | Two workers | 44.56 | 250,381 | 2,263 | 15/15 checks | Unavailable |
 | Claude / review | Single | 11.29 | 14,281 | 1,245 | Five violations; one incorrect extra claim | $0.0265 |
 | Claude / review | Two workers | 20.42 | 90,023 | 3,414 | Five violations; correct checked examples | $0.1220 |
-| Claude / repair | Single | 17.78 | 31,078 | 1,724 | 15/15 checks; recovered permission denial | $0.0362 |
+| Claude / repair | Single | 17.78 | 31,078 | 1,724 | 15/15 checks; agent ran no test after a permission denial | $0.0362 |
 | Claude / repair | Two workers | 22.48 | 112,669 | 3,654 | 15/15 checks | $0.0915 |
 
-For these pairs, delegation took approximately **1.98× and 1.50×** the Codex review and repair times, and **1.81× and 1.26×** the Claude times. Both workers can finish correctly while the parent still spends enough time starting, waiting, checking, and synthesizing to lose the latency benefit on such short tasks.
+For these pairs, delegation took approximately **1.98× and 1.50×** the Codex review and repair times, and **1.81× and 1.26×** the Claude times. The Claude repair ratio compares unequal work: the single-agent run never executed its code, while the delegated workers ran Node checks, so part of that 1.26× gap is testing the single agent skipped. Both workers can finish correctly while the parent still spends enough time starting, waiting, checking, and synthesizing to lose the latency benefit on such short tasks.
 
 Two details prevent the quality column from being reduced to a perfect-score label:
 
 - The [Claude single-agent review](results/2026-10-16/claude-review-single/answer.txt) correctly demonstrates the 10% discount bug, but then says that 100% gives a correct result or negative zero. In the starting code, `discountedTotal(1000, 100)` returns `-99000`. The symbol-coverage score alone would miss this error. The [delegated answer](results/2026-10-16/claude-review-delegated/answer.txt) correctly gives that counterexample.
-- The [Claude single-agent repair record](results/2026-10-16/claude-implement-single/record.json) contains one denied shell call that tried to rewrite files with `cat` and `sed`. The agent recovered using allowed file tools and produced a passing repair. The measured time includes that recovery; the denial is retained rather than treated as absent or removed by rerunning.
+- The [Claude single-agent repair record](results/2026-10-16/claude-implement-single/record.json) contains one denied shell call that tried to rewrite files with `cat` and `sed` and then check them with `node -e`. The allow rule `Bash(node *)` matches commands that start with `node`, so the whole combined command was denied, including its only test. The agent then made the edits with file tools and finished without running any code; its answer says that it checked the edits only by reading them. The repair passed the independent grader, but the agent itself had not verified it. The measured time includes that recovery; the denial is retained rather than treated as absent or removed by rerunning.
 
 The two Codex reviews ran concrete Node reproducers. The Claude review answers explicitly say their examples were traced from source rather than executed. The saved evidence preserves that distinction.
 
@@ -117,7 +117,7 @@ If a CLI fails, times out, lacks a final answer, or lacks successful delegation 
 
 ## Limits and next useful comparison
 
-The two tasks use the same tiny source fixture, so they are not independent samples of real repository work. There is one observation per condition, fixed run order, uncontrolled provider load and caching, and no equal-total-token budget. The study also fixes the worker count at two and does not sweep models, effort, handoff quality, or dependency structure. Normal product prompts and tool surfaces differ between the CLIs. These controls support a within-product illustration of overhead, not a causal decomposition of every cost or a cross-product ranking.
+The two tasks use the same tiny source fixture, so they are not independent samples of real repository work. There is one observation per condition, fixed run order, uncontrolled provider load and caching, and no equal-total-token budget. The study also fixes the worker count at two and does not sweep models, effort, handoff quality, or dependency structure. Normal product prompts and tool surfaces differ between the CLIs. Claude's `Bash(node *)` allow rule also blocked any shell command that combined editing with a test, which kept the single-agent repair from verifying its work; a rule set that allows separate edit and test commands would make the repair pair more comparable. These controls support a within-product illustration of overhead, not a causal decomposition of every cost or a cross-product ranking.
 
 The results favor keeping these particular tasks in one agent; they do not establish that delegation fails on larger research or implementation work. A useful next study would preselect larger independent tasks and a sequential dependency task, repeat paired runs in alternating order, and compare both unconstrained and equal-budget conditions. Keep the same outcome checks and disclose failed runs.
 
