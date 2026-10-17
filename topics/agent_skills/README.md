@@ -1,6 +1,6 @@
 # Agent Skills
 
-An agent skill is a folder of instructions and supporting files that helps an AI agent carry out a particular task. These guides explain what goes in that folder, how agents find and use skills, and how to share them. A document-generation example shows how the pieces fit together.
+An agent skill is a folder of instructions and supporting files that helps an AI agent carry out a particular task. These guides explain what goes in that folder, how agents find and use skills, and how to share them. A research report examines when skills and repository instructions help, and a document-generation example shows how the pieces fit together.
 
 ## What each guide answers
 
@@ -12,6 +12,10 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - What happens when the agent's skill list becomes crowded?
   - Is there a safe number, and what limits do products document?
   - How do you trim, scope, disable, and test a collection?
+- [Should you delete CLAUDE.md? Evidence behind Theo’s video](repository-instructions-evidence.md)
+  - What did the context-file studies and SkillsBench actually measure, and how have their findings changed?
+  - Which instructions should stay in a repository file, move into a skill, or be removed?
+  - How can you compare instruction configurations on your own tasks?
 - [Using scripts in a skill](scripts-and-mcp.md)
   - When is a script useful, and when would you use MCP instead?
   - Which languages and dependencies can a script use?
