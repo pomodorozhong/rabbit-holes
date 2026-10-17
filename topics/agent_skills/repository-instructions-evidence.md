@@ -45,6 +45,8 @@ These are the paper’s pooled comparisons across configurations. A non-signific
 
 The cost result is clearer. Generated files increased average per-task inference cost by **20% on SWE-bench and 23% on CTXbench**, with statistically significant increases. Developer-provided files also increased average steps and cost. These figures measure the study’s inference spending; they are not a universal wall-clock slowdown or a prediction for a subscription bill. [Revised results and Table 2](https://arxiv.org/html/2602.11988v3#S4.SS2)
 
+The video adds a live timing example. Theo reports 71 seconds without the generated file and 89 seconds with it: about 25.4% longer in that pair. The direction matches the paper’s cost result, but one pair does not isolate the file’s causal effect or establish comparable answer quality. Wall-clock time also differs from the paper’s inference-cost metric, which pools many tasks. [Demonstration](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=1260)
+
 For a team deciding what to keep, this changes the question. The useful comparison is whether a particular instruction prevents enough mistakes or preserves enough required behavior to justify the additional work it causes.
 
 ## Why instructions can add work without improving the measured result
@@ -71,7 +73,7 @@ A skill can package a procedure, examples, scripts, and reference material for a
 
 | Version | Evaluation scope | Authors’ reported average gain from curated skills |
 | --- | --- | --- |
-| v1, 2026-02-13 | 84 evaluated tasks; seven model–harness configurations. The inventory contained 86 tasks, with two excluded. | +16.2 percentage points. |
+| v1, 2026-02-13 | 84 evaluated tasks; seven model–harness configurations. The inventory contained 86 tasks, with two excluded. | 24.3% to 40.6% pass rate: +16.2 percentage points as reported (the rounded table means differ by 16.3). |
 | v4, 2026-06-14 | 87 tasks; 18 model–harness configurations in the main paired comparison. | 33.9% to 50.5% pass rate: +16.6 percentage points. |
 
 These gains apply to curated task packages. They do not estimate the value of an arbitrary skill downloaded from a directory. The current revision also reports weaker self-generated-skill results, but treats them as diagnostic: failures mix content quality with discovery problems and interference between authoring and solving. That is insufficient to conclude that automatic skill creation can never work. [Current main results](https://arxiv.org/html/2602.12670v4#S5.SS1), [self-generated condition](https://arxiv.org/html/2602.12670v4#A4.SS6)
@@ -91,7 +93,7 @@ Repository files, skill catalogs, loaded skills, and tool definitions enter cont
 | Skills | The format separates initially listed metadata from instructions and supporting resources loaded when needed. | A large installed collection and a large active prompt are related but different problems. [Progressive disclosure](https://agentskills.io/specification#progressive-disclosure) |
 | MCP tools with tool search | Anthropic’s API can defer tool definitions until discovery. | Check what the client actually loads before assuming every connected server’s full schema is always present. [Tool search documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool) |
 
-The video’s instruction hierarchy is an explanatory simplification. An `AGENTS.md` filename does not inherently confer developer-message priority: OpenAI’s Codex prompting guide documents user-role wrappers for discovered files. Product-specific loading rules matter. [Codex prompting guide](https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide)
+Chat models receive messages tagged with roles, such as system, developer, and user, and are trained to give earlier roles more authority when instructions conflict. The video presents instruction files as sitting in a fixed place in that hierarchy, above the user’s prompt. That is an explanatory simplification. An `AGENTS.md` filename does not inherently confer developer-message priority: OpenAI’s Codex prompting guide documents wrapping discovered files in user-role messages. Each product decides how it loads these files, so the actual priority depends on the product. [Codex prompting guide](https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide)
 
 Likewise, repeated context does not necessarily incur full input processing on every request. Prompt caching can reuse a stable prefix and reduce input cost and latency. It does not remove instructions from the model’s context or prevent them from triggering unnecessary actions. [OpenAI prompt caching](https://developers.openai.com/api/docs/guides/prompt-caching)
 
@@ -138,10 +140,8 @@ The rows follow YouTube’s official chapter order; topic descriptions are parap
 | [05:57](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=357) | Context and instruction priority | Check loading, message roles, and caching against product documentation. |
 | [11:51](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=711) | Prompting and feedback choices | Evaluate applicable instructions alongside executable checks. |
 | [14:14](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=854) | Experimental findings | Separate success rates, statistical uncertainty, and inference cost. |
-| [18:09](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=1089) | Repository design and live timing example | Treat the demonstration as an observation requiring repeated evaluation. |
+| [18:09](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=1089) | Repository design and live timing example | Treat the demonstration as an observation requiring repeated evaluation; see [the cost result](#the-revised-result-is-more-careful-than-the-headline). |
 | [25:00](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=1500) | Iterating on rules and agent setup | Consider skills, tool loading, and truthful task boundaries. |
-
-In the live example, Theo reports 71 seconds without the generated file and 89 seconds with it: about 25.4% longer in that pair. One pair does not isolate the file’s causal effect or establish comparable answer quality. Wall-clock time also differs from the paper’s inference-cost metric. [Demonstration](https://www.youtube.com/watch?v=GcNu6wrLTJc&t=1260)
 
 The introduction also mentions repeating prompts. The corresponding research concerns non-reasoning model calls; it does not establish that duplicating every coding-agent request improves a whole development workflow. [Prompt Repetition Improves Non-Reasoning LLMs](https://arxiv.org/abs/2512.14982)
 
