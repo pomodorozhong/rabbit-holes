@@ -11,6 +11,8 @@ The evidence supports **keeping instructions that supply useful project knowledg
 
 This makes the video a useful reason to audit accumulated guidance. It does not establish that every repository should delete its instructions. The standard filename discussed below is `AGENTS.md`; the video title uses the singular `AGENT.md`.
 
+Theo’s later configuration walkthrough and review of Matt Pocock’s skills develop the practical side of that question. [From repository rules to focused skills](theo-skills-workflows.md) examines those two videos, pinned public examples, and the limits of their demonstrations.
+
 ## What the context-file study actually tested
 
 An instruction file can contain several different kinds of information. A directory map describes what the agent could discover by searching. A project convention supplies a decision the code may not explain. A command such as “run the parser tests with this fixture loader” can prevent a specific failure. Loading all three into the same prompt does not make them equally valuable.
