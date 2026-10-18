@@ -26,6 +26,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-09-28-video-ai-news.md](./report-2026-09-28-video-ai-news.md) | video [nX0fgBL3sIM](https://www.youtube.com/watch?v=nX0fgBL3sIM) (as of 2026-09-28) | Runnability on 16 GB M2 for every chapter in that AI-news video; Supra2-IMG as the practical local candidate, with Limite 1B / CLM near-misses and large hosted, robotics, and research stacks separated out |
 | [report-2026-10-04-video-ai-news.md](./report-2026-10-04-video-ai-news.md) | video [lHmZoRHMZyM](https://www.youtube.com/watch?v=lHmZoRHMZyM) (as of 2026-10-04) | All 28 chapters; Whistle and Phonon-2 for local speech recognition, AstaBrief Q4 for cited synthesis, and full-pipeline checks for InSpatio, PixelUMM, DMAD and PDMD |
 | [report-2026-10-12-video-ai-news.md](./report-2026-10-12-video-ai-news.md) | video [X0_GDOkLKzQ](https://youtu.be/X0_GDOkLKzQ) (as of 2026-10-12) | All 22 chapters; EmbeddingGemma 2 for local search, Botanic1-M with window/batch limits for plant DNA scoring, and experimental ALoDLM-1.7B CPU decoding; 8B GGUF gap and Kandinsky 6.0 / Iris-3B full-pipeline checks |
+| [report-2026-10-18-video-ai-news.md](./report-2026-10-18-video-ai-news.md) | video [tDWtcyeNNew](https://youtu.be/tDWtcyeNNew) (as of 2026-10-18) | All 27 chapters; FLUX 3 Image Klein through a 6-bit MLX port for local image generation and editing, experimental 2–3-bit LFM2.5-24B-A2B for tool-calling agents, and a MOSS-Image near-miss caused by its 9B text encoder |
 
 ## Scripts
 
