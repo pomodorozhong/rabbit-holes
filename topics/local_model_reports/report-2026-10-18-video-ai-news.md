@@ -8,11 +8,12 @@
 
 ## Worth trying on your Mac
 
-**FLUX 3 Image Klein** is the most practical local release this week: a community MLX port runs text-to-image, editing, and box-guided layout on Apple Silicon, and its converter measured a 9.6 GB peak at 1024² in low-memory mode. **LFM2.5-24B-A2B** is worth an experiment if you want a local tool-calling agent, but only its 2- and 3-bit files fit this Mac, and nobody has published quality results at those sizes. Most other chapters cover hosted services, very large open models, and world-model research built for NVIDIA clusters.
+**FLUX 3 Image Klein** is the most practical local release this week: a community MLX port runs text-to-image, editing, and box-guided layout on Apple Silicon, and its converter measured a 9.6 GB peak at 1024² in low-memory mode. **LFM2.5-24B-A2B** is worth an experiment if you want a local tool-calling agent, but only its 2- and 3-bit files fit this Mac, and nobody has published quality results at those sizes. **MOSS-Image** also has a portable runner with Metal support; its plausible sub-10 GB configuration is only a compatibility experiment because it depends on an untested 3-bit text encoder and has no published Mac memory result. Most other chapters cover hosted services, very large open models, and world-model research built for NVIDIA clusters.
 
 | Model / configuration | Best for | Why it matters this week | Mac fit |
 | --- | --- | --- | --- |
-| [FLUX 3 Image Klein, MLX 6-bit via `flux3-mlx`](#flux-3-image-klein) | 🖼️ Image generation and editing | 5.6B open-weights generator and editor; 8.4 GB download; 9.6 GB peak measured at 1024² with `--low-memory` | ⚠️ Constrained |
+| [FLUX 3 Image Klein, MLX 6-bit via `flux3-mlx`](#flux-3-image-klein) | 🖼️ Image generation and editing | 5.6B open-weights generator and editor; 9.01 GB of required weights; 9.6 GB peak measured at 1024² with `--low-memory` | ⚠️ Constrained |
+| [MOSS-Image SFT, INT8 DiT plus 3-bit Qwen encoder](#moss-image) | 🖼️ Image-generation compatibility testing | `stable-diffusion.cpp` added MOSS support and has a Metal backend; the candidate files total about 9.77 GB before runtime buffers | ⚠️ Experimental |
 | [LFM2.5-24B-A2B, 2–3-bit GGUF](#lfm25-24b-a2b) | 💬 Local agents and tool calling | 2.45B active parameters keep decoding cheap; small KV cache; the 8.0–9.0 GB files are the only ones within budget | ⚠️ Experimental |
 
 **Mac fit:** ✅ Comfortable = credible path with headroom; ⚠️ Constrained = specific limits required; ⚠️ Experimental = important verification gaps; ❌ Outside budget = unsuitable for local inference on this machine. Evidence basis is recorded in the appendix.
@@ -27,10 +28,21 @@ A diffusion image model has three parts that all need memory: a text encoder tha
 
 **Why consider it:** Black Forest Labs released Klein as the open-weights member of FLUX 3 Image. One 5.6B transformer handles text-to-image, instruction edits, and compositions from up to 10 reference images. Prompts can also place elements with bounding boxes on a 0–1000 grid. The text encoder is Qwen3-VL-4B-Instruct. [BFL model page](https://bfl.ai/models/flux-3-image-klein) · [Model card](https://huggingface.co/black-forest-labs/flux-3-image-klein)
 
-**Start with:** `VisualInference/FLUX-3-Image-Klein-MLX-6bit` and the [`flux3-mlx`](https://github.com/felix-ab/flux3-mlx) runner. The repository bundles a 6-bit transformer (4.83 GB), the encoder's text path in 8-bit (3.85 GB), and the VAE (0.34 GB). Low-memory mode turns on by default below 24 GB. Begin with text-to-image at 1024² or smaller, keep the distilled model's 16 steps, and write a complete scene description in place of the optional prompt upsampler. Each image gets a JSON record with its peak memory, so the first run shows how the pipeline behaves on this Mac. Add a single reference image for editing after that.\
+**Start with:** `VisualInference/FLUX-3-Image-Klein-MLX-6bit` and the [`flux3-mlx`](https://github.com/felix-ab/flux3-mlx) runner. The repository bundles a 6-bit transformer (4.833 GB), the encoder's text path in 8-bit (3.845 GB), and the VAE (0.336 GB), totaling 9.014 GB, or 8.395 GiB. Low-memory mode turns on by default below 24 GB. Begin with text-to-image at 1024² or smaller, keep the distilled model's 16 steps, and write a complete scene description in place of the optional prompt upsampler. Each image gets a JSON record with its peak memory, so the first run shows how the pipeline behaves on this Mac. Add a single reference image for editing after that.\
 **Main limitation:** The converter measured **about 114 s per image** and the 9.6 GB peak on an M4 Pro with 48 GB, so an M2 will be slower, and 9.6 GB sits near the top of this Mac's 8–11 GB working budget. Each reference image adds tokens: one-reference edits took about 200–270 s on that machine. The weights are under the FLUX Kommunity License: non-commercial use, with commercial use of outputs only for Qualifying Users under US$5M in revenue.
 
 [Video chapter](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1154s) · [MLX 6-bit port](https://huggingface.co/VisualInference/FLUX-3-Image-Klein-MLX-6bit) · [Deployment details](#flux-3-image-klein-deployment)
+
+### MOSS-Image
+
+**Mac fit:** ⚠️ Experimental
+
+**Why consider it:** OpenMOSS released a 5B Apache-2.0 image model with JSON layout prompts and prompts up to 4K tokens. Before this report's cutoff, `stable-diffusion.cpp` added support for both Base and SFT, alongside its existing Metal backend. That creates a portable path missing from the official NVIDIA-only setup. [Project](https://openmoss.ai/MOSS-Image/) · [`stable-diffusion.cpp` guide](https://github.com/leejet/stable-diffusion.cpp/blob/68285df319457e2d79310b48513e4ba1bf8ebe9a/docs/moss_image.md)
+
+**Start with:** Treat the first run as a load and compatibility test. Pair the 5.414 GB SFT INT8 ConvRot transformer with the 4.016 GB `Qwen3.5-9B-UD-IQ3_XXS.gguf` text encoder and the 0.336 GB VAE. Together they occupy about 9.77 GB before the tokenizer, runtime buffers, and image tensors. First confirm that the files load, then generate one small image before trying 1024².\
+**Main limitation:** The runner's documented example uses the larger Q4_K_M encoder, while the fitting 3-bit substitution has no published image-quality or compatibility result. There is also no M2 peak-memory or timing measurement. The runner warns that Metal operations on very large matrices can be inefficient, and `--offload-to-cpu` does not create extra unified memory on this Mac.
+
+[Video chapter](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1247s) · [Pinned 3-bit encoder](https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/tree/3885219b6810b007914f3a7950a8d1b469d598a5) · [Deployment details](#moss-image-deployment)
 
 ## Local agents and tool calling
 
@@ -47,7 +59,6 @@ A diffusion image model has three parts that all need memory: a text encoder tha
 
 ## Other developments worth knowing
 
-- **MOSS-Image is a near-miss:** OpenMOSS released a 5B Apache-2.0 image model with JSON layout prompts and prompts up to 4K tokens. Its transformer quantizes to 3.7 GB, but it uses a 9B Qwen3.5 text encoder (16.8 GB in BF16), and the official setup requires an NVIDIA GPU. [Project](https://openmoss.ai/MOSS-Image/) · [Details](#moss-image-near-miss)
 - **Big open-weight releases:** Meta's Muse Spark Open (816B total, 42B active) targets two 512 GB Mac Studios through MLX. Step 5 Preview (600B), Ling-3.1-flash (560B), and Nemotron 3.5 Super VL (120B) are also open, all far beyond 16 GB. [Muse Spark Open](https://research.meta.ai/blog/muse-spark-open) · [Details](#large-open-language-models)
 - **Hosted frontier models:** Google launched Gemini 4 Argon at an introductory $2 / $10 per million input / output tokens. Meta's Muse Wonder and Muse Wonder Full are available through its API and Muse Code. [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon) · [Muse Wonder](https://research.meta.ai/blog/muse-wonder)
 - **Engine-driven world models:** Matrix-Game 4.0 and StreamRender-H3 let a game engine track world state while a video model only renders frames. Matrix-Game 4.0 runs on a single RTX 5080 but needs Linux and CUDA; StreamRender-H3 uses eight GPUs. [Matrix-Game 4.0](https://matrix-game-v4-0.github.io/page/) · [StreamRender-H3](https://nvlabs.github.io/Sana/Sol-Engine/StreamRender-H3/)
@@ -66,7 +77,7 @@ All 27 chapters below match the official description in source order. “❌ Hos
 | Chapter | Item / primary source | Type | Local verdict / main reason |
 | --- | --- | --- | --- |
 | [00:00](https://www.youtube.com/watch?v=tDWtcyeNNew&t=0s) | AI news intro | Editorial | — N/A; introduces the roundup. The description names Luma as sponsor, without a separate chapter. |
-| [00:58](https://www.youtube.com/watch?v=tDWtcyeNNew&t=58s) | [Drama 3](https://fish.audio/drama-3/) | Hosted text-to-speech | ❌ Hosted; Fish Audio preview in its app and API. |
+| [00:58](https://www.youtube.com/watch?v=tDWtcyeNNew&t=58s) | [Drama 3](https://huggingface.co/fishaudio/drama-3) | Open weights / text-to-speech | ❌ Outside supported Mac path; official inference needs at least 48 GB and an NVIDIA GPU, with no Apple MPS support. |
 | [02:43](https://www.youtube.com/watch?v=tDWtcyeNNew&t=163s) | [Matrix-Game 4.0](https://matrix-game-v4-0.github.io/page/) | Open weights / interactive world model | ❌ Outside supported Mac path; inference needs Linux and an NVIDIA GPU; 10 GB checkpoint per game. |
 | [03:53](https://www.youtube.com/watch?v=tDWtcyeNNew&t=233s) | [GaussiAnimate](https://cookmaker.cn/gaussianimate/) | Rigging research code | — N/A; rigs reconstructed 4D Gaussian or mesh sequences; Gaussian stages use CUDA environments. |
 | [05:06](https://www.youtube.com/watch?v=tDWtcyeNNew&t=306s) | [UniForge3D](https://xishuxishu.github.io/uniforge3d-project/) | 3D reconstruction research | ⚠️ Unverified; paper and code listed as coming soon. |
@@ -78,7 +89,7 @@ All 27 chapters below match the official description in source order. “❌ Hos
 | [17:17](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1037s) | [Kling 4.0](https://kling.ai/) | Hosted video generation | ❌ Hosted; Kling web app and API. |
 | [18:08](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1088s) | [Krea 3](https://www.krea.ai/blog/introducing-krea-3) | Hosted image editing | ❌ Hosted; Krea and API partners, $0.06 per 2K image. |
 | [19:14](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1154s) | [FLUX 3 Image Klein](https://bfl.ai/models/flux-3-image-klein) | Open weights / image generation and editing | ⚠️ Constrained; MLX 6-bit port measured at 9.6 GB peak in low-memory mode on a 48 GB M4 Pro. |
-| [20:47](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1247s) | [MOSS-Image](https://openmoss.ai/MOSS-Image/) | Open weights / image generation | ⚠️ Unverified; 3.7 GB Q4 transformer, but 9B text encoder and NVIDIA-only official setup. |
+| [20:47](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1247s) | [MOSS-Image](https://openmoss.ai/MOSS-Image/) | Open weights / image generation | ⚠️ Experimental; portable runner and about 9.77 GB of candidate files exist, but the 3-bit encoder path and M2 peak are unverified. |
 | [22:03](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1323s) | [Muse Wonder](https://research.meta.ai/blog/muse-wonder) | Hosted LLM | ❌ Hosted; Meta Model API and Muse Code. |
 | [24:59](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1499s) | [Muse Spark Open](https://research.meta.ai/blog/muse-spark-open) | Open weights / multimodal LLM | ❌ Outside budget; 816B total; 1.64 TB repository; gated download. |
 | [27:11](https://www.youtube.com/watch?v=tDWtcyeNNew&t=1631s) | [ATAS](https://lhmd.top/atas/) | Agentic video research code | ❌ Outside supported Mac path; geometry service needs about 20 GB of NVIDIA memory; generation uses hosted APIs. |
@@ -100,10 +111,10 @@ All 27 chapters below match the official description in source order. “❌ Hos
 
 | Component | Artifact size | Loading / residency notes |
 | --- | --- | --- |
-| Transformer, 6-bit MLX | 4.83 GB | 43 blocks' linear layers in 6-bit; embeddings and final layer stay BF16. Official BF16 is 11.10 GB. |
-| Text encoder, 8-bit MLX | 3.85 GB | Text path of Qwen3-VL-4B-Instruct, layers 0–31 only; official BF16 encoder is 8.89 GB. |
-| VAE | 0.34 GB | FLUX autoencoder, unchanged fp32. |
-| Complete required weights | 9.03 GB | Converter rounds the download to 8.4 GB; that figure is not peak memory. |
+| Transformer, 6-bit MLX | 4.833 GB | 43 blocks' linear layers in 6-bit; embeddings and final layer stay BF16. Official BF16 is 11.10 GB. |
+| Text encoder, 8-bit MLX | 3.845 GB | Text path of Qwen3-VL-4B-Instruct, layers 0–31 only; official BF16 encoder is 8.89 GB. |
+| VAE | 0.336 GB | FLUX autoencoder, unchanged fp32. |
+| Complete required weights | 9.014 GB (8.395 GiB) | Exact total from repository metadata; this is not peak memory. |
 | Prompt upsampler, 4-bit MLX (optional) | 5.97 GB | Fine-tuned Qwen3.5-9B; the runner's README measures a 7.5 GB peak for this step alone. |
 
 **Working memory:** The converter reports **13.0 GB peak at 1024² and 16 steps, or 9.6 GB with `--low-memory`**, which is on by default below 24 GB. For reference, BFL reports 31 GB peak for its BF16 code on a B200 at 1024² without the upsampler. Whether the upsampler and generator overlap in memory is not documented, so measure them together before relying on both.\
@@ -134,9 +145,27 @@ The converter skipped 4-bit on purpose: in its tests, 4-bit transformers added 5
 
 [Model card](https://huggingface.co/LiquidAI/LFM2.5-24B-A2B) · [Pinned GGUF files](https://huggingface.co/unsloth/LFM2.5-24B-A2B-GGUF/tree/faa77113e93335b63423e9e8d33395f86eaf8946) · [Official GGUF](https://huggingface.co/LiquidAI/LFM2.5-24B-A2B-GGUF) · [Announcement](https://www.liquid.ai/blog/lfm2-5-24b-a2b)
 
-### MOSS-Image near-miss
+### MOSS-Image deployment
 
-The official MOSS-Image-Base and -SFT repositories (revisions `1ceede80` and `fc5de0d5`) each total **27.23 GB**: a 10.17 GB BF16 transformer, a **16.79 GB Qwen3.5-9B text encoder**, and a 0.25 GB VAE. Community GGUF transformers range from 2.25 GB (Q2_K) to 3.92 GB (Q5_K_S). The smallest published encoders, however, are 7.34 GB (W4A8) and 8.45–9.75 GB (INT8 ConvRot) in formats built for NVIDIA kernels. A Q4 transformer with an 8-bit encoder adds up to about 12 GB of files. That would only work if the encoder is unloaded before denoising, and no Mac runner documents that step. The model card's quick start requires an NVIDIA GPU; a BF16 MLX conversion exists but is 27.2 GB. Weights are Apache-2.0. [Project](https://openmoss.ai/MOSS-Image/) · [SFT card](https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT) · [Community GGUF](https://huggingface.co/realrebelai/MOSS-Image_GGUFs)
+**Configuration:** MOSS-Image SFT revision `fc5de0d5`; `stable-diffusion.cpp` commit `68285df319457e2d79310b48513e4ba1bf8ebe9a`; Comfy-Org INT8 transformer and VAE at revision `f28da8f93449c16cfa7efa07dcd1303a1c0c44d1`; Unsloth Qwen3.5-9B GGUF revision `3885219b6810b007914f3a7950a8d1b469d598a5`.\
+**Fit evidence:** Exact artifact metadata and runner documentation; no M2 run and no published result for the lower-bit encoder combination.
+
+| Component | Artifact size | Loading / residency notes |
+| --- | --- | --- |
+| SFT transformer, INT8 ConvRot | 5.414 GB | File documented by `stable-diffusion.cpp`; larger than the standalone community GGUF transformers but supported by this runner. |
+| Qwen3.5-9B `UD-IQ3_XXS` encoder | 4.016 GB | Substitutes a 3-bit GGUF for the guide's documented Q4_K_M file; image-conditioning quality is unmeasured. |
+| FLUX.2 VAE | 0.336 GB | Full VAE used for the conservative total; a 0.250 GB small VAE also exists. |
+| Candidate required weights | About 9.77 GB | Before the tokenizer, runtime buffers, and image tensors. |
+| Documented Q4_K_M configuration | About 11.43 GB | Uses a 5.681 GB encoder and exceeds the report's practical working target before runtime allocations. |
+| Official SFT pipeline | 27.23 GB | 10.17 GB BF16 transformer, 16.79 GB BF16 text encoder, and 0.25 GB VAE. |
+
+**Working memory:** Unknown on the M2. The candidate files already sit near the top of the 8–11 GB working target. The guide uses `--offload-to-cpu`, but CPU and GPU share the same 16 GB pool on Apple Silicon, so that flag cannot remove the total-memory risk.\
+**Starting limits:** First confirm that the INT8 transformer, 3-bit encoder, VAE, and external tokenizer all load. Then try one image at a small resolution, with dimensions divisible by 16, before moving to 1024².\
+**Runtime support:** `stable-diffusion.cpp` supports MOSS-Image Base and SFT and can be built with Metal. Its build guide warns that Metal is currently inefficient on some very large matrix operations. The MOSS guide demonstrates the INT8 transformer with Q4_K_M; using `UD-IQ3_XXS` is the unverified step that brings the files below 10 GB.\
+**License:** Apache-2.0.\
+**Unresolved:** Whether this exact combination loads and generates correctly on Metal, peak unified memory, M2 generation time, and the layout and prompt-following loss from a 3-bit text encoder.
+
+[Project](https://openmoss.ai/MOSS-Image/) · [Pinned runner guide](https://github.com/leejet/stable-diffusion.cpp/blob/68285df319457e2d79310b48513e4ba1bf8ebe9a/docs/moss_image.md) · [Pinned Metal build guide](https://github.com/leejet/stable-diffusion.cpp/blob/68285df319457e2d79310b48513e4ba1bf8ebe9a/docs/build.md) · [Pinned portable weights](https://huggingface.co/Comfy-Org/MOSS-Image/tree/f28da8f93449c16cfa7efa07dcd1303a1c0c44d1) · [Pinned encoder files](https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/tree/3885219b6810b007914f3a7950a8d1b469d598a5)
 
 ### Large open language models
 
@@ -164,7 +193,9 @@ The official MOSS-Image-Base and -SFT repositories (revisions `1ceede80` and `fc
 
 **Robotics:** RP1 publishes the full design of a humanoid robot, from CAD and PCBs to firmware and learning code. PingpongDuo coordinates two humanoids playing table-tennis doubles, with a team planner that filters risky positioning; only the paper is listed. [RP1](https://github.com/Roboparty/RP1) · [PingpongDuo paper](https://arxiv.org/abs/2610.20579)
 
-**Hosted models:** Drama 3 lets users direct speech delivery with free-text instructions, inline sounds, and tags scoped to selected words. Kling 4.0 generates video with audio. Krea 3 reports edits in under 8 s at native 2K for $0.06. Gemini 4 Argon ranks first on the Vals Index, according to Google. Muse Wonder adds what Meta calls Active Memory and Active Focus for long-running agent work. [Drama 3](https://fish.audio/drama-3/) · [Kling](https://kling.ai/) · [Krea 3](https://www.krea.ai/blog/introducing-krea-3) · [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon) · [Muse Wonder](https://research.meta.ai/blog/muse-wonder)
+**Drama 3:** Fish Audio published downloadable weights for this 35B mixture-of-experts speech model, with 3B parameters active per token. It supports multi-character speech, voice cloning, and natural-language control, so it is not a hosted-only release. The official installer nevertheless requires at least 48 GB of GPU memory in FP8 and explicitly limits Drama 3 to NVIDIA GPUs: CPU, Apple MPS, and AMD ROCm are unsupported. [Model card](https://huggingface.co/fishaudio/drama-3) · [Pinned installation requirements](https://github.com/fishaudio/fish-speech/blob/1ff3c3ed2f80d3106a83909dd25b83129c3d816f/docs/en/install.md)
+
+**Hosted models:** Kling 4.0 generates video with audio. Krea 3 reports edits in under 8 s at native 2K for $0.06. Gemini 4 Argon ranks first on the Vals Index, according to Google. Muse Wonder adds what Meta calls Active Memory and Active Focus for long-running agent work. [Kling](https://kling.ai/) · [Krea 3](https://www.krea.ai/blog/introducing-krea-3) · [Gemini 4 Argon](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon) · [Muse Wonder](https://research.meta.ai/blog/muse-wonder)
 
 **OpenAI recording-device case:** According to news reports on the unsealed complaint, prosecutors charged OpenAI engineer Abdulrahman Alfozan with intercepting oral communications after a recorder was found in an executive conference room on September 30. They allege that a chatbot account tied to his spouse researched how to build and hide the device. OpenAI says it found no sign that code, model weights, or customer data were taken. These are allegations; the complaint itself was not reviewed for this report. [Al Jazeera](https://www.aljazeera.com/news/2026/10/14/saudi-national-charged-with-planting-a-listening-device-at-openai-offices) · [SF Standard](https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/)
 
@@ -172,7 +203,7 @@ The official MOSS-Image-Base and -SFT repositories (revisions `1ceede80` and `fc
 
 - **Video evidence:** Retrieved official metadata, title, description, and chapter markers. Publication time is **2026-10-18 03:30:33 UTC**; duration is 2,455 seconds. The description lists 27 chapters.
 - **Captions:** The English auto-caption download was rate-limited (HTTP 429). This is a chapter-based report; spoken claims within chapters were not checked.
-- **Primary sources:** Inspected project pages, model cards, GitHub READMEs, and Hugging Face file metadata on 2026-10-18. The official FLUX 3 Image Klein card is gated, so its text comes from Unsloth's mirror of the card; file sizes come from the official repository's metadata. The OpenAI chapter has no description link, and no Justice Department filing was retrieved; news reports are cited instead. The Step 5 Preview page renders without static content, so details come from its Hugging Face card.
+- **Primary sources:** Inspected project pages, model cards, GitHub READMEs, and Hugging Face file metadata on 2026-10-18. The official FLUX 3 Image Klein card is gated, so its text comes from Unsloth's mirror of the card; file sizes come from the official repository's metadata. MOSS-Image's portable assessment combines a runner and artifacts available before the report cutoff, but the exact lower-bit configuration was not run. The OpenAI chapter has no description link, and no Justice Department filing was retrieved; news reports are cited instead. The Step 5 Preview page renders without static content, so details come from its Hugging Face card.
 - **Memory interpretation:** MB/GB are decimal unless a source reports GiB. Download size, resident memory, and peak memory differ. The FLUX peaks are the converter's measurements on a 48 GB M4 Pro; the LFM2.5 KV cache is calculated from its config.
 - **Coverage:** All 27 chapters are preserved. The Luma sponsorship appears only in the description.
 - **Local verification:** Documentation and artifact inspection only. No model was downloaded for execution, installed, or benchmarked.
@@ -180,7 +211,7 @@ The official MOSS-Image-Base and -SFT repositories (revisions `1ceede80` and `fc
 ## Sources
 
 - **Video:** [AI Search roundup](https://www.youtube.com/watch?v=tDWtcyeNNew) — official metadata and 27 chapters.
-- **Drama 3:** [Fish Audio](https://fish.audio/drama-3/).
+- **Drama 3:** [Fish Audio](https://fish.audio/drama-3/) · [Model card](https://huggingface.co/fishaudio/drama-3) · [Pinned installation requirements](https://github.com/fishaudio/fish-speech/blob/1ff3c3ed2f80d3106a83909dd25b83129c3d816f/docs/en/install.md).
 - **Matrix-Game 4.0:** [Project](https://matrix-game-v4-0.github.io/page/) · [Code](https://github.com/SkyworkAI/Matrix-Game) · [Weights](https://huggingface.co/Skywork/Matrix-Game-4.0).
 - **GaussiAnimate:** [Project](https://cookmaker.cn/gaussianimate/) · [Code](https://github.com/Net-Maker/GaussiAnimate).
 - **UniForge3D:** [Project](https://xishuxishu.github.io/uniforge3d-project/).
@@ -192,7 +223,7 @@ The official MOSS-Image-Base and -SFT repositories (revisions `1ceede80` and `fc
 - **Kling 4.0:** [Kling AI](https://kling.ai/).
 - **Krea 3:** [Krea announcement](https://www.krea.ai/blog/introducing-krea-3).
 - **FLUX 3 Image Klein:** [BFL model page](https://bfl.ai/models/flux-3-image-klein) · [Official weights](https://huggingface.co/black-forest-labs/flux-3-image-klein) · [MLX 6-bit port](https://huggingface.co/VisualInference/FLUX-3-Image-Klein-MLX-6bit) · [`flux3-mlx` runner](https://github.com/felix-ab/flux3-mlx) · [Unsloth GGUF](https://huggingface.co/unsloth/flux-3-image-klein-GGUF) · [Prompt upsampler](https://huggingface.co/black-forest-labs/flux-3-image-klein-pup).
-- **MOSS-Image:** [Project](https://openmoss.ai/MOSS-Image/) · [Base](https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base) · [SFT](https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT) · [Community GGUF](https://huggingface.co/realrebelai/MOSS-Image_GGUFs).
+- **MOSS-Image:** [Project](https://openmoss.ai/MOSS-Image/) · [Base](https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base) · [SFT](https://huggingface.co/OpenMOSS-Team/MOSS-Image-SFT) · [Pinned runner guide](https://github.com/leejet/stable-diffusion.cpp/blob/68285df319457e2d79310b48513e4ba1bf8ebe9a/docs/moss_image.md) · [Pinned Metal build guide](https://github.com/leejet/stable-diffusion.cpp/blob/68285df319457e2d79310b48513e4ba1bf8ebe9a/docs/build.md) · [Pinned portable weights](https://huggingface.co/Comfy-Org/MOSS-Image/tree/f28da8f93449c16cfa7efa07dcd1303a1c0c44d1) · [Pinned encoder files](https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/tree/3885219b6810b007914f3a7950a8d1b469d598a5) · [Community transformer GGUF](https://huggingface.co/realrebelai/MOSS-Image_GGUFs).
 - **Muse Wonder:** [Meta announcement](https://research.meta.ai/blog/muse-wonder).
 - **Muse Spark Open:** [Meta announcement](https://research.meta.ai/blog/muse-spark-open) · [Model card](https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B).
 - **ATAS:** [Project](https://lhmd.top/atas/) · [Code](https://github.com/ziplab/ATAS).
