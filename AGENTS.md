@@ -14,6 +14,10 @@ Before drafting, substantially revising, or reviewing prose in a README, topic d
 
 Follow the user's requested audience, format, and scope. Preserve required topic or report formats. Apply the writing skill alongside relevant research and technical guidance. Routine code-only changes, PR descriptions, and chat replies do not require this writing skill unless the user requests it.
 
+## Learning sessions
+
+When the user wants to learn a topic by conversation, or asks to write up a learning session, read and apply [the learning-session skill](.agents/skills/learning-session/SKILL.md). It keeps a session log under the topic folder and writes the guide from that log, applying explanatory-writing with the overrides it describes.
+
 ## Verification
 
 For prose changes, review the final diff and run `git diff --check`. Check links that you add or change. If notebook prose refers to outputs, confirm the descriptions match the saved outputs; use the appropriate notebook checks if code or outputs also change.
