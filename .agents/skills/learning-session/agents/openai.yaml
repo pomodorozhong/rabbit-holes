@@ -1,0 +1,3 @@
+interface:
+  display_name: "Learning Session"
+  short_description: "Learn a topic by conversation, then write a guide from the session log"
