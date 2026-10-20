@@ -1,10 +1,12 @@
 # Storing and Sharing Agent Skills
 
-Repository examples, folder locations, and installer behavior checked on 2026-09-29.
+Repository examples, folder locations, and installer behavior checked on 2026-09-29. The personal-repository example and maintenance links were updated on 2026-10-14.
 
 Keep the files you maintain in Git. Put the skills you want an agent to use in that product's skill folder, either by copying, linking, or installing them. A repository can hold a large library without installing the whole library for every project.
 
-This guide covers repository layouts, managing a collection, real examples, and installation. For a personal repository that links skills into Codex and Claude Code, including migration and recovery, follow [Back up and install skills from one Git repo](backup-and-restore.md). For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
+This guide covers repository layouts, managing a collection, real examples, and installation. For how a skill works, see [Basics](basics.md). For product-specific discovery and permissions, see [Product differences](provider-differences.md).
+
+For the design of a personal repository linked into Codex and Claude Code, see [Back up and restore personal skills with Git](backup-and-restore.md). The runnable setup, import, and recovery workflow is maintained in [pomodorozhong/skills: Maintaining these skills](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md).
 
 ## Choose a repository layout
 
@@ -78,6 +80,7 @@ These are real repositories or folders you can inspect. The layouts above are su
 | [Anthropic's starter template](https://github.com/anthropics/skills/blob/main/template/SKILL.md) | A minimal `SKILL.md` inside the `anthropics/skills` repository | Copy the starting file for one skill, then replace its placeholder name, description, and instructions |
 | [anthropics/skills](https://github.com/anthropics/skills) | Multiple skills in `skills/<name>/`, plus the starter template | A collection with separate folders, supporting files, and installation documentation |
 | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Multiple skills under `skills/`, with a README describing available skills | A collection intended for selective installation through the `skills` CLI |
+| [pomodorozhong/skills](https://github.com/pomodorozhong/skills) | Personal skills under `skills/`, maintenance scripts under `scripts/`, and a setup and recovery guide | How one Git checkout can supply shared skills to Codex and Claude Code, with import checks and undoable link runs |
 | [openai/plugins](https://github.com/openai/plugins) | Plugin examples under `plugins/<name>/`; plugins can contain `skills/` and other components | How to package skills for Codex distribution, including skills used with connectors |
 
 For a first skill, start with Anthropic's template. For a collection, study Anthropic's or Vercel's folder layout. For Codex plugin distribution, use OpenAI's current plugin examples. These are examples to adapt; the starter file is not a complete GitHub repository template. Check the license for the specific files you reuse. Anthropic's repository includes both open-source and source-available skills with different terms. [Anthropic repository notes](https://github.com/anthropics/skills#about-this-repository)
