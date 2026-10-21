@@ -16,7 +16,7 @@ Follow the user's requested audience, format, and scope. Preserve required topic
 
 ## Learning sessions
 
-When the user wants to learn a topic by conversation, or asks to write up a learning session, read and apply [the learning-session skill](.agents/skills/learning-session/SKILL.md). It keeps a session log in `.agents/learning-session/` until the write-up, then moves it to `learning-notes/sessions/` and writes a short learning note from that log in `learning-notes/`. A note may later be promoted to a topic document, applying explanatory-writing with the overrides it describes.
+When the user wants to learn a topic by conversation, or asks to write up a learning session, read and apply [the learning-session skill](.agents/skills/learning-session/SKILL.md).
 
 ## Verification
 
