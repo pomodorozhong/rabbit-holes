@@ -1,6 +1,6 @@
 ---
 name: learning-session
-description: Teach a topic through conversation, keep a session log of what the user asked, understood, and concluded, then write a short learning note from that log. Use when the user wants to start or resume a learning session, or asks to write up, draft, or turn a learning session into a document. Not for drafting a guide the user has not discussed; use explanatory-writing or ai-research-report for that.
+description: Teach a topic through conversation, keep a session log of what the user asked, understood, and concluded, then write a short learning note or a topic guide from that log. Use when the user wants to start or resume a learning session, or asks to write up, draft, or turn a learning session into a document. Not for drafting a guide the user has not discussed; use explanatory-writing or ai-research-report for that.
 ---
 
 # Learning sessions
@@ -20,20 +20,28 @@ The skill has two modes. The user chooses the mode explicitly, for example "star
 
 ## Mode 2: write-up
 
-The write-up is a short, simple learning note, not a full topic document. It records what the session established so the user can come back to it, and it may be promoted to a topic document later.
+The write-up records what the session established so the user can come back to it. It takes one of two forms:
 
-1. Write the note at `learning-notes/<slug>.md`, outside `topics/`. Reuse the session's slug, or the existing note when the topic already has one. Move the topic's session logs from `.agents/learning-session/` to `learning-notes/sessions/`. Put the note elsewhere only when the user asks.
-2. Read every session log for the topic, [the learning-notes index](../../../learning-notes/README.md), and the existing note if the topic already has one.
-3. Read [the explanatory-writing skill](../explanatory-writing/SKILL.md) and its guide references. Apply them, with the overrides in [write-up.md](references/write-up.md). Those overrides concern where the content comes from, whose views the note states, and how short it stays.
-4. Propose a brief outline before drafting: the reader's question and the headings in reading order. Let the user change it. The order can differ from the order of the conversation when a stranger needs ideas in a different sequence.
-5. Draft the note from the log. Follow write-up.md for material the log does not cover.
-6. Add or update the note's entry in `learning-notes/README.md`: a link and the questions it answers.
-7. Deliver an audit list with the draft, as described in write-up.md, so the user can check every addition and judgment call.
+- **Learning note** (the default): a short, simple note in `learning-notes/`. It suits a session that settled a few questions, and it can be promoted to a topic guide later.
+- **Topic guide:** a full guide under `topics/`, written with explanatory-writing. It suits a session that covered enough to teach the topic to a stranger.
+
+1. Choose the form. Use the one the user named. Otherwise, suggest one based on how much the session covered and ask the user to confirm.
+2. Choose the location and move the logs:
+   - **Learning note:** write it at `learning-notes/<slug>.md`. Reuse the session's slug, or the existing note when the topic already has one. Move the topic's session logs from `.agents/learning-session/` to `learning-notes/sessions/`.
+   - **Topic guide:** ask which folder under `topics/` it belongs in, or whether to create a new one named like the existing ones. Move the topic's session logs to `topics/<topic>/sessions/`.
+
+   Put the document elsewhere only when the user asks.
+3. Read every session log for the topic and the index the document will join: [the learning-notes index](../../../learning-notes/README.md) for a note, or the topic README for a guide. Also read the existing note, or the documents the guide would sit beside.
+4. Read [the explanatory-writing skill](../explanatory-writing/SKILL.md) and its guide references. Apply them, with the overrides in [write-up.md](references/write-up.md). Those overrides concern where the content comes from, whose views the document states, and how long it runs.
+5. Propose an outline before drafting: the reader's question and the headings in reading order. For a guide, also name the log entries each section draws on. Let the user change it. The order can differ from the order of the conversation when a stranger needs ideas in a different sequence.
+6. Draft the document from the log. Follow write-up.md for material the log does not cover.
+7. Update the index: add or update the note's entry in `learning-notes/README.md`, with a link and the questions it answers, or update the topic README index as explanatory-writing describes.
+8. Deliver an audit list with the draft, as described in write-up.md, so the user can check every addition and judgment call.
 
 ## Promoting a note to a topic
 
-When the user asks to promote a note, ask which folder under `topics/` it belongs in, or whether to create a new one named like the existing ones. Move the note there and its session logs to `topics/<topic>/sessions/`. Remove its entry from `learning-notes/README.md`. Then revise it into a full guide with explanatory-writing and add it to the topic README index, keeping the log as the source of the user's views.
+When the user asks to promote a note, ask which folder under `topics/` it belongs in, or whether to create a new one named like the existing ones. Move the note there and its session logs to `topics/<topic>/sessions/`. Remove its entry from `learning-notes/README.md`. Then revise it into a full guide as the write-up describes for a topic guide, and add it to the topic README index, keeping the log as the source of the user's views.
 
 ## Delivery
 
-In session mode, report where the log is and whether it was committed. In write-up mode, give the note's path, the audit list, and the checks actually run: review the diff, run `git diff --check`, and check any links added. Do not describe a claim as verified unless it was checked against a source during the session or the write-up.
+In session mode, report where the log is and whether it was committed. In write-up mode, give the document's path, the audit list, and the checks actually run: review the diff, run `git diff --check`, and check any links added. Do not describe a claim as verified unless it was checked against a source during the session or the write-up.
