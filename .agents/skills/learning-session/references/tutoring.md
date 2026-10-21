@@ -41,4 +41,4 @@ Write log entries in plain, complete sentences that will make sense months later
 - sources consulted and claims left unchecked
 - topics the user explicitly set aside, and open questions
 
-Record what the user understood, not a transcript. If an explanation was rejected or replaced, keep only a short note of why, since that is useful context for the write-up.
+Record what the user understood, not a transcript. The log stays on this machine, so it may quote the user's exact replies where the wording matters. The session record, written from the log at the end, paraphrases instead. If an explanation was rejected or replaced, keep only a short note of why, since that is useful context for the write-up.

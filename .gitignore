@@ -1,0 +1,2 @@
+# Detailed learning-session logs stay local; durable records go in learning-notes/sessions/.
+.agents/learning-session/
