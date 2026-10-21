@@ -15,6 +15,8 @@ A personal collection of questions I’ve followed into notes, guides, notebooks
 | [Indie hacking](topics/indie-hacking/README.md) | Notes on building and sustaining products independently. |
 | [Local model reports](topics/local_model_reports/README.md) | Hardware-aware model reports, memory notes, and research scripts. |
 
+[Learning notes](learning-notes/README.md) holds shorter notes from learning sessions. Some of them may later grow into topics.
+
 ## Workflow
 
 I use [GitHub Issues](https://github.com/pomodorozhong/rabbit-holes/issues) to collect topics I’m curious about, then [GitHub Projects](https://github.com/pomodorozhong/rabbit-holes/projects) to choose what to work on. When I find something worth revisiting, I keep it in the corresponding topic folder here.
