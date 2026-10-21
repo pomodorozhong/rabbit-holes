@@ -36,7 +36,7 @@ The write-up records what the session established so the user can come back to i
 
 1. Choose the form. Use the one the user named. Otherwise, suggest one based on how much the session covered and ask the user to confirm.
 2. Choose the location:
-   - **Learning note:** write it at `learning-notes/<slug>.md`. Reuse the session's slug, or the existing note when the topic already has one.
+   - **Learning note:** write it at `learning-notes/<slug>.md`, using [the learning note template](assets/learning-note-template.md). Reuse the session's slug, or the existing note when the topic already has one.
    - **Topic guide:** ask which folder under `topics/` it belongs in, or whether to create a new one named like the existing ones. Move the topic's session records to `topics/<topic>/sessions/`.
 
    Put the document elsewhere only when the user asks.
