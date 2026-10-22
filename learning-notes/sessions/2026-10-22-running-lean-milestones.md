@@ -41,6 +41,8 @@
 
 - The user looked at milestones from the point of view of an indie iOS or game developer.
 - The user asked for evidence behind the claim about game sales rather than accepting it.
+- The user wants more data so they can set goals for indie games better.
+- The user suspects that, now that coding agents are so capable, Problem/Solution Fit need not be a separate stage. It could be merged with Product/Market Fit into one stage, for faster validation and iteration. This is the user's hypothesis and was not tested in the session.
 
 ## Set aside
 
@@ -52,3 +54,4 @@
 - Which of the user's canvases are apps and which are games, and what are their minimum success criteria?
 - What growth factor is realistic for an indie app?
 - What does a real sales curve for an indie game look like?
+- Coding agents make building cheaper, but Problem/Solution Fit is about evidence of demand. Does merging the two stages keep that check, or skip it?
