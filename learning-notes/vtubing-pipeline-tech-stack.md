@@ -2,6 +2,8 @@
 
 **Bottom line:** My working hypothesis is that a front-facing 2.5D puppet can preserve the depth cues I want from 3D while doing less work at runtime. The first project should test that hypothesis across the complete webcam-to-OBS path on my M2 Pro, starting with existing tools and replacing only measured bottlenecks. *(As of 2026-10-24.)*
 
+**Project handoff:** [Bootstrap brief for a dedicated implementation repository](vtubing-pipeline-tech-stack-handoff.md).
+
 **What I am building**
 
 - A personal VTubing setup in which the Mac runs face tracking, the avatar, and OBS. The game can come from a console capture or GeForce NOW, so local game rendering is not required.
