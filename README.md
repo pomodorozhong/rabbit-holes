@@ -9,7 +9,7 @@ I reserve `topics/` for polished, fully reviewed documents and compact, interest
 | Topic | What’s inside |
 | --- | --- |
 | [Agent Skills](topics/agent_skills/README.md) | Skill mechanics, Codex integration, document workflows, and authoring practices. |
-| [AI Meeting Notes](topics/ai_meeting_notes/README.md) | Feature goals, local pipeline patterns, and a plan for measurements. |
+| [AI Meeting Notes](topics/ai_meeting_notes/README.md) | Feature goals, local pipeline patterns, and what a recording trial found; the tool continues in its own repository. |
 | [Doppler effect](topics/doppler_semitone/README.md) | A notebook on Doppler shift, pitch perception, and a charging fighter. |
 | [Freeform canvas](topics/freeform_canvas/README.md) | A comparison of browser canvas packages and runnable demos. |
 | [Git and GitHub](topics/git_and_github/README.md) | A table of contents for Git and GitHub learning notes. |
