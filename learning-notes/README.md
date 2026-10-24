@@ -4,6 +4,10 @@ Short notes written from learning sessions: conversations where I asked question
 
 ## Notes
 
+- [Performant 2.5D VTubing on macOS](vtubing-pipeline-tech-stack.md)
+  - Why might 2.5D preserve a convincing 3D effect at lower runtime cost?
+  - What belongs in the complete webcam-to-OBS pipeline?
+  - How can painterly toon, 1-bit, and comic-print rendering share one puppet?
 - [MLX vs oMLX](mlx-vs-omlx.md)
   - Is oMLX a faster version of MLX?
   - Where does oMLX's speed come from, and when does it help?
