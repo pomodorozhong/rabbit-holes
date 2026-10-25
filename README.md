@@ -4,18 +4,19 @@ A personal collection of questions I’ve followed into notes, guides, notebooks
 
 ## Topics
 
+I reserve `topics/` for polished, fully reviewed documents and compact, interesting experiments.
+
 | Topic | What’s inside |
 | --- | --- |
 | [Agent Skills](topics/agent_skills/README.md) | Skill mechanics, Codex integration, document workflows, and authoring practices. |
 | [AI Meeting Notes](topics/ai_meeting_notes/README.md) | Feature goals, local pipeline patterns, and a plan for measurements. |
-| [AI watermarks](topics/ai_watermarks/README.md) | A guide to watermarking and provenance, with text and image notebooks. |
 | [Doppler effect](topics/doppler_semitone/README.md) | A notebook on Doppler shift, pitch perception, and a charging fighter. |
 | [Freeform canvas](topics/freeform_canvas/README.md) | A comparison of browser canvas packages and runnable demos. |
 | [Git and GitHub](topics/git_and_github/README.md) | A table of contents for Git and GitHub learning notes. |
 | [Indie hacking](topics/indie-hacking/README.md) | Notes on building and sustaining products independently. |
 | [Local model reports](topics/local_model_reports/README.md) | Hardware-aware model reports, memory notes, and research scripts. |
 
-[Learning notes](learning-notes/README.md) holds shorter notes from learning sessions. Some of them may later grow into topics.
+[Learning notes](learning-notes/README.md) holds compact explanations from learning sessions and earlier research, with companion experiments where useful. Some may later be developed and reviewed for `topics/`.
 
 ## Workflow
 
