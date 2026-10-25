@@ -99,7 +99,7 @@ These are starting points, not locked choices:
 - **Custom rendering:** a small Metal renderer only if an existing runtime misses the performance, visual, or OBS-integration contract.
 - **OBS transfer:** window capture plus a key, NDI, Syphon through a compatible path, or another transparent-output mechanism. Test the actual path on macOS before adopting it.
 
-The evidence and links behind these candidates are in [the learning note](vtubing-pipeline-tech-stack.md). The fuller question-by-question record is in [the session record](sessions/2026-10-24-vtubing-pipeline-tech-stack.md).
+The evidence and links behind these candidates are in [the learning note](03-vtubing-pipeline-tech-stack.md). The fuller question-by-question record is in [the session record](sessions/2026-10-24-vtubing-pipeline-tech-stack.md).
 
 ## Visual modes to explore
 
