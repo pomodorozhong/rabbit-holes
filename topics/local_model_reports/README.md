@@ -28,6 +28,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-10-12-video-ai-news.md](./report-2026-10-12-video-ai-news.md) | video [X0_GDOkLKzQ](https://youtu.be/X0_GDOkLKzQ) (as of 2026-10-12) | All 22 chapters; EmbeddingGemma 2 for local search, Botanic1-M with window/batch limits for plant DNA scoring, and experimental ALoDLM-1.7B CPU decoding; 8B GGUF gap and Kandinsky 6.0 / Iris-3B full-pipeline checks |
 | [report-2026-10-15-minicpm-v-4.7.md](./report-2026-10-15-minicpm-v-4.7.md) | video [JYTXQ7oFTLA](https://youtu.be/JYTXQ7oFTLA) (as of 2026-10-15) | Focused MiniCPM-V 4.7 deep dive; 1B local vision path, 35B-A3B LES experiment, and capability comparison with Gemma 4 E2B, E4B, and 12B |
 | [report-2026-10-18-video-ai-news.md](./report-2026-10-18-video-ai-news.md) | video [tDWtcyeNNew](https://youtu.be/tDWtcyeNNew) (as of 2026-10-18) | All 27 chapters; FLUX 3 Image Klein through a 6-bit MLX port for local image generation and editing, experimental 2–3-bit LFM2.5-24B-A2B for tool-calling agents, and an unverified MOSS-Image path through `stable-diffusion.cpp` and a 3-bit text encoder |
+| [report-2026-10-25-video-ai-news.md](./report-2026-10-25-video-ai-news.md) | video [EfyQOAJjx1A](https://www.youtube.com/watch?v=EfyQOAJjx1A) (as of 2026-10-25) | All 24 chapters; Bark 3 transcription, Ming 3.0 MLX speech generation, constrained Carbon-X DNA chat, Fibo 2 full-pipeline budget, and seven distinct security incidents |
 
 ## Scripts
 
