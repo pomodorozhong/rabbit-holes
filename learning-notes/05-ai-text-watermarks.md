@@ -18,7 +18,7 @@
 
 **Companion experiment**
 
-- The [toy notebook](experiments/05-ai-watermarks/01_text_green_list.ipynb) uses a small vocabulary and position-based lists to illustrate probability bias and evidence accumulation. It does not run a language model or reproduce a provider's watermark. [Setup and review limits](experiments/05-ai-watermarks/README.md).
+- The [toy notebook](experiments/05-ai-watermarks/05-ai-text-watermarks.ipynb) uses a small vocabulary and position-based lists to illustrate probability bias and evidence accumulation. It does not run a language model or reproduce a provider's watermark. [Setup and review limits](experiments/05-ai-watermarks/README.md).
 - Its paraphrase section encounters words outside the toy vocabulary, so that section does not demonstrate a measured loss of detection after rewriting.
 
 **Open**

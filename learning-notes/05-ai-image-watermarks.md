@@ -4,7 +4,7 @@
 
 **How the toy construction stores bits**
 
-- The [companion notebook](experiments/05-ai-watermarks/02_image_dct.ipynb) illustrates a frequency-domain construction: transform an 8×8 image block, compare two coefficients, and adjust their difference to represent a `0` or `1`. The detector reads that relationship back. This is an exploratory implementation that still needs a full review.
+- The [companion notebook](experiments/05-ai-watermarks/05-ai-image-watermarks.ipynb) illustrates a frequency-domain construction: transform an 8×8 image block, compare two coefficients, and adjust their difference to represent a `0` or `1`. The detector reads that relationship back. This is an exploratory implementation that still needs a full review.
 - Its message `AI` occupies 16 bits, repeated across blocks. Several blocks vote on each recovered bit. Repetition provides more observations at the cost of space for distinct message bits.
 
 **What strength and editing change**
