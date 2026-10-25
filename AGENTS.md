@@ -2,6 +2,8 @@
 
 This repository collects questions explored through topic READMEs, guides, research notes, notebooks, comparisons, and small experiments. Write for a curious reader who wants to understand the reasoning and return to the material later.
 
+Reserve `topics/` for polished, fully reviewed documents and compact, interesting experiments. Keep shorter notes and material still being refined in `learning-notes/`. Notes distilled from existing research do not need a learning-session record.
+
 ## Writing
 
 Before drafting, substantially revising, or reviewing prose in a README, topic document, research report, or notebook, read and apply [the explanatory-writing skill](.agents/skills/explanatory-writing/SKILL.md). Read the relevant bundled references as directed by SKILL.md. This includes editorial changes within other research or notebook workflows. For a mechanical typo or link fix, use the defaults below without loading the full skill.

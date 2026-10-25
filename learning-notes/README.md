@@ -1,6 +1,8 @@
 # Learning notes
 
-Short notes written from learning sessions: conversations where I asked questions about a topic and kept a log of what I understood. Each note answers the questions from its session. A note can later be promoted to a fuller document under [`topics/`](../topics/). Summaries of the sessions behind the notes are in [`sessions/`](sessions/).
+Compact notes from learning sessions and earlier research. Each note answers a few questions and keeps its sources and open questions nearby. Companion experiments can stay with a note while they are being explored or reviewed. Notes distilled from existing material do not require a session record; summaries of actual learning sessions are in [`sessions/`](sessions/).
+
+[`topics/`](../topics/) is reserved for polished, fully reviewed documents and compact, interesting experiments. A note can be developed and reviewed for promotion there later.
 
 The two-digit filename prefix follows the order in which each note subject was merged. Companion files for the same subject share one prefix, so they stay together when the directory is sorted by name.
 
@@ -24,3 +26,12 @@ The two-digit filename prefix follows the order in which each note subject was m
   - Where is the gap between correct Traditional Chinese text and a convincing Guoyu voice?
   - Is training one specific voice realistic, and which Guoyu-oriented or trainable base best fits that goal?
   - What fallback and evaluation checklist can guide the search for a convincing local Guoyu voice?
+- [How image watermarks work](05-ai-image-watermarks.md)
+  - How can image changes carry bits without a visible label?
+  - What do repetition, strength, compression, and cropping change?
+- [How text watermarks work](05-ai-text-watermarks.md)
+  - How can ordinary token choices carry a hidden statistical signal?
+  - Why do passage length and rewriting affect detection?
+- [Watermarks and provenance](05-ai-watermarks-and-provenance.md)
+  - What do an embedded watermark and a signed provenance record each tell us?
+  - What can we conclude when a signal or credential is missing?
