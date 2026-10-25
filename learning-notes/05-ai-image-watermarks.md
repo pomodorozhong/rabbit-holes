@@ -2,20 +2,25 @@
 
 **Bottom line:** An image can carry a signal through small changes to its pixel values. A matching detector tries to recover that signal after the image has been saved or edited. The useful questions are which changes it survives and what image-quality cost they require.
 
-**How the toy construction stores bits**
+**Following a short message into image blocks**
 
-- The [companion notebook](experiments/05-ai-watermarks/05-ai-image-watermarks.ipynb) illustrates a frequency-domain construction: transform an 8×8 image block, compare two coefficients, and adjust their difference to represent a `0` or `1`. The detector reads that relationship back. This is an exploratory implementation that still needs a full review.
-- Its message `AI` occupies 16 bits, repeated across blocks. Several blocks vote on each recovered bit. Repetition provides more observations at the cost of space for distinct message bits.
+- The [companion notebook](experiments/05-ai-watermarks/05-ai-image-watermarks.ipynb) turns the message `AI` into 16 **bits**, binary digits that are each `0` or `1`. This hidden message is the watermark's **payload**. The program splits an image into 8×8 blocks and distributes the bits across them.
+- It transforms each block's pixel brightnesses into **coefficients**, numbers intended to describe patterns of brightness variation. To store a bit, it adjusts two coefficients so their difference is positive for `1` and negative for `0`. The detector reads that sign back.
+- The same bits are repeated across blocks, which vote on each recovered bit. Repetition provides more observations at the cost of space for distinct message bits. This exploratory implementation still needs a full review.
 
-**What strength and editing change**
+**How embedding strength affects image distortion**
 
-- The saved strength comparison shows more pixel distortion at larger coefficient margins. It plots payload recovery alongside that distortion so the two can be considered together.
-- Its JPEG and crop-and-resize paths test different changes. Cropping and resizing can move the pixels assigned to each block, while this detector expects the original grid. The experiment does not establish the robustness of a provider's watermark. [Notebook setup and review limits](experiments/05-ai-watermarks/README.md).
+- **Embedding strength** controls how strongly the program alters the image to store the bits. In this notebook, it sets the minimum gap between the two coefficients. A larger required gap can require a larger change to the original block.
+- The notebook's final saved figure plots the fraction of message bits recovered correctly alongside the average size of changes to pixel values. Larger strength settings produce more numerical distortion in that comparison; this measurement does not establish how noticeable the changes are to a viewer.
 
-**How a learned method differs**
+**How compression and cropping affect message recovery**
 
-- [Stable Signature](https://arxiv.org/abs/2303.15435) fine-tunes a diffusion model's decoder so generated images carry a binary signature. A trained extractor recovers it, followed by a statistical test. That is a different construction from the notebook's coefficient edits, and requires control of the generator.
-- Its published evaluations belong to that method and test setup. They cannot validate this toy implementation or an unrelated product.
+- JPEG compression can change the coefficient values that carry the bits. Cropping and resizing can also move pixels between blocks, while this detector expects the original grid. The notebook explores both kinds of change; it does not establish the robustness of a provider's watermark. [Notebook setup and review limits](experiments/05-ai-watermarks/README.md).
+
+**Stable Signature trains the generator to embed a watermark**
+
+- [Stable Signature](https://arxiv.org/abs/2303.15435) uses additional training to make an image generator's output contain an identifying binary signature. A matching trained extractor recovers the signature, followed by a statistical test. The notebook instead specifies its coefficient edits directly in code.
+- This method requires control of the generator. Its published evaluations apply to that method and test setup; they cannot validate the notebook's coefficient-editing implementation.
 
 **Open**
 
