@@ -36,7 +36,7 @@ The write-up records what the session established so the user can come back to i
 
 1. Choose the form. Use the one the user named. Otherwise, suggest one based on how much the session covered and ask the user to confirm.
 2. Choose the location:
-   - **Learning note:** write it at `learning-notes/<slug>.md`, using [the learning note template](assets/learning-note-template.md). Reuse the session's slug, or the existing note when the topic already has one.
+   - **Learning note:** write it at `learning-notes/<NN>-<slug>.md`, using [the learning note template](assets/learning-note-template.md). Reuse the existing note and its prefix when the topic already has one. For a new subject, use the next two-digit number after the highest root-level learning-note prefix. Prefixes follow subject merge order, so update the number and links before publication if another subject merges first. Companion files for the same subject share its prefix; session records keep their date-based names.
    - **Topic guide:** ask which folder under `topics/` it belongs in, or whether to create a new one named like the existing ones. Move the topic's session records to `topics/<topic>/sessions/`.
 
    Put the document elsewhere only when the user asks.
@@ -44,7 +44,7 @@ The write-up records what the session established so the user can come back to i
 4. Read [the explanatory-writing skill](../explanatory-writing/SKILL.md) and its guide references. Apply them, with the overrides in [write-up.md](references/write-up.md). Those overrides concern where the content comes from, whose views the document states, and how long it runs.
 5. Propose an outline before drafting: the reader's question and the headings in reading order. For a guide, also name the log entries each section draws on. Let the user change it. The order can differ from the order of the conversation when a stranger needs ideas in a different sequence.
 6. Draft the document from the log and the record. Follow write-up.md for material they do not cover.
-7. Update the index: add or update the note's entry in `learning-notes/README.md`, with a link and the questions it answers, or update the topic README index as explanatory-writing describes.
+7. Update the index: add or update the note's entry in numeric filename order in `learning-notes/README.md`, with a link and the questions it answers, or update the topic README index as explanatory-writing describes.
 8. Deliver an audit list with the draft, as described in write-up.md, so the user can check every addition and judgment call.
 
 ## Promoting a note to a topic
