@@ -17,3 +17,8 @@ Short notes written from learning sessions: conversations where I asked question
   - Are milestones only customer counts, or also stages such as Problem/Solution Fit?
   - What would the milestones look like for an indie iOS app or an indie game?
   - Do game sales really spike at launch?
+- [Why Guoyu TTS can still sound like Putonghua](guoyu-voice-cloning.md)
+  - Why can a model claim Guoyu support yet still sound closer to Putonghua?
+  - Where is the gap between correct Traditional Chinese text and a convincing Guoyu voice?
+  - Is training one specific voice realistic, and which Guoyu-oriented or trainable base best fits that goal?
+  - What fallback and evaluation checklist can guide the search for a convincing local Guoyu voice?
