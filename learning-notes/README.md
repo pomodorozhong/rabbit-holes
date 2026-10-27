@@ -39,3 +39,8 @@ The two-digit filename prefix follows the order in which each note subject was m
   - How can a Claude Code or Codex skill launch a subagent with a narrower context or cheaper model?
   - Is `fork_turns: "none"` portable between the two products?
   - Which of my existing skills, including commit and issue/PR filing, could benefit, and why?
+- [ASICs and Local LLMs](07-llm-asics-and-local-inference.md)
+  - What does an ASIC gain for LLM inference, and can it reduce local memory use?
+  - What do current ASIC comparisons with GPUs measure, and how large are the gains?
+  - How do their architectures differ, how long does a new ASIC take to make, and when were its speed results reported relative to the model release?
+  - Could a frontier model such as Opus 5.5 run on an iPhone?
