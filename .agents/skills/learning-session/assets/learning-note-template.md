@@ -15,7 +15,11 @@
 
 <!-- Optional: a table when the session compared options or checked what something covers. Keep cells short and link sources in them. -->
 
-**For me:** <what this means for the user's own use, and what they decided, taken from the session record>
+<!-- Optional personal context: preserve user-stated goals, constraints,
+decisions, or hypotheses where they affect an answer or add a distinct
+conclusion. Place them beside the relevant explanation, using a specific
+label such as "Decision", "Goal and fallback", or "Hypothesis to test".
+Omit a separate block when it repeats existing content. -->
 
 **Open**
 

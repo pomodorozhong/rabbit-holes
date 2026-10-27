@@ -24,7 +24,7 @@
 | Image generation | Unclear; the request was closed in a cleanup, not rejected ([#477](https://github.com/jundot/omlx/issues/477)), and draft PRs add image pipelines |
 | Video, music | No sign of plans |
 
-**For me:** Whisper on oMLX is probably no faster, because it runs through the same mlx-audio library I'd call directly. The gain would be one server for everything. That's an inference, not a benchmark, so I'm waiting before trying it.
+**Decision:** I'm waiting before trying Whisper on oMLX. A single server for several workloads could be useful, but a transcription speedup has not been measured.
 
 **Open**
 

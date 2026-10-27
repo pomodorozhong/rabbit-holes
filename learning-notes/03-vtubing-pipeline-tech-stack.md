@@ -72,8 +72,6 @@ A compatible TrueDepth-equipped iPhone can help because [ARKit face tracking](ht
 
 The sensible sequence is to benchmark one existing setup under the real OBS workload, profile it, and custom-build only the stage that misses the contract. A custom renderer cannot recover time spent in tracking or encoding, and a custom tracker cannot repair a costly post-process stack.
 
-**For me:** The project is not “build a VTuber stack from scratch.” It is “find the lightest architecture that produces this front-facing illustrated illusion on an M2 Pro while OBS is running.” I should preserve the option to write a small Metal renderer or local tracker, but earn that complexity with measurements.
-
 **Open**
 
 - Does the rig stop at the head, or include shoulders and upper-body sway?
