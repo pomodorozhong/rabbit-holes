@@ -35,3 +35,7 @@ The two-digit filename prefix follows the order in which each note subject was m
 - [Watermarks and provenance](05-ai-watermarks-and-provenance.md)
   - What do an embedded watermark and a signed provenance record each tell us?
   - What can we conclude when a signal or credential is missing?
+- [Using subagents to reduce token cost](06-subagents-for-token-savings.md)
+  - How can a Claude Code or Codex skill launch a subagent with a narrower context or cheaper model?
+  - Is `fork_turns: "none"` portable between the two products?
+  - Which of my existing skills, including commit and issue/PR filing, could benefit, and why?
