@@ -4,6 +4,11 @@
 
 Here, **Guoyu** and **Putonghua** refer to two closely related Mandarin standards with distinct conventions in pronunciation and usage.
 
+**Goal and fallback**
+
+- My primary goal is to clone one specific voice, and I have many samples of it.
+- My fallback is a TTS voice that speaks convincing Guoyu even if it cannot clone that speaker.
+
 **Why “Guoyu support” can barely deliver**
 
 “Support” can mean several different things. Accepting Traditional Chinese proves script handling. A `zh-TW` tag names an intended locale. Bopomofo can disambiguate readings. Voice cloning can copy identity cues. Low character error rate shows intelligibility. None of these, alone, establishes Guoyu timing, pitch movement, reductions, phrasing, or conversational register.
@@ -81,8 +86,6 @@ The distinction makes BlueMagpie the best ready-made Guoyu cloning test, but not
 4. **Compare stages.** Listen to the human reference, a known `zh-TW` control, each stock voice, its clone, and the voice-conversion experiment. This locates whether the problem begins in base TTS, cloning, or conversion.
 5. **Score separate dimensions.** Rate words, Guoyu pronunciation, rhythm, intonation, naturalness, artifacts, speaker similarity, and long-form stability. Blind filenames and use more than one Guoyu-speaking listener where possible.
 6. **Apply stop rules.** Reject a candidate whose stock TTS fails the accent target. Investigate conditioning only when stock TTS passes but cloning fails. Keep conversion only if a native source retains its accent after conversion. Compare speed, memory, and privacy only among candidates that first pass the listening test.
-
-**For me:** My primary goal is one specific voice, and I have many samples of it. My fallback is a TTS voice that speaks convincing Guoyu even if it cannot clone that speaker. The next useful sequence is therefore current BlueMagpie centroid cloning, VoxCPM2 language-and-renderer adaptation, and a direct single-speaker Piper/VITS baseline. Accent and speaker identity should be scored separately at every stage.
 
 **Open**
 

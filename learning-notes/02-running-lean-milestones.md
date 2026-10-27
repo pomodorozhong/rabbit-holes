@@ -39,9 +39,8 @@ These examples are my own application of the book with made-up numbers. The book
 - These figures come from secondary write-ups of GameDiscoverCo's data, not the original reports.
 - The public data gives only two checkpoints, week 1 and year 1, so it can't support an honest sales-over-time curve. Real curves would need developer postmortems or Steamworks data.
 
-**For me:**
+**Hypothesis to test**
 
-- I want more data so I can set better goals for indie games.
 - I suspect Problem/Solution Fit doesn't need to be a separate stage anymore. Coding agents are now capable enough that it could merge with Product/Market Fit into one stage, which would allow faster validation and iteration. This is a hypothesis I haven't tested.
 
 **Open**
@@ -49,5 +48,5 @@ These examples are my own application of the book with made-up numbers. The book
 - Does the book call stage 3 "Scale", and how does it place the stages on the traction roadmap?
 - What are the minimum success criteria for my canvases, and which are apps and which are games?
 - What growth factor is realistic for an indie app?
-- What does a real sales curve for an indie game look like? Developer postmortems would be a place to start.
+- What does a real sales curve for an indie game look like, and how could it help me set better goals? Developer postmortems would be a place to start.
 - Coding agents make building cheaper, but Problem/Solution Fit is about evidence of demand. Does merging the two stages keep that check, or skip it?
