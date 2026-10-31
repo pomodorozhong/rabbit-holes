@@ -61,7 +61,20 @@ These results come from one call and from clips checked by one listener, so they
 
 ## Where the work continues
 
-Testing more models stopped there. Building a working tool, starting with a pipeline for saved recordings, continues in [meeting-recap](https://github.com/pomodorozhong/meeting-recap). The investigation plan and the review guide moved there, and the full trial record and the experiment code were written there. The [experiment summaries](https://github.com/pomodorozhong/meeting-recap/tree/main/docs/experiments) give the pinned setup, runtimes, and scores behind each result above, starting with the [HushScribe trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md), the [diarizer comparison](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-diarizer-comparison.md), and the [full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md). This topic keeps the background research: the feature catalogue, the paid-product comparison, and the review of open-source pipelines.
+Testing more models stopped there. Building a working tool, starting with a pipeline for saved recordings, continues in [meeting-recap](https://github.com/pomodorozhong/meeting-recap). The [investigation plan](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/investigation-plan.md) and the [review guide](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/review-guide.md) moved there, and the trial record and the experiment code were written there. This topic keeps the background research: the feature catalogue, the paid-product comparison, and the review of open-source pipelines.
+
+Each recording trial report gives the pinned setup, runtime, and scores behind the results above:
+
+- [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md)
+  - Did the setup chosen from the source review produce a usable transcript and reliable speaker labels?
+- [Diarizer settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-diarizer-comparison.md)
+  - Does a known speaker count or another Community-1 setting fix the merged voices, and do other local diarizers do better?
+- [Attaching speaker labels to transcript text](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-label-attachment.md)
+  - How much does the method of tying text to speaker labels matter?
+- [Transcription settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-transcription-variants.md)
+  - Which language setting, prompt, or model gives the most usable Chinese + English transcript?
+- [Both full recordings](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md)
+  - Does the chosen combination hold up over 87 minutes in time, memory, and label stability?
 
 ## Documents in this topic
 
@@ -75,19 +88,6 @@ Testing more models stopped there. Building a working tool, starting with a pipe
 - [Local pipeline sources](open-source-pipelines.md)
   - How do Meetily, HushScribe, VOA, and Tacet turn audio into notes?
   - Which models, runtimes, and settings do they use, and why was HushScribe chosen for the trial?
-
-The recording trial reports are in meeting-recap:
-
-- [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md)
-  - Did the setup chosen from the source review produce a usable transcript and reliable speaker labels?
-- [Diarizer settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-diarizer-comparison.md)
-  - Does a known speaker count or another Community-1 setting fix the merged voices, and do other local diarizers do better?
-- [Attaching speaker labels to transcript text](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-label-attachment.md)
-  - How much does the method of tying text to speaker labels matter?
-- [Transcription settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-transcription-variants.md)
-  - Which language setting, prompt, or model gives the most usable Chinese + English transcript?
-- [Both full recordings](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md)
-  - Does the chosen combination hold up over 87 minutes in time, memory, and label stability?
 
 ## Sources
 
