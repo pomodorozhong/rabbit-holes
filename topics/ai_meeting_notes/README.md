@@ -61,7 +61,7 @@ These results come from one call and from clips checked by one listener, so they
 
 ## Where the work continues
 
-Testing more models stopped there. Building a working tool, starting with a pipeline for saved recordings, continues in [meeting-recap](https://github.com/pomodorozhong/meeting-recap). The investigation plan, the review guide, the full trial record, and the experiment code move there with it. This topic keeps the background research: the feature catalogue, the paid-product comparison, and the review of open-source pipelines.
+Testing more models stopped there. Building a working tool, starting with a pipeline for saved recordings, continues in [meeting-recap](https://github.com/pomodorozhong/meeting-recap). The investigation plan, the review guide, the full trial record, and the experiment code move there with it. The [experiment summaries](https://github.com/pomodorozhong/meeting-recap/tree/main/docs/experiments) give the pinned setup, runtimes, and scores behind each result above, starting with the [HushScribe trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md), the [diarizer comparison](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-diarizer-comparison.md), and the [full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md). This topic keeps the background research: the feature catalogue, the paid-product comparison, and the review of open-source pipelines.
 
 ## Documents in this topic
 
