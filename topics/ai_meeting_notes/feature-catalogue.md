@@ -37,7 +37,7 @@ Two distinctions recur in the table. **Speaker separation** assigns consistent l
 
 Use the IDs to connect a feature to the steps that support it. MN-10, for example, can fail because audio is missing, transcription changes a commitment, a speaker label is wrong, or the extraction step invents an owner. Recording the failing step explains what needs to change more clearly than marking the whole feature as poor.
 
-The [pipeline impact map](#pipeline-steps-and-feature-impact) below provides the starting relationships. The [recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) tested transcription (**MN-04**) and speaker separation (**MN-06**); naming people (**MN-07**) also needs confirmed identity information. The other rows remain useful when checking what an app provides or explaining how an error affects later notes.
+The [pipeline impact map](#pipeline-steps-and-feature-impact) below provides the starting relationships. The [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) tested transcription (**MN-04**) and speaker separation (**MN-06**); naming people (**MN-07**) also needs confirmed identity information. The other rows remain useful when checking what an app provides or explaining how an error affects later notes.
 
 Keep IDs unchanged when adding findings. If a feature needs manual work, extra application code, or an external service, record that dependency. Add a new ID for a new behavior rather than renumbering the existing catalogue.
 
