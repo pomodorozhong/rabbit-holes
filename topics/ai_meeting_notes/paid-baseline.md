@@ -1,6 +1,6 @@
 # Paid meeting-notes baseline
 
-Notion AI meeting notes, Amie, and Spellar AI combine transcription and summaries with calendars, saved meeting history, editing, sharing, and follow-up work. This background note records their documented features, prices, and processing boundaries as inspected on **2026-10-06**. It explains where the [Feature catalogue](feature-catalogue.md) came from; the next work concerns local models and a meeting-recording trial.
+Notion AI meeting notes, Amie, and Spellar AI combine transcription and summaries with calendars, saved meeting history, editing, sharing, and follow-up work. This background note records their documented features, prices, and processing boundaries as inspected on **2026-10-06**. It explains where the [Feature catalogue](feature-catalogue.md) came from; later work tested local models in a [recording trial](README.md#what-the-recording-trial-found).
 
 | Field | Value |
 | --- | --- |
@@ -9,7 +9,7 @@ Notion AI meeting notes, Amie, and Spellar AI combine transcription and summarie
 | Products | Notion AI meeting notes, Amie, Spellar AI |
 | Evidence | Official documentation, pricing controls, release notes, policies, and public product examples |
 | Status | Background research. The feature catalogue is accepted; paid-product quality has not been tested. |
-| Next step | [Feature catalogue](feature-catalogue.md), then [pipeline investigation](investigation-plan.md#three-phase-roadmap) |
+| Next step | [Feature catalogue](feature-catalogue.md), then the [recording trial result](README.md#what-the-recording-trial-found) |
 
 ## Prices and what the subscription buys
 
@@ -82,7 +82,7 @@ The table below identifies where the inspected descriptions leave a practical qu
 
 ### Scope decision
 
-The catalogue is the accepted reference for local work. The next steps are to check the models used by the open-source projects and try a meeting recording on the M2 Pro / 16 GB Mac. If a model produces a good transcript and reliably distinguishes speakers, stop testing. Further model or pipeline experiments are needed only if that trial falls short. The [investigation plan](investigation-plan.md#three-phase-roadmap) records this sequence.
+The catalogue is the accepted reference for local work. The next steps were to check the models used by the open-source projects and try a meeting recording on the M2 Pro / 16 GB Mac. That trial is reported in meeting-recap as the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) with Whisper and Sortformer; the [topic overview](README.md#what-the-recording-trial-found) summarizes what it found.
 
 ## Sources
 
@@ -118,4 +118,4 @@ All sources below are primary vendor pages or the developer's App Store listing,
 
 The research used official pages, release notes, monthly and yearly pricing controls, and the summary, transcript, and action views in the public Spellar demo. The cost scenarios are arithmetic based on the inspected prices. These materials show the documented workflow and advertised behavior, but cannot establish accuracy or processing time on a real meeting.
 
-The research did not include buying subscriptions, changing account settings, or submitting meeting audio. The uncertainties above therefore remain unresolved, including mixed-language quality, export contents, access permissions, and deadline extraction. The prices and product descriptions reflect the October 6 inspection. The [local investigation](investigation-plan.md#three-phase-roadmap) uses the catalogue as its reference and has not yet produced recording-test results.
+The research did not include buying subscriptions, changing account settings, or submitting meeting audio. The uncertainties above therefore remain unresolved, including mixed-language quality, export contents, access permissions, and deadline extraction. The prices and product descriptions reflect the October 6 inspection. The [local investigation](README.md#what-the-recording-trial-found) used the catalogue as its reference; its recording trial tested transcription and speaker separation, not these product uncertainties.
