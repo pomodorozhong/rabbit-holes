@@ -76,6 +76,19 @@ Testing more models stopped there. Building a working tool, starting with a pipe
   - How do Meetily, HushScribe, VOA, and Tacet turn audio into notes?
   - Which models, runtimes, and settings do they use, and why was HushScribe chosen for the trial?
 
+The recording trial reports are in meeting-recap:
+
+- [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md)
+  - Did the setup chosen from the source review produce a usable transcript and reliable speaker labels?
+- [Diarizer settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-diarizer-comparison.md)
+  - Does a known speaker count or another Community-1 setting fix the merged voices, and do other local diarizers do better?
+- [Attaching speaker labels to transcript text](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-label-attachment.md)
+  - How much does the method of tying text to speaker labels matter?
+- [Transcription settings and models](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-transcription-variants.md)
+  - Which language setting, prompt, or model gives the most usable Chinese + English transcript?
+- [Both full recordings](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md)
+  - Does the chosen combination hold up over 87 minutes in time, memory, and label stability?
+
 ## Sources
 
 The catalogue comes from the [dated paid-product research](paid-baseline.md#sources). Pipeline observations come from the primary project documentation and selected source files listed in [Local pipeline sources](open-source-pipelines.md#sources), initially inspected on **2026-10-06**, with configuration and artifact checks on **2026-10-08**. The combined diagram, feature dependencies, and choice of first experiments are our analysis of those sources. The trial result summarizes evidence recorded in [meeting-recap](https://github.com/pomodorozhong/meeting-recap).
