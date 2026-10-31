@@ -12,7 +12,7 @@ The exact Whisper Core ML folder is about **3.09 GB**, and the offline diarizer�
 
 Tacet provides a different live-capture path; Meetily and VOA lack a confirmed speaker-separation path for this trial. The configuration sections explain those differences.
 
-**Trial outcome:** in the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md), the selected setup ran on the target Mac and transcribed the recording reasonably well, but its Community-1 speaker separation merged three voices into one label. Whisper Large v3 with Chinese forced, plus FluidAudio’s Sortformer diarizer, separated them in the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md); the [topic overview](README.md#what-the-recording-trial-found) summarizes the result.
+**Trial outcome:** in the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md), the selected setup ran on the target Mac and transcribed the recording reasonably well, but its Community-1 diarizer merged three voices into one label. Whisper Large v3 with Chinese forced, plus FluidAudio’s Sortformer diarizer, later kept them apart [over the full recordings](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md). The [topic overview](README.md#what-the-recording-trial-found) summarizes both experiments.
 
 ## Observed pipeline patterns
 
@@ -52,7 +52,7 @@ The configuration review follows both the speech and speaker paths, then checks 
 
 The projects expose separate choices for transcription, speaker handling, and summaries. They also schedule the work differently: during the call, afterward, or on request. These observations explain why the model and settings need to be recorded with the result. The same general feature can become available at a different time or depend on a different processing provider.
 
-The configuration review below records the main model paths and the settings that affect the first trial. The user then tried the selected configuration with a recording in the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md), and the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) tested the combination that replaced it; the [topic overview](README.md#what-the-recording-trial-found) records the outcome.
+The configuration review below records the main model paths and the settings that affect the first trial. The [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) then tested the selected configuration on a recording, and the [topic overview](README.md#what-the-recording-trial-found) describes the combination that replaced it.
 
 The catalogue includes more than the recording trial checks. The observations above can explain dependencies and missing application work, but they do not establish full feature coverage or summary quality.
 
@@ -177,7 +177,7 @@ Meetily’s Parakeet totals instead come from its exact-byte catalogue because v
 
 The review read the four projects’ pinned sources, dependency manifests/locks, the pinned FluidAudio and WhisperKit implementations, model cards, and Hugging Face file metadata. It traced model selection, downloads, decoding, file handling, speaker processing, and provider configuration. It downloaded **source code and metadata only**. No application dependencies, model weights, recording, or inference workload were installed or run.
 
-Models fetched from moving branches and Python dependencies specified by lower bounds can change independently of app code. Publisher language coverage and artifact sizes establish inputs for a trial, not measured success, speed, memory pressure, or label reliability. The [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) that followed measured two setups on one call; broader summary evaluation and the full 22-feature catalogue remained outside it.
+Models fetched from moving branches and Python dependencies specified by lower bounds can change independently of app code. Publisher language coverage and artifact sizes establish inputs for a trial, not measured success, speed, memory pressure, or label reliability. The [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) that followed measured two setups on one call. They did not evaluate summaries or the full 22-feature catalogue.
 
 ## Sources
 

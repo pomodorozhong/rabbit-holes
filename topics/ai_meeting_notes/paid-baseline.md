@@ -1,6 +1,6 @@
 # Paid meeting-notes baseline
 
-Notion AI meeting notes, Amie, and Spellar AI combine transcription and summaries with calendars, saved meeting history, editing, sharing, and follow-up work. This background note records their documented features, prices, and processing boundaries as inspected on **2026-10-06**. It explains where the [Feature catalogue](feature-catalogue.md) came from; the next work concerned local models and a meeting-recording trial, recorded in meeting-recap as the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md).
+Notion AI meeting notes, Amie, and Spellar AI combine transcription and summaries with calendars, saved meeting history, editing, sharing, and follow-up work. This background note records their documented features, prices, and processing boundaries as inspected on **2026-10-06**. It explains where the [Feature catalogue](feature-catalogue.md) came from; later work tested local models in a [recording trial](README.md#what-the-recording-trial-found).
 
 | Field | Value |
 | --- | --- |
@@ -82,7 +82,7 @@ The table below identifies where the inspected descriptions leave a practical qu
 
 ### Scope decision
 
-The catalogue is the accepted reference for local work. The next steps were to check the models used by the open-source projects and try a meeting recording on the M2 Pro / 16 GB Mac. The [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) are recorded in meeting-recap, and the [topic overview](README.md#what-the-recording-trial-found) summarizes what they found.
+The catalogue is the accepted reference for local work. The next steps were to check the models used by the open-source projects and try a meeting recording on the M2 Pro / 16 GB Mac. That trial is reported in meeting-recap as the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and the [full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md) with Whisper and Sortformer; the [topic overview](README.md#what-the-recording-trial-found) summarizes what it found.
 
 ## Sources
 
@@ -118,4 +118,4 @@ All sources below are primary vendor pages or the developer's App Store listing,
 
 The research used official pages, release notes, monthly and yearly pricing controls, and the summary, transcript, and action views in the public Spellar demo. The cost scenarios are arithmetic based on the inspected prices. These materials show the documented workflow and advertised behavior, but cannot establish accuracy or processing time on a real meeting.
 
-The research did not include buying subscriptions, changing account settings, or submitting meeting audio. The uncertainties above therefore remain unresolved, including mixed-language quality, export contents, access permissions, and deadline extraction. The prices and product descriptions reflect the October 6 inspection. The [local investigation](README.md#what-the-recording-trial-found) used the catalogue as its reference; its recording trial, the [HushScribe recording trial](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-hushscribe-trial.md) and then the [Sortformer full-recording run](https://github.com/pomodorozhong/meeting-recap/blob/main/docs/experiments/2026-10-24-full-recordings.md), tested transcription and speaker separation, not these product uncertainties.
+The research did not include buying subscriptions, changing account settings, or submitting meeting audio. The uncertainties above therefore remain unresolved, including mixed-language quality, export contents, access permissions, and deadline extraction. The prices and product descriptions reflect the October 6 inspection. The [local investigation](README.md#what-the-recording-trial-found) used the catalogue as its reference; its recording trial tested transcription and speaker separation, not these product uncertainties.
