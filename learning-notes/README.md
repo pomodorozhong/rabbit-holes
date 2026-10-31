@@ -44,3 +44,11 @@ The two-digit filename prefix follows the order in which each note subject was m
   - What do current ASIC comparisons with GPUs measure, and how large are the gains?
   - How do their architectures differ, how long does a new ASIC take to make, and when were its speed results reported relative to the model release?
   - Could a frontier model such as Opus 5.5 run on an iPhone?
+- [How mumble speech can drive a 3D puppet](08-mumble-voice-generator.md)
+  - How can invented sounds, timing, and pitch make fictional speech feel like a language?
+  - Why can generated speech share movement cues with a puppet, and how does live audio differ?
+  - What does klattsch's moving face demonstrate, and where does the implementation difficulty lie?
+  - Why use a browser experiment, and how do portability and streaming change the problem?
+- [Project-start handoff: mumble voice and 3D puppet system](08-mumble-voice-generator-handoff.md)
+  - What should a new implementation session build first?
+  - Which choices can the implementing agent make, what must it verify, and where should it stop?
