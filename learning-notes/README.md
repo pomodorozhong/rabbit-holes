@@ -52,3 +52,7 @@ The two-digit filename prefix follows the order in which each note subject was m
 - [Project-start handoff: mumble voice and 3D puppet system](08-mumble-voice-generator-handoff.md)
   - What should a new implementation session build first?
   - Which choices can the implementing agent make, what must it verify, and where should it stop?
+- [Clearing YouTube playlists with a Chrome Snippet](09-youtube-playlist-cleanup.md)
+  - Were the earlier cleanup failures caused by the bookmarklet format or its script?
+  - How do Console and saved Snippets help with debugging and reuse?
+  - How does the companion script target Watch Later or another playlist, and what still needs checking?
