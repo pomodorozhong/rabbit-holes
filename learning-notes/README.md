@@ -56,3 +56,7 @@ The two-digit filename prefix follows the order in which each note subject was m
   - Were the earlier cleanup failures caused by the bookmarklet format or its script?
   - How do Console and saved Snippets help with debugging and reuse?
   - How does the companion script target Watch Later or another playlist, and what still needs checking?
+- [Understanding p-values through a gacha drop rate](10-p-values.md)
+  - What probability does a p-value measure, and why include outcomes beyond the observed one?
+  - When would 300 pulls give statistically significant evidence against an advertised 2% rate?
+  - How should a scientific paper interpret statistical significance alongside effect size and uncertainty?
