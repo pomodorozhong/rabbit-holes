@@ -16,6 +16,7 @@ For the weekly `video-ai-news.md` series, use [the weekly video template](../ass
 - State the target machine, software/runtime assumptions, and evaluation date.
 - Separate model/weight size, auxiliary components, peak working memory, context use, supported runtimes, and accelerator requirements.
 - Compare each candidate against the project's memory-budget note. Explain whether a verdict is measured, publisher-reported, inferred from artifact size, or blocked by missing platform support.
+- Prefer an explicit publisher memory table or measured artifact metadata over parameter-count arithmetic. When only arithmetic is possible, show the assumption and leave room for scales, cache, activations, runtime, and the operating system.
 - End with practical candidates, near-misses, and next steps appropriate to the requested scope.
 
 ## Model deep dive or comparison

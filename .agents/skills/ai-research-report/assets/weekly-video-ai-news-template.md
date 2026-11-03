@@ -12,6 +12,7 @@ Choose card-section categories from notable findings; do not require fixed modal
 Use short task/category names for headings, such as "Speech recognition and transcription" or "Research synthesis". Put recommendations and caveats in the takeaway text below the heading.
 Best for emoji: 🖼️ image output/editing, 📹 video output, 💬 text-output LLMs(including multimodal input), ⚖️ decisions, 🎵 music, 🗣️ speech recognition/transcription, ❓ other/new model types.
 Mac fit emoji: ✅ Comfortable, ⚠️ Constrained, ⚠️ Experimental, ❌ Outside budget.
+Base Mac fit on publisher memory tables or measured artifact metadata, not parameter-count arithmetic. If arithmetic is all you have, show the assumption and leave headroom for scales, cache, activations, runtime, and macOS.
 In the chapter inventory, ❌ Hosted means no verified local weights; use — N/A for non-model stories, and ⚠️ Unverified when evidence cannot establish fit.
 Distinguish a local application/harness from its remote model dependencies.
 Keep text labels with emojis. API access from a Mac is not local inference.
