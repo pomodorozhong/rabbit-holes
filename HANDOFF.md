@@ -2,24 +2,14 @@
 
 ## In progress
 
-### codex/agent-skills-maintenance-links
-
-- Task: link the agent-skills guides to the maintained skills workflow
-- PR: #208, ready for review, no merge conflicts when last checked
-- Code checkpoint: 3ca638e, which is **one commit ahead of the remote and exists only on the computer that made it**
-- State: `3ca638e` consolidates the storage and backup guidance but isn't in the PR
-- Verification: not re-run in this session
-- Next action: answer P-01, then review and merge
-- Pending: **P-01** decide whether `3ca638e` belongs in #208, and push it if so. Why: it changes what the PR contains. Blocks: merging #208 and #212.
-
 ### codex/context-files-video-research
 
 - Task: research instruction files and skill workflows
-- PR: #212, ready for review, no merge conflicts when last checked
-- Code checkpoint: 5b42d46 on the remote; the local copy is one commit behind
-- State: awaiting review
-- Verification: not re-run in this session
-- Next action: merge #208 first, then rebase, because both change `topics/agent_skills/README.md`
+- PR: #212, ready for review, mergeable when last checked
+- Code checkpoint: 817d537, rebased onto `master` after #208
+- State: awaiting review and merge. Its two reports hold the three video appendices: one in `repository-instructions-evidence.md`, two in `theo-skills-workflows.md`.
+- Verification: `git diff --check` passed and all 70 local links in the topic resolve. External links not re-run after the rebase.
+- Next action: review, and decide where its two guides belong in the topic index. They were added after "How many skills are too many?" only to resolve the rebase conflict.
 
 ### docs/ab-test-math
 
@@ -64,7 +54,7 @@
 
 - Task: carry this file and the handoff block in `AGENTS.md`
 - PR: none yet
-- Code checkpoint: this branch's only commit
+- Code checkpoint: adf5476, plus the `docs:` commits that update this file
 - State: pushed, not merged, so `HANDOFF.md` isn't on `master` yet
 - Verification: `git diff --check` passed
 - Next action: answer P-02
@@ -74,7 +64,7 @@
 
 1. #249 Review the Git guides
 2. #250 Review the C++ note
-3. #208 and #212 Resolve P-01, then review and merge in that order
+3. #212 Review and merge
 4. #248 Write the hashing documents
 5. #247 Write the A/B test guide
 6. #245 Build the interactive sampled-sound page
@@ -85,4 +75,5 @@
 
 - **P-03** Delete the remote branch `codex/temp-skill-test`. Its report is replaced on `master`, and the later weekly template covers most of its skill rules. Only small points would be lost, such as sourcing each named system separately within a combined chapter. Why: deletion needs approval. Blocks: nothing else.
 - **P-04** Decide each old draft PR. Suggested: #152 move to `learning-notes/` or close; #145 close and move anything useful to #143; #114 rework into a short note or close. All three add files under the old `researches/` path. Why: closing a PR needs approval. Blocks: nothing else.
-- **P-05** Decide two report branches with no PR. `docs/local-model-comparison-2026-09-18`: move to `topics/local_model_reports/` or delete. `comparing-codex-models`: three unread reports at the repo root, which someone else ran for the owner. Why: moving or deleting needs approval. Blocks: nothing else.
+- **P-05** Decide the report branch `comparing-codex-models`: three unread reports at the repo root, which someone else ran for the owner. Move them or delete the branch. Why: moving or deleting needs approval. Blocks: nothing else.
+- **P-06** Decide `feat/handoff-pre-commit-hook` in the `pomodorozhong/skills` repository, which exists only locally and has its own worktree: open a PR or delete it. It adds a hook that keeps `HANDOFF.md` off the default branch. Why: opening a PR or deleting needs approval. Blocks: nothing else.
