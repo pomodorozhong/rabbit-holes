@@ -8,10 +8,10 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - What belongs in a skill folder, and what are `SKILL.md`, `scripts/`, `references/`, and `assets/` for?
   - How does an agent find a skill and read its files as needed?
   - How do you write, test, review, and improve a skill?
-- [How many skills are too many?](managing-skills.md)
-  - What happens when the agent's skill list becomes crowded?
-  - Is there a safe number, and what limits do products document?
-  - How do you trim, scope, disable, and test a collection?
+- [Document generation example](document-generation-example.md)
+  - When should a task use a template, a generator, or a separate formatting skill?
+  - Where should you put the document rules, template, and helper scripts?
+  - How do you check the document's contents and page layout?
 - [Using scripts in a skill](scripts-and-mcp.md)
   - When is a script useful, and when would you use MCP instead?
   - Which languages and dependencies can a script use?
@@ -35,9 +35,9 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - How do you import existing skills, preview links, and set up a machine?
   - How do you edit, add, remove, and synchronize skills?
   - How do you undo a link run and test the maintained scripts?
-- [Document generation example](document-generation-example.md)
-  - When should a task use a template, a generator, or a separate formatting skill?
-  - Where should you put the document rules, template, and helper scripts?
-  - How do you check the document's contents and page layout?
+- [How many skills are too many?](managing-skills.md)
+  - What happens when the agent's skill list becomes crowded?
+  - Is there a safe number, and what limits do products document?
+  - How do you trim, scope, disable, and test a collection?
 
 The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Check the linked documentation and the review date noted in each guide for current behavior.
