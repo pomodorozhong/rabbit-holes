@@ -91,7 +91,7 @@ Dependencies can also include supporting files and product-specific tools. `wiza
 
 Before trying a candidate, read the invoked skills and referenced files, identify external services and write operations, and verify that the target product can perform the named operations. A text-only prompt pasted into a chat can test its wording. It cannot test installed discovery, missing assets, metadata handling, or authorization behavior.
 
-For a customized copy, record the upstream repository, commit, imported files, and local changes. For a managed bundle, check what updates automatically. The repository’s [storage and distribution guide](storage-and-distribution.md) and [shared skill-repository walkthrough](backup-and-restore.md) cover those maintenance choices.
+For a customized copy, record the upstream repository, commit, imported files, and local changes. For a managed bundle, check what updates automatically. The repository’s [guide to organizing skills](organizing-skills.md) and [section on maintaining a personal checkout](installing-and-sharing-skills.md#maintain-a-personal-checkout-as-the-installation) cover those maintenance choices.
 
 ## Review the outcome each workflow claims to improve
 
