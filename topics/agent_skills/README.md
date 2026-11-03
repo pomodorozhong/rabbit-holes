@@ -20,14 +20,17 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - What do Codex, Claude Code, Gemini CLI, Cursor, and Copilot share?
   - How do discovery, activation, permissions, and sharing differ?
   - How do local skills differ from skills attached through an API?
-- [Storing and sharing skills](storage-and-distribution.md)
+- [Organizing skills in a repository](organizing-skills.md)
   - How do you store one skill or manage several skills in a Git repository?
+  - Which conventions keep a collection manageable?
   - Which existing templates and example repositories can you adapt?
+- [Installing and sharing skills](installing-and-sharing-skills.md)
+  - Which route fits: a CLI install, a personal checkout, a product directory, or an exported folder?
   - How do you install selected skills, choose links or copies, and track versions?
   - How do you use one checkout for personal skills, manage branch changes, and restore a backup?
   - When should both agents share a version, and when do they need separate installations?
-  - How do you export a skill and install it for Codex?
   - When should you use plugins, team sharing, or a public directory?
+  - How do you export a skill and install it for Codex?
 - [Maintaining a personal skills repository](https://github.com/pomodorozhong/skills/blob/main/docs/maintaining.md) (in `pomodorozhong/skills`)
   - How do you import existing skills, preview links, and set up a machine?
   - How do you edit, add, remove, and synchronize skills?

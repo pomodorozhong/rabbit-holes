@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" role="img" aria-labelledby="title desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="title">One Git checkout serving two agents</title>
+  <desc id="desc">Codex and Claude Code each read a link in their own skill folder. Both links point to one folder in a Git checkout, which is committed and pushed to a remote repository.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="900" height="250" rx="8" fill="#ffffff" stroke="#d0d7de"/>
+
+  <g font-size="13" font-weight="600" fill="#57606a" text-anchor="middle">
+    <text x="77" y="36">Agent</text>
+    <text x="297" y="36">Link in its skill folder</text>
+    <text x="572" y="36">Source files in Git</text>
+    <text x="807" y="36">Backup</text>
+  </g>
+
+  <g fill="#ddf4ff" stroke="#54aeff">
+    <rect x="22" y="58" width="110" height="56" rx="6"/>
+    <rect x="22" y="152" width="110" height="56" rx="6"/>
+  </g>
+  <g font-size="14" fill="#1f2328" text-anchor="middle">
+    <text x="77" y="91">Codex</text>
+    <text x="77" y="185">Claude Code</text>
+  </g>
+
+  <g fill="#f6f8fa" stroke="#afb8c1">
+    <rect x="172" y="58" width="250" height="56" rx="6"/>
+    <rect x="172" y="152" width="250" height="56" rx="6"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2328" text-anchor="middle">
+    <text x="297" y="91">~/.agents/skills/release-brief</text>
+    <text x="297" y="185">~/.claude/skills/release-brief</text>
+  </g>
+
+  <rect x="462" y="58" width="220" height="150" rx="6" fill="#dafbe1" stroke="#4ac26b"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5" fill="#1f2328" text-anchor="middle">
+    <text x="572" y="112">~/repo/agent-skills/</text>
+    <text x="572" y="132">skills/release-brief/</text>
+    <text x="572" y="152">SKILL.md</text>
+  </g>
+
+  <rect x="744" y="105" width="126" height="56" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
+  <text x="807" y="138" font-size="14" fill="#1f2328" text-anchor="middle">Remote repo</text>
+
+  <g stroke="#57606a" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+    <path d="M 132 86 L 170 86"/>
+    <path d="M 132 180 L 170 180"/>
+    <path d="M 422 86 L 460 86"/>
+    <path d="M 422 180 L 460 180"/>
+    <path d="M 682 133 L 742 133"/>
+  </g>
+  <text x="712" y="124" font-size="12" fill="#57606a" text-anchor="middle">push</text>
+</svg>
