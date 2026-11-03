@@ -1,0 +1,20 @@
+[project]
+name = "sleep-music-landscape"
+version = "0.1.0"
+description = "Marketing landscape report: sleep music, white noise (YouTube + apps)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "jupyter>=1.0",
+    "lxml>=5.0",
+    "matplotlib>=3.8",
+    "nbconvert>=7.0",
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "requests>=2.31",
+    "seaborn>=0.13",
+]
+
+[tool.uv]
+package = false

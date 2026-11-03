@@ -1,0 +1,9 @@
+metric,year,value,unit,notes,source_name,source_url
+net_sales_tsek,2025,247879,tSEK,Group net sales FY2025; -5.2% YoY,Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+net_sales_tsek,2024,261529,tSEK,Prior-year comparison figure from YE 2025 report,Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+paying_users,2025,768000,users,Paying users end-2025 (was 918k prior year),Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+paying_users,2024,918000,users,Prior-year paying users,Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+arpu_sek,2025,277,SEK,Average revenue per user; currency-adjusted ARPU SEK 282,Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+renewal_rate_pct,2025,45,percent,Subscription renewal rate stable at 45%,Sleep Cycle Year-end Report 2025,https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+net_sales_usd_mm_approx,2025,23.61,USD_mm,tSEK/1000/10.5 SEK per USD illustrative conversion,Sleep Cycle Year-end Report 2025 (converted),https://storage.mfn.se/79dd61f8-4ccc-4bc2-b095-feedaf3fced8/sleep-cycle-year-end-report-2025.pdf
+sleep_tech_market_sek_bn,2025,17,SEK_bn,Sleep tech market size cited in annual report narrative,Sleep Cycle Annual and Sustainability Report 2025,https://storage.mfn.se/d5bebf48-cfa5-4ce7-bb55-f23b91e4ea38/sleep-cycle-annual-and-sustainability-report-2025.pdf
