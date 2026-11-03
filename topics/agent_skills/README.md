@@ -1,6 +1,6 @@
 # Agent Skills
 
-An agent skill is a folder of instructions and supporting files that helps an AI agent carry out a particular task. These guides explain what goes in that folder, how agents find and use skills, and how to share them. A document-generation example shows how the pieces fit together.
+An agent skill is a folder of instructions and supporting files that helps an AI agent carry out a particular task. These guides explain what goes in that folder, how agents find and use skills, and how to share them. Research reports examine when skills and repository instructions help, and a document-generation example shows how the pieces fit together.
 
 ## What each guide answers
 
@@ -39,5 +39,13 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - What happens when the agent's skill list becomes crowded?
   - Is there a safe number, and what limits do products document?
   - How do you trim, scope, disable, and test a collection?
+- [Should you delete CLAUDE.md? Evidence behind Theo’s video](repository-instructions-evidence.md)
+  - What did the context-file studies and SkillsBench actually measure, and how have their findings changed?
+  - Which instructions should stay in a repository file, move into a skill, or be removed?
+  - How can you compare instruction configurations on your own tasks?
+- [From repository rules to focused skills: Theo’s workflow in practice](theo-skills-workflows.md)
+  - How do Theo’s later configuration walkthrough and skill review relate to the earlier deletion advice?
+  - Which Matt Pocock and pstack workflows address requirements, writing, debugging, integration, and review?
+  - What dependencies and product-specific controls matter when adapting a skill?
 
 The [Agent Skills specification](https://agentskills.io/specification) defines the shared file format. Each product has its own rules for finding, starting, installing, and sharing skills. Check the linked documentation and the review date noted in each guide for current behavior.
