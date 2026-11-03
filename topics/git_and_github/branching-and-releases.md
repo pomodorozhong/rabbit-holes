@@ -16,7 +16,7 @@ Follow the example in time. Review the export into `develop`, cut `release/1.5`,
 
 GitHub documents a shorter loop. Branch from the default branch, make a focused change, open a pull request (PR), respond to review and checks, merge, then delete the topic branch. A team can deploy a candidate to a preview environment before merging or deploy the tested revision afterward. Hosting a repository on GitHub leaves the team free to use either branching model. [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
 
-![GitHub Flow timeline. The export branch passes review and checks, merges into main, and deploys with export off. The fix branch then does the same and deploys. Later, a feature flag turns export on for a small group.](resource/github-flow.svg)
+![GitHub Flow timeline. The export branch passes review and checks, merges into main, and deploys with export off. The fix branch then does the same and deploys.](resource/github-flow.svg)
 
 In this version of the example, the export code has already passed integration tests. A **feature flag** selects the export path at runtime. Deploy the row fix from `main` with export still disabled, then enable export for a small group when it is ready. A feature branch keeps unfinished code out of the integration branch. A release flag lets users keep the old behavior even when the deployed binary contains the new code. A team can use both in either workflow. Test both meaningful flag states, choose who can enable it, and remove the old path after rollout. Switching the flag off can stop new exports. It cannot restore a row that was already dropped. [Pete Hodgson’s feature-toggle patterns](https://martinfowler.com/articles/feature-toggles.html)
 
