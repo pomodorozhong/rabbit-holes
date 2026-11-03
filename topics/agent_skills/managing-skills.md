@@ -33,7 +33,7 @@ A description that fits can still be vague. Treat selection quality and product 
 
 ## How to prevent the problem
 
-1. **Keep project skills with their project.** Use personal installations for skills you need across projects. Keep a larger library in Git, then install or enable only the relevant subset. See [Storing and sharing skills](storage-and-distribution.md).
+1. **Keep project skills with their project.** Use personal installations for skills you need across projects. Keep a larger library in Git, then install or enable only the relevant subset. See [Organizing skills in a repository](organizing-skills.md) and [Installing and sharing skills](installing-and-sharing-skills.md).
 2. **Make descriptions short and distinct.** Put the task and its main trigger first. Move the steps, long examples, and background material into `SKILL.md` or references. For example, "Write a release briefing from approved change records; not for deployment" gives a clearer choice than "Help with releases."
 3. **Remove duplicate installations.** Check project folders, personal folders, and plugins for copies of the same skill. Keep a reviewed source and a clear update process. Products handle duplicate names differently; see [Product differences](provider-differences.md).
 4. **Group variants of one task.** If several skills do the same job for different formats, consider one skill that directs the agent to the right reference. Keep separate skills when they have different tasks or triggers. This reduces repeated descriptions without creating one giant skill for unrelated work.

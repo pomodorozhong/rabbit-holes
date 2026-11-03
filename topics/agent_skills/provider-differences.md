@@ -69,7 +69,7 @@ Keep the main workflow in `SKILL.md`, with a clear name, description, and links 
 3. **Execution:** are the required tools, dependencies, files, and network access available?
 4. **Output:** does it produce the same required content and pass the relevant checks?
 
-These are suggested checks, not results from running the skill in every product. For installation examples, see [Storing and sharing skills](storage-and-distribution.md).
+These are suggested checks, not results from running the skill in every product. For installation examples, see [Installing and sharing skills](installing-and-sharing-skills.md).
 
 ## Sources
 
