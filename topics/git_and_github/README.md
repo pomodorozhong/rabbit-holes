@@ -8,7 +8,7 @@ This very page is serve to be a table of contents. And [this Project Board](http
 
 -   [ ] Basic usage
 -   [ ] Commit Message conventions
--   [ ] Branching conventions
+-   [x] Branching conventions
 -   [ ] Tools
 -   [ ] Scripts for advanced use cases
 
@@ -23,7 +23,16 @@ This very page is serve to be a table of contents. And [this Project Board](http
 
 ### Usage
 
+-   [Choosing a Git workflow when releases overlap](branching-and-releases.md)
+    -   How do Git Flow and GitHub Flow deliver the same feature and urgent fix?
+    -   When do branch names, maintenance branches, and feature flags help?
 -   [Deleting a branch checked out in another worktree](worktree-branch-deletion.md) — locate the checkout, preserve work, and remove or detach it before deleting the branch.
+-   [Recovering a commit after its branch is deleted](recover-deleted-commit.md)
+    -   Why can a commit outlive its branch, and how do I find it again?
+    -   How long does Git keep a commit that nothing points to?
+-   [Removing a large file from Git history](remove-large-file-from-history.md)
+    -   Why does a deleted file keep downloading, and when does that call for a rewrite?
+    -   How can I check that the file is really gone?
 -   Multiple repo & Submodule
     -   [What's the best practice for putting multiple projects in a git repository? - Stack Overflow](https://stackoverflow.com/questions/14679614/whats-the-best-practice-for-putting-multiple-projects-in-a-git-repository)
     -   [github - How to link folder from a git repo to another repo? - Stack Overflow](https://stackoverflow.com/questions/36554810/how-to-link-folder-from-a-git-repo-to-another-repo/36554930#36554930)
