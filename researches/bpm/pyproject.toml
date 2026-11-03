@@ -1,0 +1,11 @@
+[project]
+name = "bpm-research"
+version = "0.1.0"
+description = "BPM (beats per minute): common tempos, visualization, and a web-based practicing tool"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.11.0",
+    "numpy>=2.5.1",
+]
