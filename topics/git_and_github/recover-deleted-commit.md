@@ -34,3 +34,5 @@ If the reflog has no useful entry, `git fsck --no-reflogs --unreachable` lists o
 ## Know how long you have
 
 Reflogs are local and their entries expire. Garbage collection can prune older unreachable objects after its retention period, and once an object has been pruned, recovery needs another copy. A clone won't help unless it already has the commit, because cloning copies what refs can reach. [Git garbage collection](https://git-scm.com/docs/git-gc)
+
+The same reachability rules explain the opposite problem, a file you deleted that keeps downloading. [Removing a large file from Git history](remove-large-file-from-history.md) follows that case.

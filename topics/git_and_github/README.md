@@ -27,6 +27,9 @@ This very page is serve to be a table of contents. And [this Project Board](http
 -   [Recovering a commit after its branch is deleted](recover-deleted-commit.md)
     -   Why can a commit outlive its branch, and how do I find it again?
     -   How long does Git keep a commit that nothing points to?
+-   [Removing a large file from Git history](remove-large-file-from-history.md)
+    -   Why does a deleted file keep downloading, and when does that call for a rewrite?
+    -   How can I check that the file is really gone?
 -   Multiple repo & Submodule
     -   [What's the best practice for putting multiple projects in a git repository? - Stack Overflow](https://stackoverflow.com/questions/14679614/whats-the-best-practice-for-putting-multiple-projects-in-a-git-repository)
     -   [github - How to link folder from a git repo to another repo? - Stack Overflow](https://stackoverflow.com/questions/36554810/how-to-link-folder-from-a-git-repo-to-another-repo/36554930#36554930)
