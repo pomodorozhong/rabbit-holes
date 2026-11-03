@@ -8,7 +8,7 @@ This very page is serve to be a table of contents. And [this Project Board](http
 
 -   [ ] Basic usage
 -   [ ] Commit Message conventions
--   [ ] Branching conventions
+-   [x] Branching conventions
 -   [ ] Tools
 -   [ ] Scripts for advanced use cases
 
@@ -23,6 +23,9 @@ This very page is serve to be a table of contents. And [this Project Board](http
 
 ### Usage
 
+-   [Choosing a Git workflow when releases overlap](branching-and-releases.md)
+    -   How do Git Flow and GitHub Flow deliver the same feature and urgent fix?
+    -   When do branch names, maintenance branches, and feature flags help?
 -   [Deleting a branch checked out in another worktree](worktree-branch-deletion.md) — locate the checkout, preserve work, and remove or detach it before deleting the branch.
 -   [Recovering a commit after its branch is deleted](recover-deleted-commit.md)
     -   Why can a commit outlive its branch, and how do I find it again?
