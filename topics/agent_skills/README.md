@@ -12,18 +12,6 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - When should a task use a template, a generator, or a separate formatting skill?
   - Where should you put the document rules, template, and helper scripts?
   - How do you check the document's contents and page layout?
-- [Using scripts in a skill](scripts-and-mcp.md)
-  - When is a script useful, and when would you use MCP instead?
-  - Which languages and dependencies can a script use?
-  - How should an agent run a helper and check its result?
-- [How different products use skills](provider-differences.md)
-  - What do Codex, Claude Code, Gemini CLI, Cursor, and Copilot share?
-  - How do discovery, activation, permissions, and sharing differ?
-  - How do local skills differ from skills attached through an API?
-- [Organizing skills in a repository](organizing-skills.md)
-  - How do you store one skill or manage several skills in a Git repository?
-  - Which conventions keep a collection manageable?
-  - Which existing templates and example repositories can you adapt?
 - [Installing and sharing skills](installing-and-sharing-skills.md)
   - Which route fits: a CLI install, a personal checkout, a product directory, or an exported folder?
   - How do you install selected skills, choose links or copies, and track versions?
@@ -35,6 +23,18 @@ An agent skill is a folder of instructions and supporting files that helps an AI
   - How do you import existing skills, preview links, and set up a machine?
   - How do you edit, add, remove, and synchronize skills?
   - How do you undo a link run and test the maintained scripts?
+- [Organizing skills in a repository](organizing-skills.md)
+  - How do you store one skill or manage several skills in a Git repository?
+  - Which conventions keep a collection manageable?
+  - Which existing templates and example repositories can you adapt?
+- [Using scripts in a skill](scripts-and-mcp.md)
+  - When is a script useful, and when would you use MCP instead?
+  - Which languages and dependencies can a script use?
+  - How should an agent run a helper and check its result?
+- [How different products use skills](provider-differences.md)
+  - What do Codex, Claude Code, Gemini CLI, Cursor, and Copilot share?
+  - How do discovery, activation, permissions, and sharing differ?
+  - How do local skills differ from skills attached through an API?
 - [How many skills are too many?](managing-skills.md)
   - What happens when the agent's skill list becomes crowded?
   - Is there a safe number, and what limits do products document?
