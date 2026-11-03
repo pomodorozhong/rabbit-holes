@@ -60,3 +60,8 @@ The two-digit filename prefix follows the order in which each note subject was m
   - What probability does a p-value measure, and why include outcomes beyond the observed one?
   - When would 300 pulls give statistically significant evidence against an advertised 2% rate?
   - How should a scientific paper interpret statistical significance alongside effect size and uncertainty?
+- [Why an include guard can't fix a C++ header cycle](11-cpp-header-dependencies.md)
+  - What does an include guard fix, and why does a header cycle still fail with one?
+  - How do forward declarations break the cycle?
+  - Should a project use `#ifndef` or `#pragma once`?
+  - How can I diagnose the next header failure?
