@@ -30,6 +30,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-10-18-video-ai-news.md](./report-2026-10-18-video-ai-news.md) | video [tDWtcyeNNew](https://youtu.be/tDWtcyeNNew) (as of 2026-10-18) | All 27 chapters; FLUX 3 Image Klein through a 6-bit MLX port for local image generation and editing, experimental 2–3-bit LFM2.5-24B-A2B for tool-calling agents, and an unverified MOSS-Image path through `stable-diffusion.cpp` and a 3-bit text encoder |
 | [report-2026-10-25-video-ai-news.md](./report-2026-10-25-video-ai-news.md) | video [EfyQOAJjx1A](https://www.youtube.com/watch?v=EfyQOAJjx1A) (as of 2026-10-25) | All 24 chapters; Bark 3 transcription, Ming 3.0 MLX speech generation, constrained Carbon-X DNA chat, Fibo 2 full-pipeline budget, and seven distinct security incidents |
 | [report-2026-11-01-video-ai-news.md](./report-2026-11-01-video-ai-news.md) | video [IGICYFyP_EI](https://youtu.be/IGICYFyP_EI) (as of 2026-11-01) | All 34 chapters; English and multilingual speech with Paradee and Audio8, compact text models LFM3 and Spark, and page-count limits for Unlimited OCR 2 |
+| [report-2026-11-08-video-ai-news.md](./report-2026-11-08-video-ai-news.md) | video [9RIK3A24ZxA](https://www.youtube.com/watch?v=9RIK3A24ZxA) (as of 2026-11-08) | All 33 chapters; Mirage for local vision, the 0.8B weight-space-edited Qwen3.5 model, and NitroFusion2 as an experimental one-step image generator, with the large open-weight releases separated out |
 
 ## Scripts
 
