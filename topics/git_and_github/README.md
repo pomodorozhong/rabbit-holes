@@ -44,6 +44,9 @@ Here goes another placeholder text.
 
 ## Github
 
-### Placeholder Title 2
+### Repository settings
 
-Another One.
+-   [Turn on automatic head branch deletion for many repositories](scripts/auto-delete-branches.sh) — a script for GitHub's "Automatically delete head branches" setting, which deletes a pull request's branch on GitHub once the pull request merges.
+    -   Which of my repositories have the setting off? `list` scans a folder of clones (default `~/repo`) and writes the ones you administer to a text file.
+    -   How do I turn it on for only some of them? Delete or comment out lines in that file, then run `apply` to turn the setting on for each repository left.
+    -   Does it work with squash merges? Yes. The setting applies to every merge method, but only to pull requests merged on GitHub after it is turned on, and it never deletes your local branches.
