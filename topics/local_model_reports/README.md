@@ -31,6 +31,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-10-25-video-ai-news.md](./report-2026-10-25-video-ai-news.md) | video [EfyQOAJjx1A](https://www.youtube.com/watch?v=EfyQOAJjx1A) (as of 2026-10-25) | All 24 chapters; Bark 3 transcription, Ming 3.0 MLX speech generation, constrained Carbon-X DNA chat, Fibo 2 full-pipeline budget, and seven distinct security incidents |
 | [report-2026-11-01-video-ai-news.md](./report-2026-11-01-video-ai-news.md) | video [IGICYFyP_EI](https://youtu.be/IGICYFyP_EI) (as of 2026-11-01) | All 34 chapters; English and multilingual speech with Paradee and Audio8, compact text models LFM3 and Spark, and page-count limits for Unlimited OCR 2 |
 | [report-2026-11-08-video-ai-news.md](./report-2026-11-08-video-ai-news.md) | video [9RIK3A24ZxA](https://www.youtube.com/watch?v=9RIK3A24ZxA) (as of 2026-11-08) | All 33 chapters; Mirage for local vision, the 0.8B weight-space-edited Qwen3.5 model, and NitroFusion2 as an experimental one-step image generator, with the large open-weight releases separated out |
+| [report-2026-11-15-video-ai-news.md](./report-2026-11-15-video-ai-news.md) | video [woWo80dPkVk](https://www.youtube.com/watch?v=woWo80dPkVk) (as of 2026-11-16) | All 27 chapters; ZONOS3-Mini for local text-to-speech and voice cloning, Haru 4B as a constrained full-duplex voice model, and why the Sophon-Realtime Mac build needs more memory |
 
 ## Scripts
 
