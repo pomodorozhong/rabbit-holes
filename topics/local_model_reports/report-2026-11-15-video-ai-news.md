@@ -13,7 +13,7 @@ This week's useful local releases are both about speech. **ZONOS3-Mini** is a te
 | [ZONOS3-Mini, default GGUF files on the MLX server](#speech-generation) | ❓ Speech synthesis and voice cloning | ✅ Comfortable |
 | [Haru 4B in the Haru for macOS app, 8-bit backbone](#spoken-conversation) | ❓ Real-time spoken conversation | ⚠️ Constrained |
 
-**Comfortable** means the listed files leave room for normal use. **Constrained** means the model can fit only if other applications are closed and the suggested limits are kept. Artifact sizes use decimal GB.
+**Comfortable** means the listed files leave room for normal use. **Constrained** means the model can fit only if other applications are closed and the suggested limits are kept. Artifact sizes use decimal GB. Both models list Chinese, but neither documents Traditional characters or Guoyu delivery; see [Chinese script and Guoyu](#chinese-script-and-guoyu) before relying on either for Guoyu speech.
 
 ### Speech generation
 
@@ -82,6 +82,16 @@ The machine usually has **8–11 GB** available for weights and working memory a
 - **The Gemini 4 Carbon review spans two chapters.** The narrator ran the same tests as an earlier Fable 5.2 review. In the captions, they report that Carbon found the hidden frog in an image test, identified one of six brain tumor types, and produced a poor water-balloon physics animation. These are single informal runs, not benchmarks.
 - **Video research built on large models.** Open-H3-Regenerate-2K and pi-H3 both build on MiniMax H3, whose repository is 498 GB. MPEG-Diffusion and PixVid report results on Wan2.1 14B. They are useful as research directions, not as local tools for this machine.
 - **Science models.** NovaAtom-Lite predicts the 3D structure of proteins, DNA, RNA and bound molecules, and its authors report beating AlphaFold 3 on antibody–antigen interfaces. AlphaGenome 2 predicts how DNA variants affect gene activity in specific cell types. Both are reached through their providers' APIs. [NovaAtom-Lite](https://www.geodesiclab.com/news/introducing-novaatom-lite) · [AlphaGenome 2](https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/)
+
+### Chinese script and Guoyu
+
+Here, **Guoyu** and **Putonghua** refer to two closely related Mandarin standards with distinct conventions in pronunciation and usage. A model's "Chinese support" can mean several separate things: it reads Traditional characters, it follows Guoyu readings, or it produces Guoyu timing and intonation. Each needs its own evidence. [Why Guoyu TTS can still sound like Putonghua](../../learning-notes/04-guoyu-voice-cloning.md) explains the distinction in more detail.
+
+**ZONOS3-Mini** lists "Mandarin Chinese" (`zh`) among its 43 languages, and its text normalizer has a Mandarin grammar. Neither the [model card](https://huggingface.co/Zyphra/ZONOS3-Mini) nor the [normalizer](https://github.com/Zyphra/zyphra-textnorm) mentions Traditional characters (`zh-Hant`) or a `zh-TW` locale. Its [8,192-entry tokenizer](https://huggingface.co/Zyphra/ZONOS3-Mini/blob/main/lm/zonos3_mini/tokenizer/superbpe8192.json) is byte-level, so any character can be encoded, but only 414 Chinese characters have their own entry. In one 24-character test sentence, 9 Traditional characters had their own entry, against 17 for the same sentence in Simplified characters; the rest split into byte fragments. Fewer whole-character entries suggest that the model saw these characters less often in training, but the count does not show how the speech sounds. Converting the text to Simplified characters first (for example with OpenCC) is a reasonable experiment, though it can lose Guoyu-specific vocabulary and readings.
+
+**Haru 4B** lists "Chinese" (`zh`) among nine languages on its [model card](https://huggingface.co/higurashi-ai/Haru-4B), without naming a script or a regional standard. Because it listens to speech and speaks back, script matters mainly for the text character card and the text the model writes alongside its speech. Which script that text uses was not checked.
+
+For both models, a Guoyu reference clip sets the voice, but cloning can copy a speaker's timbre more reliably than their accent. Whether either model's output sounds like Guoyu to Guoyu-speaking listeners is untested. A short listening test with the same sentences in both scripts, compared against a real Guoyu speaker, would answer it.
 
 ### Coverage and verification limits
 
