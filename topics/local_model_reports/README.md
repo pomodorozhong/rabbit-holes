@@ -32,6 +32,7 @@ Reusable formats: [Community shortlist](../../.agents/skills/ai-research-report/
 | [report-2026-11-01-video-ai-news.md](./report-2026-11-01-video-ai-news.md) | video [IGICYFyP_EI](https://youtu.be/IGICYFyP_EI) (as of 2026-11-01) | All 34 chapters; English and multilingual speech with Paradee and Audio8, compact text models LFM3 and Spark, and page-count limits for Unlimited OCR 2 |
 | [report-2026-11-08-video-ai-news.md](./report-2026-11-08-video-ai-news.md) | video [9RIK3A24ZxA](https://www.youtube.com/watch?v=9RIK3A24ZxA) (as of 2026-11-08) | All 33 chapters; Mirage for local vision, the 0.8B weight-space-edited Qwen3.5 model, and NitroFusion2 as an experimental one-step image generator, with the large open-weight releases separated out |
 | [report-2026-11-15-video-ai-news.md](./report-2026-11-15-video-ai-news.md) | video [woWo80dPkVk](https://www.youtube.com/watch?v=woWo80dPkVk) (as of 2026-11-16) | All 27 chapters; ZONOS3-Mini for local text-to-speech and voice cloning, Haru 4B as a constrained full-duplex voice model, and why the Sophon-Realtime Mac build needs more memory |
+| [report-2026-11-22-video-ai-news.md](./report-2026-11-22-video-ai-news.md) | video [bj3JTd-ezYg](https://youtu.be/bj3JTd-ezYg) (as of 2026-11-22) | All 28 chapters; Depth Pro 2 for live metric depth, Voice Isolator for speech cleanup, an experimental SenseNova-Loop-9B GGUF on a llama.cpp fork, and WeMM-Video as a Linux-only near-miss |
 
 ## Scripts
 
